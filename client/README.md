@@ -1,3 +1,92 @@
+The fan club portal will have information for sporting events. Each user can create their own fan club page. Each user will search for fan club pages that they have interests in. Users can search the website without a login. To create a Fan Club page the user will create a login and profile and be given access to the Admin page form. Users will login to be able to submit information to the fan club page that will be accepted or rejected by the admin of the page.
+
+
+Fan Club Portals
+User Story:
+The fan club portal will have information for sporting events,
+Each user can create their own fan club page. Each user will search for fan club pages that they have interests in.
+Users can search the website without a login.
+To create a Fan Club page the user will create a login and profile and be given access to the Admin page form.
+Users will login to be able to submit information to the fan club page that will be accepted or rejected by the  admin of the page
+App Home page
+* User can click on navbar about us to read about the app.
+* User can click on navbar under fan club pages to see all the fan club pages.
+* User would be able to register
+* User would be able to login
+* User would be able to  see random generated fan page of the day on main page
+* User can search fan club pages.
+* User can search fan club pages without a login.
+User Profile Form
+* User would add first name and last name
+* User would add email
+* User would add password
+* Db Create date
+* Db Active Field
+User Page Form
+* User would add Team Name
+* User would add Fan club name
+* User would add Team Location
+* User would add fan club location
+* User would add  team logo
+* User would add description
+* Db Create Date
+* Db Active field
+* User would be able to add External links including facebook pages, twitter, etc..
+Upcoming Events Form
+* Description
+* Gather Location
+* Date/Time
+* Theme
+User Home Page Private
+* Add event
+* Update existing event
+* Update page
+Fanclub Page
+* Display team description
+* Display team location
+* Display team colors
+* Display team logo
+* Display team events
+* Display fan club location
+* Display external social media links
+Backend info - Home Page
+* User can register
+* User can login
+Backend info - User Profile
+* User can add first name and last name
+* User can add their email address
+* User can add a password
+* Shows the date the profile is created
+* Show the update
+Backend info - User Page Form
+Backend info - Upcoming Events Form
+Backend info - User Page (Private)
+Backend info - Fan Club Page
+Future:
+Search feature - by team name or fan club name
+List clubs by category
+Add a following feature that will display on each user home page
+Add a calendar to display meet ups within a specific month
+Add google maps link to location of meet up
+Add sub-categories for professional, college, little league etc.
+Have a site administrator to be able to approve / reject fan club pages.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
@@ -283,7 +372,7 @@ In the WebStorm menu `Run` select `Edit Configurations...`. Then click `+` and s
 
 Start your app by running `npm start`, then press `^D` on macOS or `F9` on Windows and Linux or click the green debug icon to start debugging in WebStorm.
 
-The same way you can debug your application in IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine. 
+The same way you can debug your application in IntelliJ IDEA Ultimate, PhpStorm, PyCharm Pro, and RubyMine.
 
 ## Formatting Code Automatically
 
@@ -1769,7 +1858,7 @@ If you’re using [Apache HTTP Server](https://httpd.apache.org/), you need to c
     RewriteRule ^ index.html [QSA,L]
 ```
 
-It will get copied to the `build` folder when you run `npm run build`. 
+It will get copied to the `build` folder when you run `npm run build`.
 
 If you’re using [Apache Tomcat](http://tomcat.apache.org/), you need to follow [this Stack Overflow answer](https://stackoverflow.com/a/41249464/4878474).
 
