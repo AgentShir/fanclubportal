@@ -1,18 +1,12 @@
 import React, { Component } from 'react'
 import {Link} from 'react-router-dom'
+import Header from './Header'
 
 class Layout extends Component {
   render() {
     return (
       <div>
-        {/* this is just an example layout*/}
-        <header>
-          <nav>
-            <ul>
-              <li><Link to="/">Home Page</Link></li>
-            </ul>
-          </nav>
-        </header>
+        <Header />
         {/* Rendering of the page below */}
         {this.props.children}
         <footer>
