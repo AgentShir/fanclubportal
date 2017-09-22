@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import postRegister from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardHeader, CardText, CardTitle } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
@@ -25,16 +26,17 @@ class Register extends Component {
     })
   }
 
-  handleExpand = () => {
-      this.setState({
-        expanded: true
-      })
+  handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(e.target.value)
+    postRegister(this.state)
   }
 
     render() {
         return (
             <Card style={cardStyle}>
                 <CardTitle title= "Register" />
+                <form onSubmit={this.handleSubmit}>
                 <CardText>
                     <TextField
                         onChange={this.handleChange} value={this.state.fname} hintText="First Name"
@@ -72,8 +74,9 @@ class Register extends Component {
                     /><br />
                 </CardText>
                 <CardActions style={buttonStyle}>
-                    <FlatButton label="Submit" onClick={this.handleExpand} />
+                    <FlatButton label="Submit" type="submit" />
                 </CardActions>
+                </form>
                 <p>{this.state.fname} {this.state.lname}</p>
                 <p>{this.state.username} {this.state.password}</p>
                 <p>{this.state.email}</p>
