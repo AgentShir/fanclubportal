@@ -1,9 +1,82 @@
 import React, { Component } from 'react'
+import {postRegister} from '../actions/app'
+import TextField from 'material-ui/TextField'
+import { Card, CardActions, CardHeader, CardText, CardTitle } from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
 
+const cardStyle = {
+    maxWidth: '1000px',
+    margin: '50px auto',
+}
+const buttonStyle = {
+    textAlign: 'right'
+}
 class Register extends Component {
-    render(){
-        return(
-            <h1>Register</h1>
+  state = {
+    fname: '',
+    lname: '',
+    username: '',
+    email: '',
+    password: ''
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    postRegister(this.state)
+  }
+
+    render() {
+        return (
+            <Card style={cardStyle}>
+                <CardTitle title= "Register" />
+                <form onSubmit={this.handleSubmit}>
+                <CardText>
+                    <TextField
+                        onChange={this.handleChange} value={this.state.fname} hintText="First Name"
+                        floatingLabelText="First Name"
+                        name="fname"
+                        fullWidth={true} required={true} autoComplete="off"
+                    /><br />
+
+                    <br />
+                    <TextField
+                        onChange={this.handleChange} value={this.state.lname} hintText="Last Name"
+                        floatingLabelText="Last Name"
+                        name="lname"
+                        fullWidth={true} required={true} autoComplete="off"
+                    /><br />
+                    <TextField
+                        onChange={this.handleChange} value={this.state.username} hintText="Username"
+                        floatingLabelText="Username"
+                        name="username"
+                        fullWidth={true} required={true} autoComplete="off"
+                    /><br />
+                    <TextField
+                        onChange={this.handleChange} value={this.state.password} hintText="Password"
+                        floatingLabelText="Password"
+                        name="password"
+                        type="password"
+                        fullWidth={true} required={true} autoComplete="off"
+                    /><br />
+                    <TextField
+                        onChange={this.handleChange} value={this.state.email} hintText="Email"
+                        floatingLabelText="Email"
+                        name="email"
+                        type="email"
+                        fullWidth={true} required={true} autoComplete="off"
+                    /><br />
+                </CardText>
+                <CardActions style={buttonStyle}>
+                    <FlatButton label="Submit" type="submit" />
+                </CardActions>
+                </form>
+            </Card>
         )
     }
 }
