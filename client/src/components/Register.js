@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import postRegister from '../actions/app'
+import {postRegister} from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardHeader, CardText, CardTitle } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
@@ -28,7 +28,6 @@ class Register extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(e.target.value)
     postRegister(this.state)
   }
 
@@ -42,7 +41,7 @@ class Register extends Component {
                         onChange={this.handleChange} value={this.state.fname} hintText="First Name"
                         floatingLabelText="First Name"
                         name="fname"
-                        fullWidth={true}
+                        fullWidth={true} required={true} autoComplete="off"
                     /><br />
 
                     <br />
@@ -50,36 +49,33 @@ class Register extends Component {
                         onChange={this.handleChange} value={this.state.lname} hintText="Last Name"
                         floatingLabelText="Last Name"
                         name="lname"
-                        fullWidth={true}
+                        fullWidth={true} required={true} autoComplete="off"
                     /><br />
                     <TextField
                         onChange={this.handleChange} value={this.state.username} hintText="Username"
                         floatingLabelText="Username"
                         name="username"
-                        fullWidth={true}
+                        fullWidth={true} required={true} autoComplete="off"
                     /><br />
                     <TextField
                         onChange={this.handleChange} value={this.state.password} hintText="Password"
                         floatingLabelText="Password"
                         name="password"
                         type="password"
-                        fullWidth={true}
+                        fullWidth={true} required={true} autoComplete="off"
                     /><br />
                     <TextField
                         onChange={this.handleChange} value={this.state.email} hintText="Email"
                         floatingLabelText="Email"
                         name="email"
                         type="email"
-                        fullWidth={true}
+                        fullWidth={true} required={true} autoComplete="off"
                     /><br />
                 </CardText>
                 <CardActions style={buttonStyle}>
                     <FlatButton label="Submit" type="submit" />
                 </CardActions>
                 </form>
-                <p>{this.state.fname} {this.state.lname}</p>
-                <p>{this.state.username} {this.state.password}</p>
-                <p>{this.state.email}</p>
             </Card>
         )
     }
