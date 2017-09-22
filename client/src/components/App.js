@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 
 // router
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+// import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Switch} from 'react-router-dom'
+import {AuthRoute as Route} from '../lib/auth'
 
 // connecting react and redux
 import {Provider} from 'react-redux'
