@@ -1,9 +1,83 @@
 import React, { Component } from 'react'
+import TextField from 'material-ui/TextField'
+import { Card, CardActions, CardHeader, CardText, CardTitle } from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
 
+const cardStyle = {
+    maxWidth: '1000px',
+    margin: '50px auto',
+}
+const buttonStyle = {
+    textAlign: 'right'
+}
 class Register extends Component {
-    render(){
-        return(
-            <h1>Register</h1>
+  state = {
+    fname: '',
+    lname: '',
+    username: '',
+    email: '',
+    password: ''
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleExpand = () => {
+      this.setState({
+        expanded: true
+      })
+  }
+
+    render() {
+        return (
+            <Card style={cardStyle}>
+                <CardTitle title= "Register" />
+                <CardText>
+                    <TextField
+                        onChange={this.handleChange} value={this.state.fname} hintText="First Name"
+                        floatingLabelText="First Name"
+                        name="fname"
+                        fullWidth={true}
+                    /><br />
+
+                    <br />
+                    <TextField
+                        onChange={this.handleChange} value={this.state.lname} hintText="Last Name"
+                        floatingLabelText="Last Name"
+                        name="lname"
+                        fullWidth={true}
+                    /><br />
+                    <TextField
+                        onChange={this.handleChange} value={this.state.username} hintText="Username"
+                        floatingLabelText="Username"
+                        name="username"
+                        fullWidth={true}
+                    /><br />
+                    <TextField
+                        onChange={this.handleChange} value={this.state.password} hintText="Password"
+                        floatingLabelText="Password"
+                        name="password"
+                        type="password"
+                        fullWidth={true}
+                    /><br />
+                    <TextField
+                        onChange={this.handleChange} value={this.state.email} hintText="Email"
+                        floatingLabelText="Email"
+                        name="email"
+                        type="email"
+                        fullWidth={true}
+                    /><br />
+                </CardText>
+                <CardActions style={buttonStyle}>
+                    <FlatButton label="Submit" onClick={this.handleExpand} />
+                </CardActions>
+                <p>{this.state.fname} {this.state.lname}</p>
+                <p>{this.state.username} {this.state.password}</p>
+                <p>{this.state.email}</p>
+            </Card>
         )
     }
 }
