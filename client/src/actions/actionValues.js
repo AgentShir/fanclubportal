@@ -1,2 +1,3 @@
 export const MY_ACTION = 'MY_ACTION'
 export const REGISTER = 'REGISTER'
+export const REGISTRATION_FAILURE = 'REGISTRATION_FAILURE'
