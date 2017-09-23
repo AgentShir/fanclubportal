@@ -65,11 +65,10 @@ export function loginUser(creds) {
     headers: { 'Content-Type':'application/x-www-form-urlencoded' },
     body: `username=${creds.username}&password=${creds.password}`
   }
-  
   return dispatch => {
     // We dispatch requestLogin to kickoff the call to the API
     dispatch(requestLogin(creds))
-    
+   
     return fetch('/api/token', config)
       .then(response =>
         response.json()
