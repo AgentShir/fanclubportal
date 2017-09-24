@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const user = require('../models/user');
+const portalEvent = require('../models/portalEvent')
 
 /* /api starting endpoint */
 router.get('/foo', function (req, res, next) {
@@ -52,4 +53,22 @@ router.post("/token", function (req, res, next) {
   }
 })
 
+
+//EVENT ROUTES
+router.post("/:portalId/addEvent", function(req, res,next){
+  const portalId = req.params.portalId
+  if(req.body.description.length === 0 || req.body.location.length === 0){
+    res.status(401).json({
+      message: 'Description and Location must be entered.'
+    })
+  }else{
+    portalEvent.addEvent(req.body, portalId, function(success,response){
+      if(!success){
+        res.status(401).json(response)
+      }else{
+        res.json(response)
+      }
+    })
+  }
+})
 module.exports = router;

@@ -1,8 +1,10 @@
 import store from '../store'
 import axios from 'axios'
+import moment from 'moment'
+
 // example actions
 import { loginUser } from '../lib/actions/auth'
-import { MY_ACTION, REGISTRATION_FAILURE } from './actionValues'
+import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE } from './actionValues'
 
 export function getFoo() {
   fetch('/api/foo')
@@ -34,4 +36,26 @@ export function postRegister(regInfo) {
         })
       })
   }
+}
+
+export function postEvent(newEvent, portalId) {
+  let momentDate = moment(newEvent.date).format('YYYY-MM-DD')
+  let momentTime = moment(newEvent.time).format('HH:mm:SS')
+
+  axios.post('/api/' + portalId + '/addEvent', {
+    description: newEvent.description,
+    location: newEvent.location,
+    theme: newEvent.theme,
+    date: momentDate,
+    time: momentTime
+  })
+    .then(function (resp) {
+      console.log(' reponse', resp)
+    })
+    .catch(function (err) {
+      store.dispatch({
+        type: POST_EVENT_FAILURE,
+        message: err.response.data.message
+      })
+    })
 }
