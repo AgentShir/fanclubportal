@@ -18,6 +18,7 @@ import Login from './Login'
 import Register from './Register'
 import AboutUs from './AboutUs'
 import Contact from './Contact'
+import PortalEvent from './PortalEvent'
 
 // base styles and icons
 import 'normalize.css/normalize.css'
@@ -38,8 +39,9 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-              <Route path="/aboutus" component={AboutUs} />
+              <Route path="/aboutUs" component={AboutUs} />
               <Route path='/contact' component={Contact} />
+              <Route path='/:portalId/addEvent' component={PortalEvent} />
             </Switch>
           </Layout>
         </Router>

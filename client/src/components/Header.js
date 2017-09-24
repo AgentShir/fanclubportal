@@ -48,14 +48,18 @@ class Header extends Component {
               <Link to="/register" style={{ textDecoration: "none" }}>
                 <MenuItem onClick={this.handleToggle}>Register</MenuItem>
               </Link>
-              <Link to="/aboutus" style={{ textDecoration: "none" }}>
+              <Link to="/aboutUs" style={{ textDecoration: "none" }}>
                 <MenuItem onClick={this.handleToggle}>About Us</MenuItem>
               </Link>
               <Link to="/contact" style={{ textDecoration: "none" }}>
                 <MenuItem onClick={this.handleToggle}>Contact</MenuItem>
               </Link></div>
             : <div>
-              <MenuItem onClick={this.logout}>Logout</MenuItem></div>}
+              <MenuItem onClick={this.logout}>Logout</MenuItem>
+              <Link to="/1/addEvent" style={{ textDecoration: "none" }}>
+                <MenuItem onClick={this.handleToggle}>Add Event</MenuItem>
+              </Link>
+              </div>}
         </Drawer>
       </div>
     )

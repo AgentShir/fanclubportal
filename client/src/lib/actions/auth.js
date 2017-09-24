@@ -55,6 +55,7 @@ export function logoutUser() {
     dispatch(requestLogout())
     localStorage.removeItem('token')
     localStorage.removeItem('username')
+    localStorage.removeItem('userId')
     dispatch(receiveLogout())
   }
 }
@@ -84,6 +85,7 @@ export function loginUser(creds) {
           // If login was successful, set the token in local storage
           localStorage.setItem('token', user.token)
           localStorage.setItem('username', user.username)
+          localStorage.setItem('userId', user.userId)
           // Dispatch the success action
           dispatch(receiveLogin(user))
         }

@@ -22,7 +22,7 @@ class Register extends Component {
         username: '',
         email: '',
         password: '',
-        expanded: true
+        expanded: false
     }
     componentWillReceiveProps(props) {
         if (!props.isAuthenticated) {
@@ -41,6 +41,7 @@ class Register extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.dispatch(postRegister(this.state))
+        this.setState({fname: '',lname: '',username: '', email: '',password: '',})
     }
     handleExpandChange = (expanded) => {
         this.setState({ expanded: expanded });

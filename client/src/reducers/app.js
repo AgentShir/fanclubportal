@@ -1,6 +1,6 @@
 // if you so choose, you may name your actions and import them here
 // for reducing typing errors
-import { MY_ACTION, REGISTRATION_FAILURE } from '../actions/actionValues'
+import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE } from '../actions/actionValues'
 
 const initialState = {
   foo: 'bar',
@@ -17,6 +17,11 @@ export default function (state = initialState, action) {
         ...state,
         errorMessage:action.message
       }
+    case POST_EVENT_FAILURE:
+    return{
+      ...state,
+      errorMessage:action.message
+    }
     default:
       return state
   }

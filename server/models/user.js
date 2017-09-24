@@ -29,7 +29,7 @@ function registerUser(regInfo, done) {
 
 function login(username, password, done) {
   const sql = `
-  SELECT password FROM users
+  SELECT password, id FROM users
  WHERE username = ?
 `
   conn.query(sql, [username], function (err, results, fields) {
@@ -39,12 +39,14 @@ function login(username, password, done) {
       done(false, response)
     } else {
       const hashedPassword = results[0].password.toString()
+      const userId = results[0].id
       bcrypt.compare(password, hashedPassword).then(function (result) {
         if (result) {
           // notice we don't need to store tokens in the database!
           let response ={
             token: jwt.sign({ username }, config.get('secret'), { expiresIn: config.get('sessionLengthInSeconds') }),
-            username: username
+            username: username,
+            userId:userId
           }
           done(true, response)
         } else {
