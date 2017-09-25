@@ -2,15 +2,11 @@ import store from '../store'
 import axios from 'axios'
 import moment from 'moment'
 
-<<<<<<< HEAD
-import {MY_ACTION} from './actionValues'
-import axios from 'axios'
-import { FAN_PORTAL_FAILURE } from './actionValues'
-=======
+
 // example actions
 import { loginUser } from '../lib/actions/auth'
-import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE } from './actionValues'
->>>>>>> master
+import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE } from './actionValues'
+
 
 export function getFoo() {
   fetch('/api/foo')
@@ -55,7 +51,15 @@ export function postEvent(newEvent, portalId) {
     date: momentDate,
     time: momentTime
   })
-<<<<<<< HEAD
+    .then(function (resp) {
+      console.log(' reponse', resp)
+    })
+    .catch(function (err) {
+      store.dispatch({
+        type: POST_EVENT_FAILURE,
+        message: err.response.data.message
+      })
+    })
 }
 
 export function postPortals(fanPortal) {
@@ -72,20 +76,8 @@ export function postPortals(fanPortal) {
     })
       .catch(function (err) {
         store.dispatch({
-          type: FAN_PORTAL_FAILURE,
+          type: ADD_PORTAL_FAILURE,
           message: err.response.data.message
         })
       })
-  }
-=======
-    .then(function (resp) {
-      console.log(' reponse', resp)
-    })
-    .catch(function (err) {
-      store.dispatch({
-        type: POST_EVENT_FAILURE,
-        message: err.response.data.message
-      })
-    })
 }
->>>>>>> master

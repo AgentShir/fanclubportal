@@ -18,11 +18,11 @@ import Login from './Login'
 import Register from './Register'
 import AboutUs from './AboutUs'
 import Contact from './Contact'
-<<<<<<< HEAD
-import CreatePortal from './CreatePortal'
-=======
+
+import AddPortal from './AddPortal'
+
 import PortalEvent from './PortalEvent'
->>>>>>> master
+
 
 // base styles and icons
 import 'normalize.css/normalize.css'
@@ -47,11 +47,8 @@ class App extends Component {
               <Route path="/register" component={Register} />
               <Route path="/aboutUs" component={AboutUs} />
               <Route path='/contact' component={Contact} />
-<<<<<<< HEAD
-              <Route path='/createportal' component={CreatePortal} />
-=======
+              <Route path='/addportal' component={AddPortal} />
               <Route path='/:portalId/addEvent' component={PortalEvent} />
->>>>>>> master
             </Switch>
           </Layout>
         </Router>
