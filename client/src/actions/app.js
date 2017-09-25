@@ -1,20 +1,61 @@
 import store from '../store'
-// example actions
+import axios from 'axios'
+import moment from 'moment'
 
+<<<<<<< HEAD
 import {MY_ACTION} from './actionValues'
 import axios from 'axios'
 import { FAN_PORTAL_FAILURE } from './actionValues'
+=======
+// example actions
+import { loginUser } from '../lib/actions/auth'
+import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE } from './actionValues'
+>>>>>>> master
 
 export function getFoo() {
   fetch('/api/foo')
-  .then(resp => resp.json())
-  .then(resp => {
-    console.log(resp)
-    store.dispatch({
-      type: MY_ACTION,
-      payload: resp.foo
+    .then(resp => resp.json())
+    .then(resp => {
+      store.dispatch({
+        type: MY_ACTION,
+        payload: resp.foo
+      })
     })
+}
+
+export function postRegister(regInfo) {
+  return dispatch => {
+    axios.post('/api/register', {
+      fname: regInfo.fname,
+      lname: regInfo.lname,
+      username: regInfo.username,
+      email: regInfo.email,
+      password: regInfo.password
+    })
+      .then(function (res) {
+        dispatch(loginUser({ username: regInfo.username, password: regInfo.password }))
+      })
+      .catch(function (err) {
+        store.dispatch({
+          type: REGISTRATION_FAILURE,
+          message: err.response.data.message
+        })
+      })
+  }
+}
+
+export function postEvent(newEvent, portalId) {
+  let momentDate = moment(newEvent.date).format('YYYY-MM-DD')
+  let momentTime = moment(newEvent.time).format('HH:mm:SS')
+
+  axios.post('/api/' + portalId + '/addEvent', {
+    description: newEvent.description,
+    location: newEvent.location,
+    theme: newEvent.theme,
+    date: momentDate,
+    time: momentTime
   })
+<<<<<<< HEAD
 }
 
 export function postPortals(fanPortal) {
@@ -36,3 +77,15 @@ export function postPortals(fanPortal) {
         })
       })
   }
+=======
+    .then(function (resp) {
+      console.log(' reponse', resp)
+    })
+    .catch(function (err) {
+      store.dispatch({
+        type: POST_EVENT_FAILURE,
+        message: err.response.data.message
+      })
+    })
+}
+>>>>>>> master

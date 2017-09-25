@@ -9,4 +9,8 @@ const conn = mysql.createPool({
   password: config.get('db.password')
 });
 
+<<<<<<< HEAD
 module.exports = conn;
+=======
+module.exports = conn;
+>>>>>>> master

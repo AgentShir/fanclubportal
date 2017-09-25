@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 
 // router
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+// import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {BrowserRouter as Router, Switch} from 'react-router-dom'
+import {AuthRoute as Route} from '../lib/auth'
 
 // connecting react and redux
 import {Provider} from 'react-redux'
@@ -16,7 +18,11 @@ import Login from './Login'
 import Register from './Register'
 import AboutUs from './AboutUs'
 import Contact from './Contact'
+<<<<<<< HEAD
 import CreatePortal from './CreatePortal'
+=======
+import PortalEvent from './PortalEvent'
+>>>>>>> master
 
 // base styles and icons
 import 'normalize.css/normalize.css'
@@ -39,9 +45,13 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
-              <Route path="/aboutus" component={AboutUs} />
+              <Route path="/aboutUs" component={AboutUs} />
               <Route path='/contact' component={Contact} />
+<<<<<<< HEAD
               <Route path='/createportal' component={CreatePortal} />
+=======
+              <Route path='/:portalId/addEvent' component={PortalEvent} />
+>>>>>>> master
             </Switch>
           </Layout>
         </Router>
