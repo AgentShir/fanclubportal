@@ -1,1 +1,3 @@
 export const MY_ACTION = 'MY_ACTION'
+export const FAN_CLUB_PORTAL = 'FAN_CLUB_PORTAL'
+export const FAN_PORTAL_FAILURE = 'FAN_PORTAL_FAILURE'
