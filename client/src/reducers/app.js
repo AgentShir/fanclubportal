@@ -27,7 +27,7 @@ export default function (state = initialState, action) {
         ...state,
         errorMessage:action.message
       }
-    case POST_EVENT_FAILURE:
+    case ADD_PORTAL_FAILURE:
     return{
       ...state,
       errorMessage:action.message

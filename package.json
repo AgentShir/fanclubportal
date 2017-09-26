@@ -7,7 +7,9 @@
   "dependencies": {
     "axios": "^0.16.2",
     "concurrently": "^3.5.0",
-    "config": "^1.26.2"
+    "config": "^1.26.2",
+    "is-url": "^1.2.2",
+    "validator": "^8.2.0"
   },
   "scripts": {
     "start": "concurrently \"yarn run server\" \"yarn run client\"",

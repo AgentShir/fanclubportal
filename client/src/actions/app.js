@@ -52,7 +52,6 @@ export function postEvent(newEvent, portalId) {
     time: momentTime
   })
     .then(function (resp) {
-      console.log(' reponse', resp)
     })
     .catch(function (err) {
       store.dispatch({
@@ -63,16 +62,16 @@ export function postEvent(newEvent, portalId) {
 }
 
 export function postPortals(fanPortal) {
-  console.log('in action ', fanPortal)
     axios.post('/api/addPortals', {
+      userId:localStorage.userId,
       teamName: fanPortal.teamName,
       fanClubName: fanPortal.fanClubName,
       teamLocation: fanPortal.teamLocation,
       fanClubLocation: fanPortal.fanClubLocation,
+      logo: fanPortal.logo,
       description: fanPortal.description
     })
       .then(function (resp){
-      console.log("action add portal",resp)
     })
       .catch(function (err) {
         store.dispatch({

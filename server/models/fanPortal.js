@@ -1,23 +1,21 @@
 const conn = require('../lib/db');
-const config = require('config')
 
-function fanPortal(fanPortInfo, done){
-    const sql = `INSERT INTO portals (teamName, fanClubName, teamLocation, fanClubLocation, description)
-    VALUES (?,?,?,?,?)`
+function addFanPortal(fanPortalInfo, done){
+    const sql = `INSERT INTO portals (userId, teamName, fanClubName, teamLocation, fanClubLocation, logo, description)
+    VALUES (?,?,?,?,?,?,?)`
 
 
-console.log("inside model")
-    conn.query(sql, [fanPortal.teamName, fanPortal.fanClubName, fanPortal.teamLocation, fanPortal.fanClubLocation, fanPortal.teamLocation, fanPortal.fanClubLocation, fanPortal.description], function (error, results, fields) {
+    conn.query(sql, [fanPortalInfo.userId,fanPortalInfo.teamName, fanPortalInfo.fanClubName, fanPortalInfo.teamLocation, fanPortalInfo.fanClubLocation, fanPortalInfo.logo,  fanPortalInfo.description], function (error, results, fields) {
         if (error) {
           let response = {
             status: "fail",
-            message: "Unable to create event."
+            message: "A fan club name already exists."
           }
           done(false, response)
         } else if (!error) {
           let response = {
             status:"success",
-            message:"New event created."
+            message:"New fan portal created."
           }
           done(true, response)
         }
@@ -25,5 +23,5 @@ console.log("inside model")
 }
 
 module.exports = {
-    fanPortal
+    addFanPortal
 }

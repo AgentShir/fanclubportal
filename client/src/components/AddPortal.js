@@ -5,8 +5,7 @@ import { postPortals} from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardHeader, CardText, CardTitle } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
-
-
+import validator from 'validator';
 
 
 const cardStyle = {
@@ -25,6 +24,7 @@ class CreatePortal extends Component {
       fanClubLocation: '',
       teamName: '',
       teamLocation: '',
+      logo: '',
       description: ''
   }
 }
@@ -34,12 +34,15 @@ if (props.errorMessage.length > 0) {
   this.setState({ expanded: true })
     } else {
       this.setState({ expanded: false })
-        this.props.history.push('/')
+        this.props.history.push('./AddPortal')
     }
   }
 
+  handleExpandChange = (expanded) => {
+      this.setState({ expanded: expanded });
+    }
+
   handleChange = (e) => {
-    console.log('in handleChange', e.target.value)
     	this.setState({
     		  [e.target.name]: e.target.value
   	})
@@ -47,59 +50,74 @@ if (props.errorMessage.length > 0) {
   handleSubmit = (e) => {
           e.preventDefault()
           postPortals(this.state)
-          this.setState({fanClubName: '',fanClubLocation: '',teamName: '', teamLocation: '', description: '',})
-      }
-
+          this.setState({fanClubName: '', fanClubLocation: '', teamName: '', teamLocation: '', logo: '', description: '',})
+    }
 
     render() {
         return (
-          <form onSubmit={this.handleSubmit}>
-            <Card style={cardStyle}>
-                <CardTitle title= "Fan Club Portal" />
+          <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+              <CardTitle title= "Fan Club Portal" />
+                <CardText expandable={true} color={'red'}>
+                    {this.props.errorMessage}
+                </CardText>
+            <form onSubmit={this.handleSubmit}>
                 <CardText>
                     <TextField
                         hintText="Fan Club Name"
                         floatingLabelText="Fan Club Name"
                         name="fanClubName"
-                        onChange={this.handleChange}
+                        autoComplete="off"
                         fullWidth={true} required={true}
+                        onChange={this.handleChange}
                     /><br />
                     <TextField
                         hintText="Fan Club Location"
                         floatingLabelText="Fan Club Location"
                         name="fanClubLocation"
-                        onChange={this.handleChange}
+                        autoComplete="off"
                         fullWidth={true} required={true}
+                        onChange={this.handleChange}
                     /><br />
                     <TextField
                         hintText="Team Name"
                         floatingLabelText="Team Name"
                         name="teamName"
-                        onChange={this.handleChange}
+                        autoComplete="off"
                         fullWidth={true} required={true}
+                        onChange={this.handleChange}
                     /><br />
                     <TextField
                         hintText="Team Location"
                         floatingLabelText="Team Location"
                         name="teamLocation"
-                        onChange={this.handleChange}
+                        autoComplete="off"
                         fullWidth={true} required={true}
+                        onChange={this.handleChange}
+                    /><br />
+                    <TextField
+                        hintText="Team Logo URL"
+                        floatingLabelText="Enter a URL for the Team Logo"
+                        name="logo"
+                        autoComplete="off"
+                        fullWidth={true} required={false}
+                        onChange={this.handleChange}
+                        type='URL'
                     /><br />
                     <TextField
                         hintText="Description"
                         floatingLabelText="Description"
                         name="description"
+                        autoComplete="off"
+                        fullWidth={true} required={false}
                         onChange={this.handleChange}
-                        fullWidth={true}
                     /><br />
 
                 </CardText>
                 <CardActions style={buttonStyle}>
                     <FlatButton label="Submit" type="Submit" />
                 </CardActions>
+              </form>
             </Card>
-          </form>
-
         )
     }
 }
