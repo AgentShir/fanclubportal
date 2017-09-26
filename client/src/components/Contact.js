@@ -1,21 +1,37 @@
 import React, { Component } from 'react';
-import Paper from 'material-ui/Paper';
+import {Card, CardHeader, CardTitle, CardText} from 'material-ui/Card';
 
-const style = {
-  height: 600,
-  width: 400,
-  margin: 20,
-  textAlign: 'center',
-  display: 'inline-block'
+const cardStyle = {
+    maxWidth: '1000px',
+    margin: '50px auto',
+}
+
+const cardText = {
+  textAlign: 'center'
+}
+
+const i = {
+  padding: '3px'
 }
 
 class Contact extends Component {
     render(){
         return(
-          <div>
-            <h1>Contact</h1>
-              <Paper style={style} zDepth={2} />
-          </div>
+          <Card style={cardStyle}>
+            <CardHeader>
+              <CardTitle title="Contact" />
+                <CardTitle subtitle="Use the icons to contact us!" />
+                <CardText style={cardText}>
+                  <i className="fa fa-envelope fa-4x" aria-hidden="true" style={i}></i>
+                  <a href="https://www.facebook.com/fanclubportals/"><i className="fa fa-facebook-square fa-4x" aria-hidden="true" style={i} aria-label="Fan Club Portals on Facebook"></i></a>
+                  <a href="https://github.com/AgentShir/fanclubportals"><i className="fa fa-github fa-4x" aria-hidden="true" style={i} aria-label="View our repository on GitHub"></i></a>
+                  <i className="fa fa-twitter fa-4x" aria-hidden="true" style={i}></i>
+                  <i className="fa fa-rebel fa-4x" aria-hidden="true" style={i}></i>
+                  <i className="fa fa-instagram fa-4x" aria-hidden="true" style={i}></i>
+                  <i className="fa fa-empire fa-4x" aria-hidden="true" style={i}></i>
+                </CardText>
+            </CardHeader>
+          </Card>
         )
     }
 }
