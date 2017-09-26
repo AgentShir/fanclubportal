@@ -1,3 +1,44 @@
 /*
   Custom styles here
  */
+.cards {
+  display:flex;
+  flex-wrap: wrap;
+  /* border: 1px solid orange; */
+}
+ .portalContainer{
+   max-width: 1000px;
+    /* border: 1px solid red; */
+    margin: 0 auto;
+ }
+ .rightSideCards{
+   /* border: 1px solid blue; */
+   width: 70%;
+ }
+ .leftCard{
+   width: 25%;
+   flex-grow: 1;
+   margin-right: 10px;
+ }
+ .rightCard{
+   flex-grow: 2;
+   margin-bottom: 10px;
+ }
+ .headerCard{
+   width: 100%;
+ }
+
+ @media screen and (max-width:960px) {
+   .cards {
+     flex-wrap:wrap;
+   }
+
+   .card {
+     width:100%;
+     margin-right: 0;
+     margin-bottom: 10px;
+   }
+   .rightSideCards{
+     width: 100%;
+   }
+ }
