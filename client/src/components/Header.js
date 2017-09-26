@@ -56,6 +56,9 @@ class Header extends Component {
               </Link></div>
             : <div>
               <MenuItem onClick={this.logout}>Logout</MenuItem>
+              <Link to="/addPortal" style={{ textDecoration: "none" }}>
+                <MenuItem onClick={this.handleToggle}>Add Portal</MenuItem>
+              </Link>
               <Link to="/1/addEvent" style={{ textDecoration: "none" }}>
                 <MenuItem onClick={this.handleToggle}>Add Event</MenuItem>
               </Link>
