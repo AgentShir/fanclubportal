@@ -5,7 +5,6 @@ import { postPortals} from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardHeader, CardText, CardTitle } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
-import validator from 'validator';
 
 
 const cardStyle = {
