@@ -2,9 +2,11 @@ import store from '../store'
 import axios from 'axios'
 import moment from 'moment'
 
+
 // example actions
 import { loginUser } from '../lib/actions/auth'
-import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE } from './actionValues'
+import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE } from './actionValues'
+
 
 export function getFoo() {
   fetch('/api/foo')
@@ -50,7 +52,6 @@ export function postEvent(newEvent, portalId) {
     time: momentTime
   })
     .then(function (resp) {
-      console.log(' reponse', resp)
     })
     .catch(function (err) {
       store.dispatch({
@@ -58,4 +59,24 @@ export function postEvent(newEvent, portalId) {
         message: err.response.data.message
       })
     })
+}
+
+export function postPortals(fanPortal) {
+    axios.post('/api/addPortals', {
+      userId:localStorage.userId,
+      teamName: fanPortal.teamName,
+      fanClubName: fanPortal.fanClubName,
+      teamLocation: fanPortal.teamLocation,
+      fanClubLocation: fanPortal.fanClubLocation,
+      logo: fanPortal.logo,
+      description: fanPortal.description
+    })
+      .then(function (resp){
+    })
+      .catch(function (err) {
+        store.dispatch({
+          type: ADD_PORTAL_FAILURE,
+          message: err.response.data.message
+        })
+      })
 }
