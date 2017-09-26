@@ -18,8 +18,12 @@ import Login from './Login'
 import Register from './Register'
 import AboutUs from './AboutUs'
 import Contact from './Contact'
+
+import AddPortal from './AddPortal'
+
 import PortalEvent from './PortalEvent'
 import PortalView from './PortalView'
+
 
 // base styles and icons
 import 'normalize.css/normalize.css'
@@ -28,6 +32,8 @@ import 'font-awesome/css/font-awesome.min.css'
 // custom styles
 import '../styles/App.css'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+
 
 class App extends Component {
   render() {
@@ -42,6 +48,7 @@ class App extends Component {
               <Route path="/register" component={Register} />
               <Route path="/aboutUs" component={AboutUs} />
               <Route path='/contact' component={Contact} />
+              <Route path='/addportal' component={AddPortal} />
               <Route path='/:portalId/addEvent' component={PortalEvent} />
               <Route path='/portal/:portalId' component={PortalView} />
             </Switch>
