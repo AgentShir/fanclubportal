@@ -4,15 +4,12 @@
 .cards {
   display:flex;
   flex-wrap: wrap;
-  /* border: 1px solid orange; */
 }
  .portalContainer{
    max-width: 1000px;
-    /* border: 1px solid red; */
     margin: 0 auto;
  }
  .rightSideCards{
-   /* border: 1px solid blue; */
    width: 70%;
  }
  .leftCard{
@@ -27,7 +24,12 @@
  .headerCard{
    width: 100%;
  }
-
+.leftCardHeader div{
+  width: 100%
+}
+.mainHeader * {
+  padding-right: 0px !important;
+}
  @media screen and (max-width:960px) {
    .cards {
      flex-wrap:wrap;
@@ -40,5 +42,5 @@
    }
    .rightSideCards{
      width: 100%;
-   }
+   }  
  }

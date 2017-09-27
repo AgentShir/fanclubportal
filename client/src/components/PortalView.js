@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import TextField from 'material-ui/TextField'
-import { Card, CardActions, CardText, CardTitle, CardHeader, CardMedia } from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
-
+import { getPortalInfo } from '../actions/app'
+import { Card, CardText, CardHeader, CardMedia } from 'material-ui/Card'
 
 const cardStyle = {
     maxWidth: '1000px',
@@ -16,34 +14,42 @@ const cardHeaderStyle = {
 const titleStyle = {
     fontSize: '50px'
 }
+
 class PortalView extends Component {
+    componentWillMount() {
+        let portalId = this.props.match.params.portalId
+        getPortalInfo(portalId)
+    }
     render() {
         return (
             <div className="portalContainer">
                 <Card style={cardStyle} className="headerCard">
-                    <CardHeader style={cardHeaderStyle}
-                        title="fan club name"
+                    <CardHeader style={cardHeaderStyle} className="mainHeader"
+                        title={this.props.portalInfo.fanClubName}
                         titleStyle={titleStyle}
                     />
                 </Card>
                 <div className="cards">
                     <Card className="leftCard card">
                         <CardMedia>
-                            <img src="http://via.placeholder.com/100x100" alt="Logo" />
+                             <img src={this.props.portalInfo.logo} alt="Logo" style={{width:'90px'}} />
                         </CardMedia>
-                        <CardText>
-                            <h1> left col </h1>
-                        </CardText>
+                        <CardHeader className="leftCardHeader"
+                            title={this.props.portalInfo.fanClubLocation}
+                            subtitle={<p>Founded:   {this.props.portalInfo.createDate}
+                                <br/>  Last update:  {this.props.portalInfo.lastUpdate}</p>}
+                        />
                     </Card>
                     <div className="rightSideCards">
                         <Card className="rightCard card">
                             <CardText>
-                                <h1> right col </h1>
+                                <h4> Description </h4>
+                                <p>{this.props.portalInfo.description}</p>
                             </CardText>
                         </Card>
                         <Card className="bottomRightCard card">
                             <CardText>
-                                <h1> bottom right col </h1>
+                                <h4> Upcoming Events</h4>
                             </CardText>
                         </Card>
                     </div>
@@ -54,11 +60,13 @@ class PortalView extends Component {
 }
 
 function mapStateToProps(appState) {
-    const { isAuthenticated, errorMessage, isFetching } = appState.auth
+    const { portalInfo } = appState.app
+    //If there's no fan portal logo use place holder
+    if(portalInfo.logo === ''){
+        portalInfo.logo = "http://via.placeholder.com/100x100"
+    }
     return {
-        isAuthenticated,
-        isFetching,
-        errorMessage
+        portalInfo
     }
 }
 
