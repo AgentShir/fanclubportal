@@ -5,7 +5,9 @@ var logger = require('morgan')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 
-var apiRoutes = require('./routes/api')
+var userApiRoutes = require('./routes/userApi')
+var portalApiRoutes = require('./routes/portalApi')
+var eventApiRoutes = require('./routes/eventApi')
 var webRoutes = require('./routes/web')
 
 var app = express()
@@ -19,7 +21,9 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/api', apiRoutes)
+app.use('/api', userApiRoutes)
+app.use('/api/portal', portalApiRoutes)
+app.use('/api/event', eventApiRoutes)
 app.use('/', webRoutes)
 
 // no stacktraces leaked to user in production

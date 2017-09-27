@@ -22,6 +22,7 @@ import Contact from './Contact'
 import AddPortal from './AddPortal'
 
 import PortalEvent from './PortalEvent'
+import PortalView from './PortalView'
 
 
 // base styles and icons
@@ -49,6 +50,7 @@ class App extends Component {
               <Route path='/contact' component={Contact} />
               <Route path='/addportal' component={AddPortal} />
               <Route path='/:portalId/addEvent' component={PortalEvent} />
+              <Route path='/portal/:portalId' component={PortalView} />
             </Switch>
           </Layout>
         </Router>

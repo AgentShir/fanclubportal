@@ -5,7 +5,7 @@ import moment from 'moment'
 
 // example actions
 import { loginUser } from '../lib/actions/auth'
-import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE } from './actionValues'
+import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE, GET_PORTAL_ID,PORTAL_INFO } from './actionValues'
 
 
 export function getFoo() {
@@ -43,8 +43,7 @@ export function postRegister(regInfo) {
 export function postEvent(newEvent, portalId) {
   let momentDate = moment(newEvent.date).format('YYYY-MM-DD')
   let momentTime = moment(newEvent.time).format('HH:mm:SS')
-
-  axios.post('/api/' + portalId + '/addEvent', {
+  axios.post('/api/event/' + portalId, {
     description: newEvent.description,
     location: newEvent.location,
     theme: newEvent.theme,
@@ -61,8 +60,11 @@ export function postEvent(newEvent, portalId) {
     })
 }
 
+
+/*--------------PORTAL ACTIONS-------------------------------------------------*/
+
 export function postPortals(fanPortal) {
-    axios.post('/api/addPortals', {
+    axios.post('/api/portal', {
       userId:localStorage.userId,
       teamName: fanPortal.teamName,
       fanClubName: fanPortal.fanClubName,
@@ -72,6 +74,10 @@ export function postPortals(fanPortal) {
       description: fanPortal.description
     })
       .then(function (resp){
+        store.dispatch({
+          type:GET_PORTAL_ID,
+          portalId: resp.data.portalId
+        })
     })
       .catch(function (err) {
         store.dispatch({
@@ -79,4 +85,16 @@ export function postPortals(fanPortal) {
           message: err.response.data.message
         })
       })
+}
+export function getPortalInfo(portalId){
+  axios.get('/api/portal/'+portalId)
+  .then(function(resp){
+    store.dispatch({
+      type:PORTAL_INFO,
+      portalInfo: resp.data
+    })
+  })
+  .catch(function(err){
+    console.log('error ', err)
+  })
 }
