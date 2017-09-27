@@ -5,6 +5,7 @@ import { postPortals } from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText, CardTitle } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
+import { getPortalInfo} from '../actions/app'
 
 
 const cardStyle = {
@@ -30,8 +31,13 @@ class CreatePortal extends Component {
             portalInfo:{}
         }
     }
+
     componentWillMount(){
-        this.setState({portalInfo:{}})
+      if (localStorage.getItem(portalId) !== 'null'){
+        getPortalInfo(localStorage.getItem(portalId))
+      } else {
+          this.setState({portalInfo:{}})
+      }
     }
     componentWillReceiveProps(props) {
         if (props.errorMessage.length > 0) {

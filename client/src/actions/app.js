@@ -98,3 +98,13 @@ export function getPortalInfo(portalId){
     console.log('error ', err)
   })
 }
+
+export function updateFanPortal(portalId){
+  axios.update('/api/portal/'+portalId)
+  .then(function(resp){
+    console.log('actionUpdatePortal', resp)
+    })
+    .catch(function(err){
+      console.log('error', err)
+    })
+  }
