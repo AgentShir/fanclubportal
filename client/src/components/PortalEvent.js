@@ -17,7 +17,8 @@ const buttonStyle = {
 }
 const errorMessageStyle = {
     fontSize: '20px'
-  }
+}
+const minDate = new Date();
 class PortalEvent extends Component {
     constructor(props) {
         super(props)
@@ -27,7 +28,7 @@ class PortalEvent extends Component {
             theme: '',
             date: null,
             time: null,
-            expanded:false
+            expanded: false,
         }
     }
     componentWillReceiveProps(props) {
@@ -59,7 +60,7 @@ class PortalEvent extends Component {
     }
     handleExpandChange = (expanded) => {
         this.setState({ expanded: expanded });
-      };
+    };
     render() {
         return (
             <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
@@ -100,6 +101,7 @@ class PortalEvent extends Component {
                             name="date"
                             value={this.state.date}
                             onChange={this.handleDateChange}
+                            minDate={minDate}
                             hintText="Date"
                             container="inline"
                             mode="landscape"
@@ -114,6 +116,7 @@ class PortalEvent extends Component {
                             hintText="Time"
                             autoOk={true}
                             required={true}
+                            minutesStep={5}
                         /><br />
                     </CardText>
                     <CardActions style={buttonStyle}>
@@ -125,7 +128,7 @@ class PortalEvent extends Component {
     }
 }
 function mapStateToProps(appState) {
-    const { errorMessage} = appState.app
+    const { errorMessage } = appState.app
     return {
         errorMessage
     }

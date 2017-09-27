@@ -8,9 +8,6 @@ class Layout extends Component {
         <Header />
         {/* Rendering of the page below */}
         {this.props.children}
-        <footer>
-          &copy; 2017 Iron Yard
-        </footer>
       </div>
     )
   }

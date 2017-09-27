@@ -42,13 +42,16 @@ export function postRegister(regInfo) {
 
 export function postEvent(newEvent, portalId) {
   let momentDate = moment(newEvent.date).format('YYYY-MM-DD')
-  let momentTime = moment(newEvent.time).format('HH:mm:SS')
+  // let momentTime = moment(newEvent.time).format('HH:MM:00')
+  let hr = moment(newEvent.time).hour();
+  let min = moment(newEvent.time).minute();
+  let time = hr +':'+min+':00'
   axios.post('/api/event/' + portalId, {
     description: newEvent.description,
     location: newEvent.location,
     theme: newEvent.theme,
     date: momentDate,
-    time: momentTime
+    time: time
   })
     .then(function (resp) {
     })
@@ -91,7 +94,8 @@ export function getPortalInfo(portalId){
   .then(function(resp){
     store.dispatch({
       type:PORTAL_INFO,
-      portalInfo: resp.data
+      portalInfo: resp.data.portalInfo,
+      portalEvents: resp.data.events
     })
   })
   .catch(function(err){
