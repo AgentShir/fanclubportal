@@ -43,8 +43,7 @@ export function postRegister(regInfo) {
 export function postEvent(newEvent, portalId) {
   let momentDate = moment(newEvent.date).format('YYYY-MM-DD')
   let momentTime = moment(newEvent.time).format('HH:mm:SS')
-
-  axios.post('/api/event' + portalId, {
+  axios.post('/api/event/' + portalId, {
     description: newEvent.description,
     location: newEvent.location,
     theme: newEvent.theme,

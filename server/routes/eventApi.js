@@ -3,7 +3,7 @@ var router = express.Router();
 const portalEvent = require('../models/portalEvent')
 
 
-router.post("/:portalId/", function(req, res,next){
+router.post("/:portalId", function(req, res,next){
     const portalId = req.params.portalId
     if(req.body.description.length === 0 || req.body.location.length === 0){
       res.status(401).json({

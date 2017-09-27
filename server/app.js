@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/api', userApiRoutes)
 app.use('/api/portal', portalApiRoutes)
-app.use('./api/event', eventApiRoutes)
+app.use('/api/event', eventApiRoutes)
 app.use('/', webRoutes)
 
 // no stacktraces leaked to user in production
