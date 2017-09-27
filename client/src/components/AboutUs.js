@@ -24,8 +24,20 @@ class AboutUs extends Component {
                     <CardTitle title="Meet the Team">
                       <CardText>
                         <p>About Diana</p>
+                          <ul>
+                            <li>AKA: Master of the Visual Daggers </li>
+                            <li>Fan of: Arrested Development, Archer, and food... mainly bacon. </li>
+                          </ul>
                         <p>About Phil</p>
+                          <ul>
+                            <li>AKA: The Man, The Myth, The Legend</li>
+                            <li>Fan of: Sci fi adventurer</li>
+                          </ul>
                         <p>About Shireen</p>
+                          <ul>
+                            <li>AKA: The Snack Queen</li>
+                            <li>Fan of: Doctor Who, Harry Potter, Ryan Gosling, bullet journaling, La La Land, and FOOD.</li>
+                          </ul>
                       </CardText>
                     </CardTitle>
                 </CardHeader>
