@@ -5,7 +5,7 @@ import { Card, CardText, CardHeader, CardMedia } from 'material-ui/Card'
 
 const cardStyle = {
     maxWidth: '1000px',
-    margin: '30px auto',
+    margin: '10px auto',
 
 }
 const cardHeaderStyle = {
@@ -14,6 +14,9 @@ const cardHeaderStyle = {
 const titleStyle = {
     fontSize: '50px'
 }
+const style = {
+    marginLeft: 20,
+};
 
 class PortalView extends Component {
     componentWillMount() {
@@ -30,26 +33,42 @@ class PortalView extends Component {
                     />
                 </Card>
                 <div className="cards">
+                    <div style={{ width: '28%' }} >
                     <Card className="leftCard card">
                         <CardMedia>
-                             <img src={this.props.portalInfo.logo} alt="Logo" style={{width:'90px'}} />
+                            <img src={this.props.portalInfo.logo} alt="Logo" style={{ width: '90px' }} />
                         </CardMedia>
                         <CardHeader className="leftCardHeader"
                             title={this.props.portalInfo.fanClubLocation}
                             subtitle={<p>Founded:   {this.props.portalInfo.createDate}
-                                <br/>  Last update:  {this.props.portalInfo.lastUpdate}</p>}
+                                <br />  Last update:  {this.props.portalInfo.lastUpdate}</p>}
                         />
                     </Card>
+                    </div>
                     <div className="rightSideCards">
                         <Card className="rightCard card">
                             <CardText>
-                                <h4> Description </h4>
+                                <h2> Description </h2>
                                 <p>{this.props.portalInfo.description}</p>
                             </CardText>
                         </Card>
                         <Card className="bottomRightCard card">
                             <CardText>
-                                <h4> Upcoming Events</h4>
+                                <h2> Upcoming Events</h2>
+
+                                {this.props.portalEvents.map((event) => (
+                                    <Card key={event.id}>
+                                        <CardHeader
+                                            titleStyle={{fontSize:'20px'}}
+                                            title={event.description}
+                                        />
+                                        <CardText>
+                                            <span style={{fontWeight:'900'}}>Date </span>{event.date} {event.time}<br />
+                                            <span style={{fontWeight:'900'}}>Location  </span> {event.location}<br />
+                                            <span style={{fontWeight:'900'}}>Theme  </span> {event.theme}<br />
+                                        </CardText>
+                                    </Card>
+                                ))}
                             </CardText>
                         </Card>
                     </div>
@@ -60,13 +79,15 @@ class PortalView extends Component {
 }
 
 function mapStateToProps(appState) {
-    const { portalInfo } = appState.app
+    const { portalInfo, portalEvents } = appState.app
     //If there's no fan portal logo use place holder
-    if(portalInfo.logo === ''){
+    if (portalInfo.logo === '') {
         portalInfo.logo = "http://via.placeholder.com/100x100"
     }
+
     return {
-        portalInfo
+        portalInfo,
+        portalEvents
     }
 }
 

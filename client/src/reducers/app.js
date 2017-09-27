@@ -9,7 +9,8 @@ const initialState = {
   open: false,
   errorMessage: '',
   portalId:null,
-  portalInfo: {}
+  portalInfo: {},
+  portalEvents:[]
 }
 
 export default function (state = initialState, action) {
@@ -40,7 +41,8 @@ export default function (state = initialState, action) {
     case PORTAL_INFO:
     return{
       ...state,
-      portalInfo:action.portalInfo
+      portalInfo:action.portalInfo,
+      portalEvents:action.portalEvents
     }
     default:
       return state

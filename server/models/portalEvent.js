@@ -6,6 +6,7 @@ function addEvent(eventInfo,portalId, done){
 
     conn.query(sql, [portalId, eventInfo.description, eventInfo.location, eventInfo.date, eventInfo.time, eventInfo.theme], function (error, results, fields) {
         if (error) {
+          console.log(error)
           let response = {
             status: "fail",
             message: "Unable to create event."

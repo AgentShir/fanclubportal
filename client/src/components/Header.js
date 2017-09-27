@@ -12,7 +12,8 @@ const headerStyle = {
   cursor: 'pointer',
   boxShadow: 'none',
   textAlign: 'center',
-  backgroundColor: '#039BE5'
+  // backgroundColor: '#039BE5'
+  backgroundColor:'#4267B2'
 }
 
 class Header extends Component {
@@ -61,6 +62,12 @@ class Header extends Component {
               </Link>
               <Link to="/1/addEvent" style={{ textDecoration: "none" }}>
                 <MenuItem onClick={this.handleToggle}>Add Event</MenuItem>
+              </Link>
+              <Link to="/aboutUs" style={{ textDecoration: "none" }}>
+                <MenuItem onClick={this.handleToggle}>About Us</MenuItem>
+              </Link>
+              <Link to="/contact" style={{ textDecoration: "none" }}>
+                <MenuItem onClick={this.handleToggle}>Contact</MenuItem>
               </Link>
               </div>}
         </Drawer>
