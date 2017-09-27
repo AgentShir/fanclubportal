@@ -14,9 +14,6 @@ const cardHeaderStyle = {
 const titleStyle = {
     fontSize: '50px'
 }
-const style = {
-    marginLeft: 20,
-};
 
 class PortalView extends Component {
     componentWillMount() {
