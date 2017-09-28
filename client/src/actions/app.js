@@ -5,7 +5,7 @@ import moment from 'moment'
 
 // example actions
 import { loginUser } from '../lib/actions/auth'
-import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE, GET_PORTAL_ID,PORTAL_INFO } from './actionValues'
+import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE, GET_PORTAL_ID,PORTAL_INFO, UPDATE_PORTAL, UPDATE_STATUS} from './actionValues'
 
 
 export function getFoo() {
@@ -99,6 +99,33 @@ export function getPortalInfo(portalId){
     })
   })
   .catch(function(err){
-    console.log('error ', err)
+  })
+}
+
+export function updatePortal(portalId, portalInfo){
+  axios.put('/api/portal/'+ portalId, {
+    userId:localStorage.userId,
+    teamName: portalInfo.teamName,
+    fanClubName: portalInfo.fanClubName,
+    teamLocation: portalInfo.teamLocation,
+    fanClubLocation: portalInfo.fanClubLocation,
+    logo: portalInfo.logo,
+    description: portalInfo.description
+  })
+  .then(function(resp){
+      store.dispatch({
+        type:UPDATE_PORTAL,
+        updateStatus: resp.data.status
+      })
+    })
+    .catch(function(err){
+    })
+  }
+
+export function updateComplete(){
+  console.log('aciton ')
+  store.dispatch({
+    type:UPDATE_STATUS,
+    status:'done'
   })
 }

@@ -55,7 +55,7 @@ function getPortalInfo(portalId, done){
            message:"Unable to retrieve fan portal events."
          }
          done(false,response)
-       }else if(!error){        
+       }else if(!error){
           info.events = results
           done(true,info)
        }
@@ -63,7 +63,30 @@ function getPortalInfo(portalId, done){
     }
   })
 }
+function updatePortal(portalId, portalInfo, done){
+    const sql = `UPDATE portals
+    SET teamName = ?, fanClubName = ?, teamLocation = ?, fanClubLocation= ?, logo = ?, description = ?
+    WHERE id = ? and userid = ?`
+
+    conn.query(sql, [portalInfo.teamName, portalInfo.fanClubName, portalInfo.teamLocation, portalInfo.fanClubLocation, portalInfo.logo,  portalInfo.description, portalId, portalInfo.userId], function (error, results, fields) {
+        if (error) {
+          let response = {
+            status: "fail",
+            message: "A fan club name already exists."
+          }
+          done(false, response)
+        } else if (!error) {
+          let response = {
+            status:"success",
+            message:"The fan portal has been updated"
+          }
+          done(true, response)
+        }
+      })
+}
+
 module.exports = {
   addFanPortal,
-  getPortalInfo
+  getPortalInfo,
+  updatePortal
 }

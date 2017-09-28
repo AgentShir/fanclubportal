@@ -19,7 +19,7 @@ import Register from './Register'
 import AboutUs from './AboutUs'
 import Contact from './Contact'
 
-import AddPortal from './AddPortal'
+import Portal from './Portal'
 
 import PortalEvent from './PortalEvent'
 import PortalView from './PortalView'
@@ -48,9 +48,10 @@ class App extends Component {
               <Route path="/register" component={Register} />
               <Route path="/aboutUs" component={AboutUs} />
               <Route path='/contact' component={Contact} />
-              <Route path='/addportal' component={AddPortal} />
+              <Route path='/addportal' component={Portal} />
               <Route path='/:portalId/addEvent' component={PortalEvent} />
               <Route path='/portal/:portalId' component={PortalView} />
+              <Route path='/editPortal/:portalId' component={Portal} />
             </Switch>
           </Layout>
         </Router>
