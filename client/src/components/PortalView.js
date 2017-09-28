@@ -30,10 +30,10 @@ class PortalView extends Component {
                     />
                 </Card>
                 <div className="cards">
-                    <div style={{ width: '28%' }} >
+                    <div className='leftSide'>
                     <Card className="leftCard card">
                         <CardMedia>
-                            <img src={this.props.portalInfo.logo} alt="Logo" style={{ width: '90px' }} />
+                            <img src={this.props.portalInfo.logo} alt="Logo" />
                         </CardMedia>
                         <CardHeader className="leftCardHeader"
                             title={this.props.portalInfo.fanClubLocation}
@@ -79,7 +79,7 @@ function mapStateToProps(appState) {
     const { portalInfo, portalEvents } = appState.app
     //If there's no fan portal logo use place holder
     if (portalInfo.logo === '') {
-        portalInfo.logo = "http://via.placeholder.com/100x100"
+        portalInfo.logo = "http://via.placeholder.com/400x800"
     }
 
     return {
