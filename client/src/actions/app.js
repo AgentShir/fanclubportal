@@ -100,7 +100,6 @@ export function updateEvent(eventId,portalId, eventInfo) {
     time: time
   })
     .then(function (resp) {
-      console.log('reventupdate', resp)
       store.dispatch({
         type: action.UPDATE_EVENT,
         updateStatus: resp.data.status
@@ -174,7 +173,6 @@ export function updatePortal(portalId, portalInfo){
   }
 
 export function updateComplete(){
-  console.log('aciton ')
   store.dispatch({
     type:action.UPDATE_STATUS,
     status:'done'
