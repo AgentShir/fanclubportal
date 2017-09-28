@@ -6,6 +6,8 @@ import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText, CardTitle } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import { getPortalInfo, updatePortal, updateComplete } from '../actions/app'
+import MenuItem from 'material-ui/MenuItem'
+import SelectField from 'material-ui/SelectField'
 
 
 const cardStyle = {
@@ -18,16 +20,28 @@ const buttonStyle = {
 const errorMessageStyle = {
     fontSize: '20px'
   }
+
+  const items = [
+    <MenuItem key={1} value={"Sports"} primaryText="Sports" />,
+    <MenuItem key={2} value={"Television"} primaryText="Television" />,
+    <MenuItem key={3} value={"Movies"} primaryText="Movies" />,
+    <MenuItem key={4} value={"Food & Drink"} primaryText="Food & Drink" />,
+    <MenuItem key={5} value={"Technology"} primaryText="Technology" />,
+  ];
+
+
 class CreatePortal extends Component {
     constructor(props) {
         super(props)
         this.state = {
             fanClubName: '',
             fanClubLocation: '',
-            teamName: '',
+            category: '',
+            MenuItem: '',
             teamLocation: '',
             logo: '',
-            description: ''
+            description: '',
+            value: null
         }
     }
 
@@ -49,7 +63,7 @@ class CreatePortal extends Component {
           this.setState({
             fanClubName: props.portalInfo.fanClubName,
             fanClubLocation: props.portalInfo.fanClubLocation,
-            teamName: props.portalInfo.teamName,
+            category: props.portalInfo.category,
             teamLocation: props.portalInfo.teamLocation,
             logo: props.portalInfo.logo,
             description: props.portalInfo.description
@@ -68,6 +82,10 @@ class CreatePortal extends Component {
         this.setState({ expanded: expanded });
     }
 
+    handleSelect = (e, index, value) => {  
+      this.setState({value:value})
+    }
+
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -77,7 +95,7 @@ class CreatePortal extends Component {
         e.preventDefault()
       if(this.props.location.pathname === '/addPortal'){
         postPortals(this.state)
-        this.setState({ fanClubName: '', fanClubLocation: '', teamName: '', teamLocation: '', logo: '', description: '' })
+        this.setState({ fanClubName: '', fanClubLocation: '', category: '', teamLocation: '', logo: '', description: '' })
       }else{
         updatePortal(localStorage.getItem('portalId'), this.state)
       }
@@ -110,15 +128,16 @@ class CreatePortal extends Component {
                             onChange={this.handleChange}
                             value={this.state.fanClubLocation}
                         /><br />
-                        <TextField
-                            hintText="Team Name"
-                            floatingLabelText="Team Name"
-                            name="teamName"
-                            autoComplete="off"
-                            fullWidth={true} required={true}
-                            onChange={this.handleChange}
-                            value={this.state.teamName}
-                        /><br />
+                        <SelectField
+                            onChange={this.handleSelect}
+                            value={this.state.value}
+                            floatingLabelText="Category"
+                            name="category"
+                          >
+                            {items}
+                          </SelectField>
+
+                        <br />
                         <TextField
                             hintText="Team Location"
                             floatingLabelText="Team Location"
