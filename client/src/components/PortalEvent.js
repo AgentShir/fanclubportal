@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Authorize } from '../lib/auth'
-import { postEvent } from '../actions/app'
+import { postEvent, getEventInfo, updateEvent, updateComplete } from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText, CardTitle } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
@@ -27,16 +27,36 @@ class PortalEvent extends Component {
             location: '',
             theme: '',
             date: null,
-            time: null,
-            expanded: false,
+            time: null
         }
     }
+
+    componentWillMount() {
+      let eventId = this.props.match.params.eventId
+      getEventInfo(eventId)
+    }
+
     componentWillReceiveProps(props) {
-        if (props.errorMessage.length > 0) {
-            this.setState({ expanded: true })
-        } else {
-            this.setState({ expanded: false })
+        if (this.props.location.pathname === '/addEvent') {
+          if (props.errorMessage.length > 0) {
+              this.setState({ expanded: true })
+          } else {
+              this.setState({ expanded: false })
+              this.props.history.push('/')
+          }
+        }
+        else {
+          this.state = {
+              description: props.eventInfo.description,
+              location: props.eventInfo.location,
+              theme: props.eventInfo.theme,
+              date: props.eventInfo.date,
+              time: props.eventInfo.time
+          }
+          if(props.updateStatus === 'success') {
             this.props.history.push('/')
+            updateComplete()
+          }
         }
     }
     handleChange = (e) => {
@@ -54,9 +74,16 @@ class PortalEvent extends Component {
     }
     addEvent = (e) => {
         e.preventDefault()
-        let portalId = this.props.match.params.portalId
-        postEvent(this.state, portalId)
-        this.setState({ description: '', location: '', theme: '', date: null, time: null })
+        let portalId = localStorage.getItem('portalId')
+
+        if (this.props.location.pathname === '/addEvent') {
+          postEvent(this.state, portalId)
+          this.setState({ description: '', location: '', theme: '', date: null, time: null })
+        }
+        else {
+          let eventId = this.props.match.params.eventId
+          updateEvent(eventId,portalId, this.state)
+        }
     }
     handleExpandChange = (expanded) => {
         this.setState({ expanded: expanded });
@@ -128,9 +155,9 @@ class PortalEvent extends Component {
     }
 }
 function mapStateToProps(appState) {
-    const { errorMessage } = appState.app
+    const { errorMessage, eventInfo, updateStatus } = appState.app
     return {
-        errorMessage
+        errorMessage, eventInfo, updateStatus
     }
 }
 export default connect(mapStateToProps)(Authorize(PortalEvent))
