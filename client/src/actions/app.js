@@ -5,7 +5,9 @@ import moment from 'moment'
 
 // example actions
 import { loginUser } from '../lib/actions/auth'
-import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE, GET_PORTAL_ID,PORTAL_INFO, UPDATE_PORTAL, UPDATE_STATUS, UPDATE_EVENT} from './actionValues'
+// import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE, GET_PORTAL_ID,PORTAL_INFO, UPDATE_PORTAL, UPDATE_STATUS, UPDATE_EVENT, GET_EVENT_INFO} from './actionValues'
+
+import * as action from './actionValues'
 
 
 export function getFoo() {
@@ -13,7 +15,7 @@ export function getFoo() {
     .then(resp => resp.json())
     .then(resp => {
       store.dispatch({
-        type: MY_ACTION,
+        type: action.MY_ACTION,
         payload: resp.foo
       })
     })
@@ -33,12 +35,15 @@ export function postRegister(regInfo) {
       })
       .catch(function (err) {
         store.dispatch({
-          type: REGISTRATION_FAILURE,
+          type: action.REGISTRATION_FAILURE,
           message: err.response.data.message
         })
       })
   }
 }
+
+/*--------------EVENT ACTIONS-------------------------------------------------*/
+
 
 export function postEvent(newEvent, portalId) {
   let momentDate = moment(newEvent.date).format('YYYY-MM-DD')
@@ -57,14 +62,56 @@ export function postEvent(newEvent, portalId) {
     })
     .catch(function (err) {
       store.dispatch({
-        type: POST_EVENT_FAILURE,
+        type: action.POST_EVENT_FAILURE,
         message: err.response.data.message
       })
     })
 }
 
-export function updateEvent() {
+export function getEventInfo(eventId) {
+  console.log('action get event', eventId, localStorage.portalId)
+  const portalId = localStorage.portalId
+  axios.get('/api/event/' + eventId + '/' + portalId)
+  .then(function(resp){
+    store.dispatch({
+      type:action.EVENT_INFO,
+      eventInfo: resp.data
+    })
+    console.log('getEvent', resp)
+  })
+  .catch(function (err) {
+    console.log('getEventerr', err)
+  })
+}
 
+export function updateEvent(eventId,portalId, eventInfo) {
+  console.log('InfoEventGet', eventInfo)
+  let momentDate = moment(eventInfo.date).format('YYYY-MM-DD')
+  // let momentTime = moment(eventInfo.time).format('HH:MM:00')
+  let hr = moment(eventInfo.time).hour();
+  let min = moment(eventInfo.time).minute();
+  let time = hr +':'+min+':00'
+  axios.put('/api/event/' + eventId, {
+    portalId: portalId,
+    description: eventInfo.description,
+    location: eventInfo.location,
+    theme: eventInfo.theme,
+    date: momentDate,
+    time: time
+  })
+    .then(function (resp) {
+      console.log('reventupdate', resp)
+      store.dispatch({
+        type: action.UPDATE_EVENT,
+        updateStatus: resp.data.status
+      })
+    })
+    .catch(function (err) {
+      store.dispatch({
+        type: action.POST_EVENT_FAILURE,
+        message: err.response.data.message
+      })
+    })
 }
 
 
@@ -82,13 +129,13 @@ export function postPortals(fanPortal) {
     })
       .then(function (resp){
         store.dispatch({
-          type:GET_PORTAL_ID,
+          type:action.GET_PORTAL_ID,
           portalId: resp.data.portalId
         })
     })
       .catch(function (err) {
         store.dispatch({
-          type: ADD_PORTAL_FAILURE,
+          type: action.ADD_PORTAL_FAILURE,
           message: err.response.data.message
         })
       })
@@ -97,7 +144,7 @@ export function getPortalInfo(portalId){
   axios.get('/api/portal/'+portalId)
   .then(function(resp){
     store.dispatch({
-      type:PORTAL_INFO,
+      type:action.PORTAL_INFO,
       portalInfo: resp.data.portalInfo,
       portalEvents: resp.data.events
     })
@@ -118,7 +165,7 @@ export function updatePortal(portalId, portalInfo){
   })
   .then(function(resp){
       store.dispatch({
-        type:UPDATE_PORTAL,
+        type:action.UPDATE_PORTAL,
         updateStatus: resp.data.status
       })
     })
@@ -129,7 +176,7 @@ export function updatePortal(portalId, portalInfo){
 export function updateComplete(){
   console.log('aciton ')
   store.dispatch({
-    type:UPDATE_STATUS,
+    type:action.UPDATE_STATUS,
     status:'done'
   })
 }

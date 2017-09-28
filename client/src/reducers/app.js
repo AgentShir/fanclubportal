@@ -1,8 +1,9 @@
 // if you so choose, you may name your actions and import them here
 // for reducing typing errors
 
-import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE,GET_PORTAL_ID, PORTAL_INFO, UPDATE_PORTAL, UPDATE_STATUS, UPDATE_EVENT} from '../actions/actionValues'
+// import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE,GET_PORTAL_ID, PORTAL_INFO, UPDATE_PORTAL, UPDATE_STATUS, UPDATE_EVENT} from '../actions/actionValues'
 
+import * as reduce from '../actions/actionValues'
 
 const initialState = {
   foo: 'bar',
@@ -11,55 +12,61 @@ const initialState = {
   portalId:null,
   portalInfo: {},
   portalEvents:[],
-  updateStatus:''
+  updateStatus:'',
+  eventInfo: {}
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
-    case MY_ACTION:
+    case reduce.MY_ACTION:
 
       return {...state, foo: action.payload}
-    case ADD_PORTAL_FAILURE:
+    case reduce.ADD_PORTAL_FAILURE:
       return {
         ...state,
         errorMessage:action.message
       }
-    case REGISTRATION_FAILURE:
+    case reduce.REGISTRATION_FAILURE:
       return{
         ...state,
         errorMessage:action.message
       }
-    case POST_EVENT_FAILURE:
+    case reduce.POST_EVENT_FAILURE:
     return{
       ...state,
       errorMessage:action.message
     }
-    case GET_PORTAL_ID:
+    case reduce.GET_PORTAL_ID:
     return{
       ...state,
       portalId:action.portalId
     }
-    case PORTAL_INFO:
+    case reduce.PORTAL_INFO:
     return{
       ...state,
       portalInfo:action.portalInfo,
       portalEvents:action.portalEvents
     }
-    case UPDATE_PORTAL:
+    case reduce.UPDATE_PORTAL:
     return{
       ...state,
       updateStatus:action.updateStatus
     }
-    case UPDATE_STATUS:
+    case reduce.UPDATE_STATUS:
       return{
         ...state,
         updateStatus:action.status
       }
-
-    case UPDATE_EVENT:
+    case reduce.EVENT_INFO:
     return{
       ...state,
-      updateEvent:action.updateEvent
+      eventInfo:action.eventInfo
+    }
+
+    case reduce.UPDATE_EVENT:
+    return{
+      ...state,
+      updateStatus:action.updateStatus
     }
 
     default:

@@ -22,16 +22,48 @@ function addEvent(eventInfo,portalId, done){
       })
 }
 
-function getEvent() {
-
+function getEventInfo(eventId, portalId, done) {
+  const sql = `SELECT * FROM events WHERE id = ? and portalId = ?`
+  console.log('here',eventId, portalId)
+  conn.query(sql, [eventId, portalId], function (error, results, fields) {
+    if (error) {
+      console.log(error)
+      let response = {
+        status: "fail",
+        message: "Unable to create event."
+      }
+      done(false, response)
+    } else if (!error) {
+      let response = results[0]
+      done(true, response)
+    }
+  })
 }
 
-function updateEvent() {
-  
+function updateEvent(eventId, eventInfo, done) {
+  const sql = `UPDATE events  SET description=?, location=?, date=?, time=?, theme=?
+    WHERE id =? AND portalId =?`
+
+  conn.query(sql, [eventInfo.description, eventInfo.location, eventInfo.date, eventInfo.time, eventInfo.theme, eventId, eventInfo.portalId], function (error, results, fields) {
+      if (error) {
+        console.log(error)
+        let response = {
+          status: "fail",
+          message: "Unable to update event."
+        }
+        done(false, response)
+      } else if (!error) {
+        let response = {
+          status:"success",
+          message:"Event updated."
+        }
+        done(true, response)
+      }
+    })
 }
 
 module.exports = {
     addEvent,
-    getEvent,
+    getEventInfo,
     updateEvent
 }
