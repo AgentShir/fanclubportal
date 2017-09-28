@@ -1,10 +1,7 @@
 /*
   Custom styles here
  */
-/* #root{
-  background-color:#E3E6EA;
-  height: 100vh;
-} */
+
 .cards {
   display:flex;
   flex-wrap: wrap;
@@ -17,11 +14,7 @@
  .rightSideCards{
    width: 70%;
  }
- /* .leftCard{
-   width: 25%;
-   flex-grow: 1;
-   margin-right: 10px;
- } */
+
  .rightCard{
    flex-grow: 2;
    margin-bottom: 10px;
@@ -29,8 +22,15 @@
  .headerCard{
    width: 100%;
  }
+ .leftSide{
+ width:28%;
+ }
+ .leftSide img{
+   max-height: 300px;
+ }
 .leftCardHeader div{
-  width: 100%
+  width: 100%;
+  text-align: left;
 }
 .mainHeader * {
   padding-right: 0px !important;
@@ -50,5 +50,16 @@
    }  
    .portalContainer{
      max-width: 80%;
+   }
+   .leftSide{
+     width: 100%;
+     text-align:center;
+   }
+   .leftSide img{
+     max-width: 300px !important;
+     max-height: 300px !important;
+     /* min-width:0 !important; */
+     width: auto !important;
+     height:auto !important;
    }
  }
