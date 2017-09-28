@@ -159,8 +159,6 @@ class CreatePortal extends Component {
 }
 function mapStateToProps(appState) {
     const { errorMessage, portalId, portalInfo, updateStatus } = appState.app
-
-    console.log(' map to props', updateStatus)
     return {
         errorMessage,
         // portalInfo:Object.assign({},portalInfo)
