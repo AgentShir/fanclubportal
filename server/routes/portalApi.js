@@ -11,7 +11,7 @@ router.post('/', function (req, res, next) {
     const fanClubLocation = req.body.fanClubLocation
     const logo = req.body.logo
     const description = req.body.description
-  
+
     if (teamName.length === 0) {
       res.status(401).json({
         message: 'Team Name must be entered.'
@@ -27,7 +27,7 @@ router.post('/', function (req, res, next) {
     }
   })
 
-  
+
 router.get("/:portalId", function(req,res,next){
     const portalId = req.params.portalId
     fanPortal.getPortalInfo(portalId, function(success,response){
@@ -39,4 +39,14 @@ router.get("/:portalId", function(req,res,next){
     })
   })
 
+router.put("/:portalId", function(req,res,next){
+  const portalId = req.params.portalId
+  fanPortal.updatePortal(portalId,req.body, function(success, response){
+    if(!success){
+      res.status(401).json(response)
+    }else{
+      res.json(response)
+    }
+  })
+})
   module.exports = router;

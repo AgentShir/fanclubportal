@@ -1,7 +1,7 @@
 // if you so choose, you may name your actions and import them here
 // for reducing typing errors
 
-import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE,GET_PORTAL_ID, PORTAL_INFO} from '../actions/actionValues'
+import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE,GET_PORTAL_ID, PORTAL_INFO, UPDATE_PORTAL, UPDATE_STATUS} from '../actions/actionValues'
 
 
 const initialState = {
@@ -9,7 +9,9 @@ const initialState = {
   open: false,
   errorMessage: '',
   portalId:null,
-  portalInfo: {}
+  portalInfo: {},
+  portalEvents:[],
+  updateStatus:''
 }
 
 export default function (state = initialState, action) {
@@ -40,8 +42,19 @@ export default function (state = initialState, action) {
     case PORTAL_INFO:
     return{
       ...state,
-      portalInfo:action.portalInfo
+      portalInfo:action.portalInfo,
+      portalEvents:action.portalEvents
     }
+    case UPDATE_PORTAL:
+    return{
+      ...state,
+      updateStatus:action.updateStatus
+    }
+    case UPDATE_STATUS:
+      return{
+        ...state,
+        updateStatus:action.status
+      }
     default:
       return state
   }

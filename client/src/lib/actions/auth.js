@@ -86,6 +86,7 @@ export function loginUser(creds) {
           localStorage.setItem('token', user.token)
           localStorage.setItem('username', user.username)
           localStorage.setItem('userId', user.userId)
+          localStorage.setItem('portalId', user.portalId)
           // Dispatch the success action
           dispatch(receiveLogin(user))
         }

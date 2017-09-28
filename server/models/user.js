@@ -29,7 +29,8 @@ function registerUser(regInfo, done) {
 
 function login(username, password, done) {
   const sql = `
-  SELECT password, id FROM users
+  SELECT u.password, u.id as userId, p.id as portalId FROM users u
+  LEFT JOIN portals p on p.userId = u.id
  WHERE username = ?
 `
   conn.query(sql, [username], function (err, results, fields) {
@@ -39,14 +40,17 @@ function login(username, password, done) {
       done(false, response)
     } else {
       const hashedPassword = results[0].password.toString()
-      const userId = results[0].id
+      const userId = results[0].userId
+      const portalId = results[0].portalId
+
       bcrypt.compare(password, hashedPassword).then(function (result) {
         if (result) {
           // notice we don't need to store tokens in the database!
           let response ={
             token: jwt.sign({ username }, config.get('secret'), { expiresIn: config.get('sessionLengthInSeconds') }),
             username: username,
-            userId:userId
+            userId:userId,
+            portalId:portalId
           }
           done(true, response)
         } else {

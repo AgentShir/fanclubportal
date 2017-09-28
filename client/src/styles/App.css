@@ -1,9 +1,14 @@
 /*
   Custom styles here
  */
+/* #root{
+  background-color:#E3E6EA;
+  height: 100vh;
+} */
 .cards {
   display:flex;
   flex-wrap: wrap;
+  justify-content: space-between
 }
  .portalContainer{
    max-width: 1000px;
@@ -12,11 +17,11 @@
  .rightSideCards{
    width: 70%;
  }
- .leftCard{
+ /* .leftCard{
    width: 25%;
    flex-grow: 1;
    margin-right: 10px;
- }
+ } */
  .rightCard{
    flex-grow: 2;
    margin-bottom: 10px;
@@ -43,4 +48,7 @@
    .rightSideCards{
      width: 100%;
    }  
+   .portalContainer{
+     max-width: 80%;
+   }
  }

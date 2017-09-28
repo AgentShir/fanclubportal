@@ -12,7 +12,8 @@ const headerStyle = {
   cursor: 'pointer',
   boxShadow: 'none',
   textAlign: 'center',
-  backgroundColor: '#039BE5'
+  // backgroundColor: '#039BE5'
+  backgroundColor: '#4267B2'
 }
 
 class Header extends Component {
@@ -24,7 +25,7 @@ class Header extends Component {
   }
   handleToggle = () => this.setState({ open: !this.state.open });
 
-  logout = () =>{
+  logout = () => {
     this.props.dispatch(logoutUser())
     this.handleToggle()
   }
@@ -56,13 +57,28 @@ class Header extends Component {
               </Link></div>
             : <div>
               <MenuItem onClick={this.logout}>Logout</MenuItem>
-              <Link to="/addPortal" style={{ textDecoration: "none" }}>
-                <MenuItem onClick={this.handleToggle}>Add Portal</MenuItem>
+              {localStorage.getItem('portalId') === 'null' ?
+                <div>
+                  <Link to="/addPortal" style={{ textDecoration: "none" }}>
+                    <MenuItem onClick={this.handleToggle}>Add Portal</MenuItem>
+                  </Link>
+                </div>
+                : <div>
+                  <Link to={`/editPortal/${localStorage.portalId}`} style={{ textDecoration: "none" }}>
+                    <MenuItem onClick={this.handleToggle}>Edit Portal</MenuItem>
+                  </Link>
+                  <Link to={`/${localStorage.portalId}/addEvent`} style={{ textDecoration: "none" }}>
+                    <MenuItem onClick={this.handleToggle}>Add Event</MenuItem>
+                  </Link>
+                </div>
+              }
+              <Link to="/aboutUs" style={{ textDecoration: "none" }}>
+                <MenuItem onClick={this.handleToggle}>About Us</MenuItem>
               </Link>
-              <Link to="/1/addEvent" style={{ textDecoration: "none" }}>
-                <MenuItem onClick={this.handleToggle}>Add Event</MenuItem>
+              <Link to="/contact" style={{ textDecoration: "none" }}>
+                <MenuItem onClick={this.handleToggle}>Contact</MenuItem>
               </Link>
-              </div>}
+            </div>}
         </Drawer>
       </div>
     )
