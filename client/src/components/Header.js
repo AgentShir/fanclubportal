@@ -64,7 +64,7 @@ class Header extends Component {
                   </Link>
                 </div>
                 : <div>
-                  <Link to={`/editPortal/${localStorage.portalId}`} style={{ textDecoration: "none" }}>
+                  <Link to={`/updatePortal/${localStorage.portalId}`} style={{ textDecoration: "none" }}>
                     <MenuItem onClick={this.handleToggle}>Edit Portal</MenuItem>
                   </Link>
                   <Link to={`/${localStorage.portalId}/addEvent`} style={{ textDecoration: "none" }}>

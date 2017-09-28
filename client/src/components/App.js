@@ -48,10 +48,11 @@ class App extends Component {
               <Route path="/register" component={Register} />
               <Route path="/aboutUs" component={AboutUs} />
               <Route path='/contact' component={Contact} />
-              <Route path='/addportal' component={Portal} />
+              <Route path='/addPortal' component={Portal} />
               <Route path='/:portalId/addEvent' component={PortalEvent} />
+              <Route path='/updateEvent/:eventId' component={PortalEvent} />
               <Route path='/portal/:portalId' component={PortalView} />
-              <Route path='/editPortal/:portalId' component={Portal} />
+              <Route path='/updatePortal/:portalId' component={Portal} />
             </Switch>
           </Layout>
         </Router>
