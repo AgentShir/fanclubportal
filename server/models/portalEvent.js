@@ -22,6 +22,16 @@ function addEvent(eventInfo,portalId, done){
       })
 }
 
+function getEvent() {
+
+}
+
+function updateEvent() {
+  
+}
+
 module.exports = {
-    addEvent
+    addEvent,
+    getEvent,
+    updateEvent
 }

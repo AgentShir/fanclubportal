@@ -5,7 +5,7 @@ import moment from 'moment'
 
 // example actions
 import { loginUser } from '../lib/actions/auth'
-import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE, GET_PORTAL_ID,PORTAL_INFO, UPDATE_PORTAL, UPDATE_STATUS} from './actionValues'
+import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE, GET_PORTAL_ID,PORTAL_INFO, UPDATE_PORTAL, UPDATE_STATUS, UPDATE_EVENT} from './actionValues'
 
 
 export function getFoo() {
@@ -61,6 +61,10 @@ export function postEvent(newEvent, portalId) {
         message: err.response.data.message
       })
     })
+}
+
+export function updateEvent() {
+
 }
 
 

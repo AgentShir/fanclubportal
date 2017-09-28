@@ -19,4 +19,13 @@ router.post("/:portalId", function(req, res,next){
       })
     }
   })
+
+router.get("/:portalId", function(req, res, next) {
+  // portalId brings up the entire portal, what do I use to call just the event
+})
+
+router.put("/:portalId", function(req, res, next) {
+  // Same question as above
+})
+
   module.exports = router;

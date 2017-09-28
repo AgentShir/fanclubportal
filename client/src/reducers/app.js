@@ -1,7 +1,7 @@
 // if you so choose, you may name your actions and import them here
 // for reducing typing errors
 
-import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE,GET_PORTAL_ID, PORTAL_INFO, UPDATE_PORTAL, UPDATE_STATUS} from '../actions/actionValues'
+import { MY_ACTION, REGISTRATION_FAILURE, POST_EVENT_FAILURE, ADD_PORTAL_FAILURE,GET_PORTAL_ID, PORTAL_INFO, UPDATE_PORTAL, UPDATE_STATUS, UPDATE_EVENT} from '../actions/actionValues'
 
 
 const initialState = {
@@ -55,6 +55,13 @@ export default function (state = initialState, action) {
         ...state,
         updateStatus:action.status
       }
+
+    case UPDATE_EVENT:
+    return{
+      ...state,
+      updateEvent:action.updateEvent
+    }
+
     default:
       return state
   }
