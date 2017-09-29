@@ -29,7 +29,7 @@ function registerUser(regInfo, done) {
 
 function login(username, password, done) {
   const sql = `
-  SELECT u.password, u.id as userId, p.id as portalId FROM users u
+  SELECT u.password, u.username, u.id as userId, p.id as portalId FROM users u
   LEFT JOIN portals p on p.userId = u.id
  WHERE username = ?
 `
@@ -42,7 +42,7 @@ function login(username, password, done) {
       const hashedPassword = results[0].password.toString()
       const userId = results[0].userId
       const portalId = results[0].portalId
-
+      
       bcrypt.compare(password, hashedPassword).then(function (result) {
         if (result) {
           // notice we don't need to store tokens in the database!

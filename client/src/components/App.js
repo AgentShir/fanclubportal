@@ -18,11 +18,10 @@ import Login from './Login'
 import Register from './Register'
 import AboutUs from './AboutUs'
 import Contact from './Contact'
-
 import Portal from './Portal'
-
 import PortalEvent from './PortalEvent'
 import PortalView from './PortalView'
+import UserHomepage from './UserHomepage'
 
 
 // base styles and icons
@@ -53,6 +52,7 @@ class App extends Component {
               <Route path='/updateEvent/:eventId' component={PortalEvent} />
               <Route path='/portal/:portalId' component={PortalView} />
               <Route path='/updatePortal/:portalId' component={Portal} />
+              <Route path='/home' component={UserHomepage} />
             </Switch>
           </Layout>
         </Router>

@@ -57,7 +57,9 @@ class Header extends Component {
                 <MenuItem onClick={this.handleToggle}>Contact</MenuItem>
               </Link></div>
             : <div>
-              <MenuItem onClick={this.logout}>Logout</MenuItem>
+              <Link to="/home" style={{ textDecoration: "none" }}>
+                <MenuItem onClick={this.handleToggle}>Home</MenuItem>
+              </Link>
               {localStorage.getItem('portalId') === 'null' ?
                 <div>
                   <Link to="/addPortal" style={{ textDecoration: "none" }}>
@@ -79,6 +81,7 @@ class Header extends Component {
               <Link to="/contact" style={{ textDecoration: "none" }}>
                 <MenuItem onClick={this.handleToggle}>Contact</MenuItem>
               </Link>
+              <MenuItem onClick={this.logout}>Logout</MenuItem>
             </div>}
         </Drawer>
       </div>
