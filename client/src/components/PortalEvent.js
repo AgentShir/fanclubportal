@@ -27,7 +27,8 @@ class PortalEvent extends Component {
             location: '',
             theme: '',
             date: null,
-            time: null
+            time: null,
+            expanded: false
         }
     }
 
@@ -48,15 +49,14 @@ class PortalEvent extends Component {
             }
         }
         else {
-            this.state = {
+            this.setState({
                 description: props.eventInfo.description,
                 location: props.eventInfo.location,
                 theme: props.eventInfo.theme,
-                //date: props.eventInfo.date,
-                // time: props.eventInfo.time
-                date: props.eventDate,
-                time: props.eventTime
-            }
+                date: props.eventInfo.date,
+                time: props.eventInfo.time
+            })
+            
             if (props.updateStatus === 'success') {
                 this.props.history.push('/')
                 updateComplete()
@@ -71,12 +71,10 @@ class PortalEvent extends Component {
         })
     }
     handleDateChange = (e, date) => {
-        this.setState({
-            date: date
-        })
+        this.setState({ date })
     }
     handleTimeChange = (e, time) => {
-        this.setState({ time: time })
+        this.setState({ time })
     }
     addEvent = (e) => {
         e.preventDefault()
@@ -166,23 +164,28 @@ class PortalEvent extends Component {
 function mapStateToProps(appState) {
     const { errorMessage, eventInfo, updateStatus } = appState.app
     if (eventInfo.date !== undefined) {
-        var newDate = new Date(eventInfo.date)
+        eventInfo.date = new Date(eventInfo.date)
     }
     // time
     if (eventInfo.time !== undefined) {
-        var newTime = new Date()
-        var tempTime = eventInfo.time
-        var times = tempTime.split(":")
-        newTime.setHours(times[0])
-        newTime.setMinutes(times[1])
-        newTime.setSeconds(times[2])
+        var newTime
+        if (typeof eventInfo.time === 'object') {
+          newTime = eventInfo.time
+        } else {
+            newTime = new Date()
+            var tempTime = eventInfo.time
+            var times = tempTime.split(":")
+            newTime.setHours(times[0])
+            newTime.setMinutes(times[1])
+            newTime.setSeconds(times[2])
+        }
+        
+        eventInfo.time = newTime
     }
     return {
         errorMessage,
         eventInfo,
-        updateStatus,
-        eventDate: newDate,
-        eventTime: newTime
+        updateStatus
     }
 }
 export default connect(mapStateToProps)(Authorize(PortalEvent))
