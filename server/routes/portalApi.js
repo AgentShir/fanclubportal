@@ -5,16 +5,16 @@ const fanPortal = require('../models/fanPortal')
 
 router.post('/', function (req, res, next) {
     const userId = req.body.userId
-    const teamName = req.body.teamName
+    const category = req.body.category
     const fanClubName = req.body.fanClubName
     const teamLocation = req.body.teamLocation
     const fanClubLocation = req.body.fanClubLocation
     const logo = req.body.logo
     const description = req.body.description
 
-    if (teamName.length === 0) {
+    if (fanClubName.length === 0) {
       res.status(401).json({
-        message: 'Team Name must be entered.'
+        message: 'Fan Club Name must be entered.'
       })
     }else{
       fanPortal.addFanPortal(req.body, function(success,response){

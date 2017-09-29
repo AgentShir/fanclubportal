@@ -24,7 +24,6 @@ router.get("/:eventId/:portalId", function(req, res, next) {
   const eventId = req.params.eventId
   const portalId = req.params.portalId
 
-  console.log('routes', eventId, portalId, req.body)
   portalEvent.getEventInfo(eventId, portalId, function(success, response){
     if(!success){
       res.status(401).json(response)
