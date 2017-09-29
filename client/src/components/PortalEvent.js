@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Authorize } from '../lib/auth'
-import { postEvent, getEventInfo, updateEvent, updateComplete } from '../actions/app'
+import { postEvent, getEventInfo, updateEvent, updateComplete, removeEvent } from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText, CardTitle } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
@@ -56,7 +56,7 @@ class PortalEvent extends Component {
                 date: props.eventInfo.date,
                 time: props.eventInfo.time
             })
-            
+
             if (props.updateStatus === 'success') {
                 this.props.history.push('/')
                 updateComplete()
@@ -179,7 +179,7 @@ function mapStateToProps(appState) {
             newTime.setMinutes(times[1])
             newTime.setSeconds(times[2])
         }
-        
+
         eventInfo.time = newTime
     }
     return {

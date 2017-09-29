@@ -115,6 +115,10 @@ export function updateEvent(eventId,portalId, eventInfo) {
     })
 }
 
+export function removeEvent() {
+  
+}
+
 
 /*--------------PORTAL ACTIONS-------------------------------------------------*/
 

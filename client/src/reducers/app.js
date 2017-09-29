@@ -70,6 +70,12 @@ export default function (state = initialState, action) {
       updateStatus:action.updateStatus
     }
 
+    case reduce.REMOVE_EVENT:
+    return{
+      ...state,
+      removeEvent:action.removeEvent
+    }
+
     default:
       return state
   }

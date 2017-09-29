@@ -58,8 +58,13 @@ function updateEvent(eventId, eventInfo, done) {
     })
 }
 
+function removeEvent(eventId, portalId, done) {
+  // `UPDATE events WHERE active = ? 2 to set to false or just false?`
+}
+
 module.exports = {
     addEvent,
     getEventInfo,
-    updateEvent
+    updateEvent,
+    removeEvent
 }
