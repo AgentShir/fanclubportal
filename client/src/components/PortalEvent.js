@@ -102,6 +102,7 @@ class PortalEvent extends Component {
                     <CardText>
                         <TextField
                             hintText="Description"
+                            floatingLabelText="Tell us about your Event"
                             name="description"
                             value={this.state.description}
                             onChange={this.handleChange}
@@ -112,6 +113,7 @@ class PortalEvent extends Component {
                         <br />
                         <TextField
                             hintText="Location"
+                            floatingLabelText="Tell us the location"
                             name="location"
                             value={this.state.location}
                             onChange={this.handleChange}
@@ -121,6 +123,7 @@ class PortalEvent extends Component {
                         /><br /><br />
                         <TextField
                             hintText="Theme"
+                            floatingLabelText="Theme"
                             name="theme"
                             value={this.state.theme}
                             onChange={this.handleChange}

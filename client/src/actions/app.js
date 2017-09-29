@@ -123,7 +123,6 @@ export function postPortals(fanPortal) {
       userId:localStorage.userId,
       category:fanPortal.category,
       fanClubName: fanPortal.fanClubName,
-      teamLocation: fanPortal.teamLocation,
       fanClubLocation: fanPortal.fanClubLocation,
       logo: fanPortal.logo,
       description: fanPortal.description
@@ -160,7 +159,6 @@ export function updatePortal(portalId, portalInfo){
     userId:localStorage.userId,
     category:portalInfo.category,
     fanClubName: portalInfo.fanClubName,
-    teamLocation: portalInfo.teamLocation,
     fanClubLocation: portalInfo.fanClubLocation,
     logo: portalInfo.logo,
     description: portalInfo.description

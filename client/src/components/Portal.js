@@ -38,7 +38,6 @@ class CreatePortal extends Component {
             fanClubLocation: '',
             category: '',
             MenuItem: '',
-            teamLocation: '',
             logo: '',
             description: '',
             value: null
@@ -65,7 +64,6 @@ class CreatePortal extends Component {
             fanClubLocation: props.portalInfo.fanClubLocation,
             category: props.portalInfo.category,
             value: props.portalInfo.category,
-            teamLocation: props.portalInfo.teamLocation,
             logo: props.portalInfo.logo,
             description: props.portalInfo.description
           })
@@ -96,7 +94,7 @@ class CreatePortal extends Component {
         e.preventDefault()
       if(this.props.location.pathname === '/addPortal'){
         postPortals(this.state)
-        this.setState({ fanClubName: '', fanClubLocation: '', category: '', teamLocation: '', logo: '', description: '' })
+        this.setState({ fanClubName: '', fanClubLocation: '', category: '', logo: '', description: '' })
       }else{
         updatePortal(localStorage.getItem('portalId'), this.state)
       }
@@ -112,8 +110,8 @@ class CreatePortal extends Component {
                 <form onSubmit={this.handleSubmit}>
                     <CardText>
                         <TextField
-                            hintText="Fan Club Name"
-                            floatingLabelText="Fan Club Name"
+                            hintText="Name"
+                            floatingLabelText="Name Your Fan Club"
                             name="fanClubName"
                             autoComplete="off"
                             fullWidth={true} required={true}
@@ -121,8 +119,8 @@ class CreatePortal extends Component {
                             value={this.state.fanClubName}
                         /><br />
                         <TextField
-                            hintText="Fan Club Location"
-                            floatingLabelText="Fan Club Location"
+                            hintText="Location"
+                            floatingLabelText="Tell us your Location"
                             name="fanClubLocation"
                             autoComplete="off"
                             fullWidth={true} required={true}
@@ -132,26 +130,16 @@ class CreatePortal extends Component {
                         <SelectField
                             onChange={this.handleSelect}
                             value={this.state.value}
-                            floatingLabelText="Category"
+                            floatingLabelText="Select a Category"
                             name="category"
                             fullWidth={true}
                           >
                             {items}
                           </SelectField>
-
                         <br />
                         <TextField
-                            hintText="Team Location"
-                            floatingLabelText="Team Location"
-                            name="teamLocation"
-                            autoComplete="off"
-                            fullWidth={true} required={true}
-                            onChange={this.handleChange}
-                            value={this.state.teamLocation}
-                        /><br />
-                        <TextField
-                            hintText="Team Logo URL"
-                            floatingLabelText="Enter a URL for the Team Logo"
+                            hintText="Web address"
+                            floatingLabelText="Enter a web address to display a photo"
                             name="logo"
                             autoComplete="off"
                             fullWidth={true} required={false}
@@ -161,7 +149,7 @@ class CreatePortal extends Component {
                         /><br />
                         <TextField
                             hintText="Description"
-                            floatingLabelText="Description"
+                            floatingLabelText="Tell us about your portal"
                             name="description"
                             autoComplete="off"
                             fullWidth={true} required={false}

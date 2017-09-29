@@ -7,7 +7,6 @@ router.post('/', function (req, res, next) {
     const userId = req.body.userId
     const category = req.body.category
     const fanClubName = req.body.fanClubName
-    const teamLocation = req.body.teamLocation
     const fanClubLocation = req.body.fanClubLocation
     const logo = req.body.logo
     const description = req.body.description
