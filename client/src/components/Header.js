@@ -28,6 +28,7 @@ class Header extends Component {
   logout = () => {
     this.props.dispatch(logoutUser())
     this.handleToggle()
+    this.props.history.push('/')
   }
   render() {
     return (

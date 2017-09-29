@@ -4,10 +4,8 @@ function addFanPortal(fanPortalInfo, done) {
   const sql = `INSERT INTO portals (userId, category, fanClubName, fanClubLocation, logo, description)
     VALUES (?,?,?,?,?,?)`
   const userId = fanPortalInfo.userId
-
   conn.query(sql, [userId, fanPortalInfo.category, fanPortalInfo.fanClubName, fanPortalInfo.fanClubLocation, fanPortalInfo.logo, fanPortalInfo.description], function (error, results, fields) {
     if (error) {
-      console.log(error)
       let response = {
         status: "fail",
         message: "A fan club name already exists."
@@ -66,9 +64,10 @@ function getPortalInfo(portalId, done){
 }
 function updatePortal(portalId, portalInfo, done){
     const sql = `UPDATE portals
-    SET category = ?, fanClubName = ?, fanClubLocation= ?, logo = ?, description = ?
+    SET category = ?, fanClubName = ?, fanClubLocation= ?, logo = ?, description = ?, lastUpdate = ?
     WHERE id = ? and userid = ?`
-    conn.query(sql, [portalInfo.category, portalInfo.fanClubName, portalInfo.fanClubLocation, portalInfo.logo,  portalInfo.description, portalId, portalInfo.userId], function (error, results, fields) {
+
+    conn.query(sql, [portalInfo.category, portalInfo.fanClubName, portalInfo.fanClubLocation, portalInfo.logo,  portalInfo.description, portalInfo.lastUpdate, portalId, portalInfo.userId], function (error, results, fields) {
         if (error) {
           let response = {
             status: "fail",
