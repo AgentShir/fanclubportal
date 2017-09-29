@@ -64,6 +64,7 @@ class CreatePortal extends Component {
             fanClubName: props.portalInfo.fanClubName,
             fanClubLocation: props.portalInfo.fanClubLocation,
             category: props.portalInfo.category,
+            value: props.portalInfo.category,
             teamLocation: props.portalInfo.teamLocation,
             logo: props.portalInfo.logo,
             description: props.portalInfo.description
@@ -82,8 +83,8 @@ class CreatePortal extends Component {
         this.setState({ expanded: expanded });
     }
 
-    handleSelect = (e, index, value) => {  
-      this.setState({value:value})
+    handleSelect = (e, index, value) => {
+      this.setState({value:value, category:value})
     }
 
     handleChange = (e) => {
@@ -133,6 +134,7 @@ class CreatePortal extends Component {
                             value={this.state.value}
                             floatingLabelText="Category"
                             name="category"
+                            fullWidth={true}
                           >
                             {items}
                           </SelectField>

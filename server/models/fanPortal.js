@@ -67,7 +67,6 @@ function updatePortal(portalId, portalInfo, done){
     const sql = `UPDATE portals
     SET category = ?, fanClubName = ?, teamLocation = ?, fanClubLocation= ?, logo = ?, description = ?
     WHERE id = ? and userid = ?`
-
     conn.query(sql, [portalInfo.category, portalInfo.fanClubName, portalInfo.teamLocation, portalInfo.fanClubLocation, portalInfo.logo,  portalInfo.description, portalId, portalInfo.userId], function (error, results, fields) {
         if (error) {
           let response = {
