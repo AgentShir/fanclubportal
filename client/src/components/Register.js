@@ -29,7 +29,7 @@ class Register extends Component {
             this.setState({ expanded: true })
         } else {
             this.setState({ expanded: false })
-            this.props.history.push('/')
+            this.props.history.push('/home')
         }
     }
     handleChange = (e) => {

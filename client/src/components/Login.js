@@ -30,7 +30,7 @@ class Login extends Component {
       this.setState({ expanded: true })
     } else {
       this.setState({ expanded: false })
-      this.props.history.push('/')
+      this.props.history.push('/home')
     }
   }
   handleSubmit = (e) => {

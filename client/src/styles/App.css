@@ -34,7 +34,17 @@
 }
 .mainHeader * {
   padding-right: 0px !important;
+  text-align: center;
 }
+.link{
+  text-decoration: none;  
+}
+.updateEventTitle{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
  @media screen and (max-width:960px) {
    .cards {
      flex-wrap:wrap;
