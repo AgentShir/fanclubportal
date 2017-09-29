@@ -9,4 +9,10 @@
          "database":"heroku_fc932b4fd66b1f0"
      }
     
+    //  "db":{
+    //      "host":"localhost",
+    //      "user":"root",
+    //      "password":"",
+    //      "database":"fanPortals"
+    //  }
 }

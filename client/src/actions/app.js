@@ -149,6 +149,7 @@ export function getPortalInfo(portalId){
     })
   })
   .catch(function(err){
+    console.log('err!!!!!!', err)
   })
 }
 

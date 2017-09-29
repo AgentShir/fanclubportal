@@ -32,31 +32,31 @@ class PortalEvent extends Component {
     }
 
     componentWillMount() {
-      let eventId = this.props.match.params.eventId
-      getEventInfo(eventId)
+        let eventId = this.props.match.params.eventId
+        getEventInfo(eventId)
     }
 
     componentWillReceiveProps(props) {
         if (this.props.location.pathname === '/addEvent') {
-          if (props.errorMessage.length > 0) {
-              this.setState({ expanded: true })
-          } else {
-              this.setState({ expanded: false })
-              this.props.history.push('/')
-          }
+            if (props.errorMessage.length > 0) {
+                this.setState({ expanded: true })
+            } else {
+                this.setState({ expanded: false })
+                this.props.history.push('/')
+            }
         }
         else {
-          this.state = {
-              description: props.eventInfo.description,
-              location: props.eventInfo.location,
-              theme: props.eventInfo.theme,
-              date: props.eventInfo.date,
-              time: props.eventInfo.time
-          }
-          if(props.updateStatus === 'success') {
-            this.props.history.push('/')
-            updateComplete()
-          }
+            this.state = {
+                description: props.eventInfo.description,
+                location: props.eventInfo.location,
+                theme: props.eventInfo.theme,
+                date: props.eventInfo.date,
+                time: props.eventInfo.time
+            }
+            if (props.updateStatus === 'success') {
+                this.props.history.push('/')
+                updateComplete()
+            }
         }
     }
     handleChange = (e) => {
@@ -77,12 +77,12 @@ class PortalEvent extends Component {
         let portalId = localStorage.getItem('portalId')
 
         if (this.props.location.pathname === '/addEvent') {
-          postEvent(this.state, portalId)
-          this.setState({ description: '', location: '', theme: '', date: null, time: null })
+            postEvent(this.state, portalId)
+            this.setState({ description: '', location: '', theme: '', date: null, time: null })
         }
         else {
-          let eventId = this.props.match.params.eventId
-          updateEvent(eventId,portalId, this.state)
+            let eventId = this.props.match.params.eventId
+            updateEvent(eventId, portalId, this.state)
         }
     }
     handleExpandChange = (expanded) => {
@@ -132,6 +132,7 @@ class PortalEvent extends Component {
                             hintText="Date"
                             container="inline"
                             mode="landscape"
+                            locale="en-US"
                             fullWidth={true}
                             required={true}
                         /><br /><br />
@@ -156,6 +157,22 @@ class PortalEvent extends Component {
 }
 function mapStateToProps(appState) {
     const { errorMessage, eventInfo, updateStatus } = appState.app
+    console.log('dtae', eventInfo.date)
+    let newDate = new Date(eventInfo.date)
+    eventInfo.date = newDate
+    console.log('new ndate', newDate)
+    console.log('time - ', eventInfo.time)
+    if (eventInfo.time !== undefined) {
+        let newTime = Date.now();
+        var date = new Date()
+        var times = eventInfo.time.split(":")
+        date.setHours(times[0])
+        date.setMinutes(times[1])
+        date.setSeconds(times[2])
+        let temp = new Date(newTime).setTime(times)
+
+        console.log('new time', temp)
+    }
     return {
         errorMessage, eventInfo, updateStatus
     }
