@@ -1,11 +1,11 @@
 const conn = require('../lib/db');
 
 function addFanPortal(fanPortalInfo, done) {
-  const sql = `INSERT INTO portals (userId, teamName, fanClubName, teamLocation, fanClubLocation, logo, description)
+  const sql = `INSERT INTO portals (userId, category, fanClubName, teamLocation, fanClubLocation, logo, description)
     VALUES (?,?,?,?,?,?,?)`
   const userId = fanPortalInfo.userId
 
-  conn.query(sql, [userId, fanPortalInfo.teamName, fanPortalInfo.fanClubName, fanPortalInfo.teamLocation, fanPortalInfo.fanClubLocation, fanPortalInfo.logo, fanPortalInfo.description], function (error, results, fields) {
+  conn.query(sql, [userId, fanPortalInfo.category, fanPortalInfo.fanClubName, fanPortalInfo.teamLocation, fanPortalInfo.fanClubLocation, fanPortalInfo.logo, fanPortalInfo.description], function (error, results, fields) {
     if (error) {
       let response = {
         status: "fail",
@@ -31,7 +31,7 @@ function addFanPortal(fanPortalInfo, done) {
 }
 
 function getPortalInfo(portalId, done){
-  const sql = `SELECT id, teamName, fanClubName, teamLocation, fanClubLocation, logo, description, DATE_FORMAT(createDate, "%M %d %Y") as createDate, DATE_FORMAT(lastUpdate, "%M %d %Y") as lastUpdate FROM portals WHERE id = ? and active = 1`
+  const sql = `SELECT id, category, fanClubName, teamLocation, fanClubLocation, logo, description, DATE_FORMAT(createDate, "%M %d %Y") as createDate, DATE_FORMAT(lastUpdate, "%M %d %Y") as lastUpdate FROM portals WHERE id = ? and active = 1`
 
   let info = {
     portalInfo:{},
@@ -65,10 +65,9 @@ function getPortalInfo(portalId, done){
 }
 function updatePortal(portalId, portalInfo, done){
     const sql = `UPDATE portals
-    SET teamName = ?, fanClubName = ?, teamLocation = ?, fanClubLocation= ?, logo = ?, description = ?
+    SET category = ?, fanClubName = ?, teamLocation = ?, fanClubLocation= ?, logo = ?, description = ?
     WHERE id = ? and userid = ?`
-
-    conn.query(sql, [portalInfo.teamName, portalInfo.fanClubName, portalInfo.teamLocation, portalInfo.fanClubLocation, portalInfo.logo,  portalInfo.description, portalId, portalInfo.userId], function (error, results, fields) {
+    conn.query(sql, [portalInfo.category, portalInfo.fanClubName, portalInfo.teamLocation, portalInfo.fanClubLocation, portalInfo.logo,  portalInfo.description, portalId, portalInfo.userId], function (error, results, fields) {
         if (error) {
           let response = {
             status: "fail",

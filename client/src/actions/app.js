@@ -69,7 +69,6 @@ export function postEvent(newEvent, portalId) {
 }
 
 export function getEventInfo(eventId) {
-  console.log('action get event', eventId, localStorage.portalId)
   const portalId = localStorage.portalId
   axios.get('/api/event/' + eventId + '/' + portalId)
   .then(function(resp){
@@ -77,15 +76,12 @@ export function getEventInfo(eventId) {
       type:action.EVENT_INFO,
       eventInfo: resp.data
     })
-    console.log('getEvent', resp)
   })
   .catch(function (err) {
-    console.log('getEventerr', err)
   })
 }
 
 export function updateEvent(eventId,portalId, eventInfo) {
-  console.log('InfoEventGet', eventInfo)
   let momentDate = moment(eventInfo.date).format('YYYY-MM-DD')
   // let momentTime = moment(eventInfo.time).format('HH:MM:00')
   let hr = moment(eventInfo.time).hour();
@@ -119,7 +115,7 @@ export function updateEvent(eventId,portalId, eventInfo) {
 export function postPortals(fanPortal) {
     axios.post('/api/portal', {
       userId:localStorage.userId,
-      teamName: fanPortal.teamName,
+      category:fanPortal.category,
       fanClubName: fanPortal.fanClubName,
       teamLocation: fanPortal.teamLocation,
       fanClubLocation: fanPortal.fanClubLocation,
@@ -155,7 +151,7 @@ export function getPortalInfo(portalId){
 export function updatePortal(portalId, portalInfo){
   axios.put('/api/portal/'+ portalId, {
     userId:localStorage.userId,
-    teamName: portalInfo.teamName,
+    category:portalInfo.category,
     fanClubName: portalInfo.fanClubName,
     teamLocation: portalInfo.teamLocation,
     fanClubLocation: portalInfo.fanClubLocation,

@@ -6,7 +6,6 @@ function addEvent(eventInfo,portalId, done){
 
     conn.query(sql, [portalId, eventInfo.description, eventInfo.location, eventInfo.date, eventInfo.time, eventInfo.theme], function (error, results, fields) {
         if (error) {
-          console.log(error)
           let response = {
             status: "fail",
             message: "Unable to create event."
@@ -24,10 +23,8 @@ function addEvent(eventInfo,portalId, done){
 
 function getEventInfo(eventId, portalId, done) {
   const sql = `SELECT * FROM events WHERE id = ? and portalId = ?`
-  console.log('here',eventId, portalId)
   conn.query(sql, [eventId, portalId], function (error, results, fields) {
     if (error) {
-      console.log(error)
       let response = {
         status: "fail",
         message: "Unable to create event."
@@ -46,7 +43,6 @@ function updateEvent(eventId, eventInfo, done) {
 
   conn.query(sql, [eventInfo.description, eventInfo.location, eventInfo.date, eventInfo.time, eventInfo.theme, eventId, eventInfo.portalId], function (error, results, fields) {
       if (error) {
-        console.log(error)
         let response = {
           status: "fail",
           message: "Unable to update event."
