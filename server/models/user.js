@@ -58,6 +58,7 @@ function login(username, password, done) {
           done(false,response)
         }
       }).catch(function (err) {
+        console.log(err)
       })
     }
   })
