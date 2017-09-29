@@ -39,7 +39,6 @@ function getPortalInfo(portalId, done){
   }
   conn.query(sql,[portalId], function(error, results,fields){
     if(error){
-      console.log(' err ', error)
       let response = {
         status: "fail",
         message: "Unable to retrieve fan portal."

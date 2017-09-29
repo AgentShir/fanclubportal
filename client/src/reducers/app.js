@@ -34,7 +34,8 @@ export default function (state = initialState, action) {
     case reduce.POST_EVENT_FAILURE:
     return{
       ...state,
-      errorMessage:action.message
+      errorMessage:action.message,
+      updateStatus:action.updateStatus
     }
     case reduce.GET_PORTAL_ID:
     return{
