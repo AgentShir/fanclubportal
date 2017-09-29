@@ -2,11 +2,12 @@ const conn = require('../lib/db');
 
 function addFanPortal(fanPortalInfo, done) {
   const sql = `INSERT INTO portals (userId, category, fanClubName, fanClubLocation, logo, description)
-    VALUES (?,?,?,?,?,?,?)`
+    VALUES (?,?,?,?,?,?)`
   const userId = fanPortalInfo.userId
 
   conn.query(sql, [userId, fanPortalInfo.category, fanPortalInfo.fanClubName, fanPortalInfo.fanClubLocation, fanPortalInfo.logo, fanPortalInfo.description], function (error, results, fields) {
     if (error) {
+      console.log(error)
       let response = {
         status: "fail",
         message: "A fan club name already exists."
