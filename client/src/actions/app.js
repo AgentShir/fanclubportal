@@ -128,6 +128,7 @@ export function postPortals(fanPortal) {
       description: fanPortal.description
     })
       .then(function (resp){
+        localStorage.setItem('portalId', resp.data.portalId)
         store.dispatch({
           type:action.GET_PORTAL_ID,
           portalId: resp.data.portalId
@@ -155,13 +156,17 @@ export function getPortalInfo(portalId){
 }
 
 export function updatePortal(portalId, portalInfo){
+  let lastUpdate = Date.now()
+  let momentDate = moment(lastUpdate).format('YYYY-MM-DD')
+  console.log(' last update ', momentDate)
   axios.put('/api/portal/'+ portalId, {
     userId:localStorage.userId,
     category:portalInfo.category,
     fanClubName: portalInfo.fanClubName,
     fanClubLocation: portalInfo.fanClubLocation,
     logo: portalInfo.logo,
-    description: portalInfo.description
+    description: portalInfo.description,
+    lastUpdate:momentDate
   })
   .then(function(resp){
       store.dispatch({
