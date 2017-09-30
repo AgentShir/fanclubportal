@@ -88,6 +88,14 @@ class PortalEvent extends Component {
             updateEvent(eventId, portalId, this.state)
         }
     }
+
+    removeEvent = (e) => {
+      e.preventDefault()
+      let eventId = this.props.match.params.eventId
+      removeEvent(eventId)
+
+    }
+
     handleExpandChange = (expanded) => {
         this.setState({ expanded: expanded });
     };
@@ -154,6 +162,7 @@ class PortalEvent extends Component {
                         /><br />
                     </CardText>
                     <CardActions style={buttonStyle}>
+                        <FlatButton label="Delete" type="submit" onClick={this.removeEvent} />
                         <FlatButton label="Submit" type="submit" />
                     </CardActions>
                 </form>

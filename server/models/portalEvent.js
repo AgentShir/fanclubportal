@@ -58,8 +58,25 @@ function updateEvent(eventId, eventInfo, done) {
     })
 }
 
-function removeEvent(eventId, portalId, done) {
-  // `UPDATE events WHERE active = ? 2 to set to false or just false?`
+function removeEvent(eventId, done) {
+  const sql = `UPDATE events SET active = 0
+    WHERE id = ?`
+
+  conn.query(sql, [eventId], function (error, results, fields) {
+    if (error) {
+      let response = {
+        status: "fail",
+        message: "Unable to remove event."
+      }
+      done(false, response)
+    } else if (!error) {
+      let response = {
+        status:"success",
+        message:"Event removed."
+      }
+      done(true, response)
+    }
+  })
 }
 
 module.exports = {

@@ -115,8 +115,21 @@ export function updateEvent(eventId,portalId, eventInfo) {
     })
 }
 
-export function removeEvent() {
-  
+export function removeEvent(eventId) {
+  axios.delete('/api/event/' + eventId)
+    .then(function (resp){
+      store.dispatch({
+        type: action.UPDATE_EVENT,
+        updateStatus: resp.data.status
+      })
+    })
+    .catch(function (err) {
+      store.dispatch({
+        type: action.POST_EVENT_FAILURE,
+        message: err.response.data.message,
+        updateStatus:err.response.data.status
+      })
+    })
 }
 
 
