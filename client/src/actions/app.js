@@ -201,3 +201,14 @@ export function updateComplete(){
     status:'done'
   })
 }
+
+export function getPortalCategories(){
+  console.log('acttion get cate')
+  axios.get('/api/portal/categories')
+  .then(function(resp){
+    console.log('respon se', resp)
+  })
+  .catch(function(err){
+    console.log('action err ', err)
+  })
+}

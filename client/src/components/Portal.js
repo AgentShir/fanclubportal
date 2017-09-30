@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Authorize } from '../lib/auth'
-import { postPortals } from '../actions/app'
+import { postPortals, getPortalCategories } from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText, CardTitle } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
@@ -45,6 +45,7 @@ class CreatePortal extends Component {
     }
 
     componentWillMount(){
+        getPortalCategories()
       if (localStorage.getItem('portalId') !== 'null'){
         getPortalInfo(localStorage.getItem('portalId'))
       }
