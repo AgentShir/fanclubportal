@@ -6,7 +6,9 @@ import { getPortalInfo } from '../actions/app'
 import { Card, CardText, CardHeader } from 'material-ui/Card'
 import { List, ListItem } from 'material-ui/List'
 import FlatButton from 'material-ui/FlatButton'
-import Divider from 'material-ui/Divider';
+import Divider from 'material-ui/Divider'
+import CircularProgress from 'material-ui/CircularProgress'
+
 const cardStyle = {
     maxWidth: '1000px',
     margin: '10px auto',
@@ -39,27 +41,32 @@ class UserHomepage extends Component {
                         titleStyle={titleStyle}
                     />
                 </Card>
-                <Card style={cardStyle} className="headerCard">
-                    <CardText>
-                        <span className="updateEventTitle">
-                            <h2>{this.props.portalInfo.fanClubName + " upcoming events"}</h2>
-                            <FlatButton label="Add Event" type="submit" onClick={this.addEvent} />
-                        </span>
-                        <List>
-                            {this.props.portalEvents.map((event) => (
-                                <div key={event.id} >
-                                    <Link to={`/updateEvent/${event.id}`} className="link">
-                                        <ListItem key={event.id}
-                                            primaryText={event.description}
-                                            secondaryText={event.date + " at " + event.time}
-                                        />
-                                    </Link>
-                                    <Divider />
-                                </div>
-                            ))}
-                        </List>
-                    </CardText>
-                </Card>
+                {this.props.portalInfo.fanClubName
+                    ? <Card style={cardStyle} className="headerCard">
+                        <CardText>
+                            <span className="updateEventTitle">
+                                <h2>{this.props.portalInfo.fanClubName + " upcoming events"}</h2>
+                                <FlatButton label="Add Event" type="submit" onClick={this.addEvent} />
+                            </span>
+                            <List>
+                                {this.props.portalEvents.map((event) => (
+                                    <div key={event.id} >
+                                        <Link to={`/updateEvent/${event.id}`} className="link">
+                                            <ListItem key={event.id}
+                                                primaryText={event.description}
+                                                secondaryText={event.date + " at " + event.time}
+                                            />
+                                        </Link>
+                                        <Divider />
+                                    </div>
+                                ))}
+                            </List>
+                        </CardText>
+                    </Card>
+                    :   <Card style={cardHeaderStyle} className="headerCard">
+                            <CircularProgress size={80} thickness={5} />
+                        </Card>
+                }
             </div>
         )
     }
