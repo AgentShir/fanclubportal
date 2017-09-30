@@ -1,7 +1,14 @@
 /*
   Custom styles here
  */
-
+#root{
+  background-color: #FAFAFA;
+  height: 100vh;
+}
+.appLogo{
+  width: 150px;
+  margin-top: 10px;
+}
 .cards {
   display:flex;
   flex-wrap: wrap;

@@ -3,19 +3,24 @@ import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logoutUser } from '../lib/auth'
+import logo from '../images/logo_white.png'
 import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
+import MenuIcon from 'material-ui/svg-icons/navigation/menu'
+import IconButton from 'material-ui/IconButton'
+import Divider from 'material-ui/Divider'
 
 const headerStyle = {
   cursor: 'pointer',
   boxShadow: 'none',
-  textAlign: 'center',
-  // backgroundColor: '#039BE5'
-  backgroundColor: '#4267B2'
+  // backgroundColor:'#4DB6AC'
+  backgroundColor: '#24292E'
 }
-
+// const menuStyle={
+//   fill:'black'
+// }
 class Header extends Component {
   constructor(props) {
     super(props)
@@ -34,13 +39,14 @@ class Header extends Component {
     return (
       <div>
         <AppBar
-          title='Fan Club Portals'
+          title={<img src={logo} alt='Fan Portals' className='appLogo' />}
           style={headerStyle}
+          showMenuIconButton={false}
           onTitleTouchTap={(e) => { this.props.history.push('/') }}
-          onLeftIconButtonTouchTap={this.handleToggle}
-
+          onRightIconButtonTouchTap={this.handleToggle}
+          iconElementRight={<IconButton><MenuIcon /></IconButton>}
         />
-        <Drawer open={this.state.open}>
+        <Drawer open={this.state.open} openSecondary={true}>
           <MenuItem onClick={this.handleToggle}>{<CloseIcon />}</MenuItem>
           {!this.props.isAuthenticated ?
             <div>
@@ -67,12 +73,16 @@ class Header extends Component {
                   </Link>
                 </div>
                 : <div>
+                  <Link to={`/portal/${localStorage.portalId}`} style={{ textDecoration: "none" }}>
+                    <MenuItem onClick={this.handleToggle}>View Portal</MenuItem>
+                  </Link>
                   <Link to={`/updatePortal/${localStorage.portalId}`} style={{ textDecoration: "none" }}>
                     <MenuItem onClick={this.handleToggle}>Edit Portal</MenuItem>
                   </Link>
                   <Link to={`/${localStorage.portalId}/addEvent`} style={{ textDecoration: "none" }}>
                     <MenuItem onClick={this.handleToggle}>Add Event</MenuItem>
                   </Link>
+                  <Divider />
                 </div>
               }
               <Link to="/aboutUs" style={{ textDecoration: "none" }}>
