@@ -44,4 +44,15 @@ router.put("/:eventId", function(req, res, next) {
   })
 })
 
+router.delete("/:eventId", function(req, res, next) {
+  const eventId = req.params.eventId
+  portalEvent.removeEvent(eventId, function(success, response){
+    if(!success){
+      res.status(401).json(response)
+    }else{
+      res.json(response)
+    }
+  })
+})
+
   module.exports = router;
