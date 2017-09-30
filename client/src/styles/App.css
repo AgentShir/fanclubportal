@@ -1,7 +1,10 @@
 /*
   Custom styles here
  */
-
+#root{
+  background-color: #FAFAFA;
+  height: 100vh;
+}
 .cards {
   display:flex;
   flex-wrap: wrap;

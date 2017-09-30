@@ -7,13 +7,13 @@ import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
 import CloseIcon from 'material-ui/svg-icons/navigation/close'
+import MenuIcon from 'material-ui/svg-icons/navigation/menu'
+import IconButton from 'material-ui/IconButton'
 
 const headerStyle = {
   cursor: 'pointer',
   boxShadow: 'none',
-  textAlign: 'center',
-  // backgroundColor: '#039BE5'
-  backgroundColor: '#4267B2'
+  backgroundColor:'#4DB6AC'
 }
 
 class Header extends Component {
@@ -34,13 +34,14 @@ class Header extends Component {
     return (
       <div>
         <AppBar
-          title='Fan Club Portals'
+          title='Fan Portals'
           style={headerStyle}
+          showMenuIconButton={false}
           onTitleTouchTap={(e) => { this.props.history.push('/') }}
-          onLeftIconButtonTouchTap={this.handleToggle}
-
+          onRightIconButtonTouchTap={this.handleToggle}
+          iconElementRight={<IconButton><MenuIcon/></IconButton>}
         />
-        <Drawer open={this.state.open}>
+        <Drawer open={this.state.open} openSecondary={true}>
           <MenuItem onClick={this.handleToggle}>{<CloseIcon />}</MenuItem>
           {!this.props.isAuthenticated ?
             <div>

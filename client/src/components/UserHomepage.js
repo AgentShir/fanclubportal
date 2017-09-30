@@ -47,8 +47,8 @@ class UserHomepage extends Component {
                         </span>
                         <List>
                             {this.props.portalEvents.map((event) => (
-                                <div>
-                                    <Link key={event.id} to={`/updateEvent/${event.id}`} className="link">
+                                <div key={event.id} >
+                                    <Link to={`/updateEvent/${event.id}`} className="link">
                                         <ListItem key={event.id}
                                             primaryText={event.description}
                                             secondaryText={event.date + " at " + event.time}
