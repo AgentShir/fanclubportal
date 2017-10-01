@@ -9,7 +9,6 @@ import { loginUser } from '../lib/actions/auth'
 
 import * as action from './actionValues'
 
-
 export function getFoo() {
   fetch('/api/foo')
     .then(resp => resp.json())
@@ -138,7 +137,7 @@ export function removeEvent(eventId) {
 export function postPortals(fanPortal) {
     axios.post('/api/portal', {
       userId:localStorage.userId,
-      category:fanPortal.category,
+      categoryId:fanPortal.category,
       fanClubName: fanPortal.fanClubName,
       fanClubLocation: fanPortal.fanClubLocation,
       logo: fanPortal.logo,
@@ -148,13 +147,15 @@ export function postPortals(fanPortal) {
         localStorage.setItem('portalId', resp.data.portalId)
         store.dispatch({
           type:action.GET_PORTAL_ID,
-          portalId: resp.data.portalId
+          portalId: resp.data.portalId,
+          updateStatus:resp.data.status
         })
     })
       .catch(function (err) {
         store.dispatch({
-          type: action.ADD_PORTAL_FAILURE,
-          message: err.response.data.message
+          type: action.PORTAL_FAILURE,
+          message: err.response.data.message,
+          updateStatus:err.response.data.status
         })
       })
 }
@@ -175,10 +176,9 @@ export function getPortalInfo(portalId){
 export function updatePortal(portalId, portalInfo){
   let lastUpdate = Date.now()
   let momentDate = moment(lastUpdate).format('YYYY-MM-DD')
-  console.log(' last update ', momentDate)
   axios.put('/api/portal/'+ portalId, {
     userId:localStorage.userId,
-    category:portalInfo.category,
+    categoryId:portalInfo.category,
     fanClubName: portalInfo.fanClubName,
     fanClubLocation: portalInfo.fanClubLocation,
     logo: portalInfo.logo,
@@ -192,6 +192,11 @@ export function updatePortal(portalId, portalInfo){
       })
     })
     .catch(function(err){
+      store.dispatch({
+        type:action.PORTAL_FAILURE,
+        updateStatus: err.response.data.status,
+        message: err.response.data.message
+      })
     })
   }
 
@@ -203,12 +208,27 @@ export function updateComplete(){
 }
 
 export function getPortalCategories(){
-  console.log('acttion get cate')
   axios.get('/api/portal/categories')
   .then(function(resp){
-    console.log('respon se', resp)
+    store.dispatch({
+      type:action.GET_PORTAL_CATEGORIES,
+      portalCategories:resp.data
+    })
   })
   .catch(function(err){
     console.log('action err ', err)
+  })
+}
+
+export function getPortalsByCategory(categoryId){
+  axios.get('/api/portal/categories/' + categoryId)
+  .then(function(resp){
+    store.dispatch({
+      type:action.GET_PORTALS,
+      portals:resp.data
+    })
+  })
+  .catch(function(err){
+    console.log(' error ', err)
   })
 }

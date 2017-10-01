@@ -25,7 +25,6 @@ class PortalView extends Component {
     componentWillReceiveProps(props){
         let portalId =Number(props.match.params.portalId)
         if(portalId !== props.portalInfo.id){
-            console.log('here ', portalId, props.portalInfo.id)
           getPortalInfo(portalId)
         }
     }

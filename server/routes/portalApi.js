@@ -26,7 +26,26 @@ router.post('/', function (req, res, next) {
   }
 })
 
+router.get("/categories", function (req, res, next) {
+  fanPortal.getPortalCategories(function (success, response) {
+    if (!success) {
+      res.status(401).json(response)
+    } else {
+      res.json(response)
+    }
+  })
+})
+router.get("/categories/:categoryId", function(req,res,next){
+  const categoryId = req.params.categoryId
+  fanPortal.getPortalsByCategory(categoryId, function(success, response){
+    if (!success) {
+      res.status(401).json(response)
+    } else {
+      res.json(response)
+    }
+  })
 
+})
 router.get("/:portalId", function (req, res, next) {
   const portalId = req.params.portalId
   fanPortal.getPortalInfo(portalId, function (success, response) {
@@ -41,17 +60,6 @@ router.get("/:portalId", function (req, res, next) {
 router.put("/:portalId", function (req, res, next) {
   const portalId = req.params.portalId
   fanPortal.updatePortal(portalId, req.body, function (success, response) {
-    if (!success) {
-      res.status(401).json(response)
-    } else {
-      res.json(response)
-    }
-  })
-})
-
-router.put("/categories", function (req, res, next) {
-  console.log('in routes')
-  fanPortal.getPortalCategories(function (success, response) {
     if (!success) {
       res.status(401).json(response)
     } else {

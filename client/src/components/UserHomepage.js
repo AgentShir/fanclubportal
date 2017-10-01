@@ -23,13 +23,9 @@ const titleStyle = {
 class UserHomepage extends Component {
     componentWillMount() {
         let portalId = localStorage.getItem('portalId')
-
-        console.log(' porta lin', portalId)
         getPortalInfo(portalId)
     }
     addEvent = (e) => {
-        //  let portalId = localStorage.getItem('portalId')
-        console.log('here')
         this.props.history.push(`/${localStorage.portalId}/addEvent`)
     }
     render() {
