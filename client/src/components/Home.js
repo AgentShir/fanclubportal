@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getPortalCategories } from '../actions/app'
-import { Card, CardActions, CardText, CardTitle, CardHeader, CardMedia } from 'material-ui/Card'
+import { Card, CardTitle, CardMedia } from 'material-ui/Card'
 
 class Home extends Component {
   componentWillMount() {
@@ -18,7 +18,9 @@ class Home extends Component {
               <Card key={category.id} className="categoryCard">
               <Link key={category.id} to={`/category/${category.id}`} className="link">
                 <CardMedia>
-                  <img src="http://via.placeholder.com/350x150" />
+                  {category.logoName !== null
+                  ? <img src={require('../images/categories/' + category.logoName)} alt="category" />
+                  : <img src="http://via.placeholder.com/300x300" alt="category"/>}
                 </CardMedia>
                 <CardTitle title={category.category} />
                 </Link>

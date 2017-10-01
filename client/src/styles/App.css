@@ -59,6 +59,10 @@ h1{
   max-width: 30%;
   margin: 10px;
 }
+.categoryCard img{
+  max-height: 200px;
+  min-height: 200px;
+}
 /*-------------------*/
 
  @media screen and (max-width:960px) {
