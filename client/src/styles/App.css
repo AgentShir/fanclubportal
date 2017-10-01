@@ -16,7 +16,7 @@
 }
  .portalContainer{
    max-width: 1000px;
-    margin: 0 auto;
+    margin: 10px auto;
  }
  .rightSideCards{
    width: 70%;
@@ -51,6 +51,15 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
+/*----- HOME PAGE ----*/
+h1{
+  text-align: center;
+}
+.categoryCard{
+  max-width: 30%;
+  margin: 10px;
+}
+/*-------------------*/
 
  @media screen and (max-width:960px) {
    .cards {
@@ -72,11 +81,13 @@
      width: 100%;
      text-align:center;
    }
-   .leftSide img{
+   .leftSide img, .categoryCard img{
      max-width: 300px !important;
      max-height: 300px !important;
-     /* min-width:0 !important; */
      width: auto !important;
      height:auto !important;
+   }
+   .categoryCard{
+     max-width:100%;
    }
  }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Authorize } from '../lib/auth'
-import { postPortals } from '../actions/app'
+import { postPortals, getPortalCategories } from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText, CardTitle } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
@@ -19,16 +19,7 @@ const buttonStyle = {
 }
 const errorMessageStyle = {
     fontSize: '20px'
-  }
-
-  const items = [
-    <MenuItem key={1} value={"Sports"} primaryText="Sports" />,
-    <MenuItem key={2} value={"Television"} primaryText="Television" />,
-    <MenuItem key={3} value={"Movies"} primaryText="Movies" />,
-    <MenuItem key={4} value={"Food & Drink"} primaryText="Food & Drink" />,
-    <MenuItem key={5} value={"Technology"} primaryText="Technology" />,
-  ];
-
+}
 
 class CreatePortal extends Component {
     constructor(props) {
@@ -36,45 +27,47 @@ class CreatePortal extends Component {
         this.state = {
             fanClubName: '',
             fanClubLocation: '',
-            category: '',
+            category: null,
             MenuItem: '',
             logo: '',
-            description: '',
-            value: null
+            description: ''
         }
     }
 
-    componentWillMount(){
-      if (localStorage.getItem('portalId') !== 'null'){
-        getPortalInfo(localStorage.getItem('portalId'))
-      }
+    componentWillMount() {
+        if (localStorage.getItem('portalId') !== 'null') {
+            getPortalInfo(localStorage.getItem('portalId'))
+            getPortalCategories()
+
+        } else {
+            getPortalCategories()
+        }
     }
     componentWillReceiveProps(props) {
-      if(this.props.location.pathname === '/addPortal'){
-        if (props.errorMessage.length > 0) {
-            this.setState({ expanded: true })
+        if (this.props.location.pathname === '/addPortal') {
+            if (props.updateStatus === 'fail') {
+                this.setState({ expanded: true })
+            } else if (props.updateStatus === 'success') {
+                this.setState({ expanded: false })
+                this.props.history.push('/portal/' + props.portalId)
+            }
+            //if editing portal
         } else {
-            this.setState({ expanded: false })
-            this.props.history.push('/portal/'+ props.portalId)
+            this.setState({
+                fanClubName: props.portalInfo.fanClubName,
+                fanClubLocation: props.portalInfo.fanClubLocation,
+                category: props.portalInfo.categoryId,
+                logo: props.portalInfo.logo,
+                description: props.portalInfo.description
+            })
+            if (props.updateStatus === "success") {
+                this.setState({ expanded: false })
+                this.props.history.push('/portal/' + localStorage.getItem('portalId'))
+                updateComplete()
+            } else if (props.updateStatus === "fail") {
+                this.setState({ expanded: true })
+            }
         }
-        //if editing portal
-      }else{
-          this.setState({
-            fanClubName: props.portalInfo.fanClubName,
-            fanClubLocation: props.portalInfo.fanClubLocation,
-            category: props.portalInfo.category,
-            value: props.portalInfo.category,
-            logo: props.portalInfo.logo,
-            description: props.portalInfo.description
-          })
-          if(props.updateStatus === "success"){
-            this.setState({ expanded: false })
-            this.props.history.push('/portal/'+ localStorage.getItem('portalId'))
-            updateComplete()
-          }else if(props.updateStatus === "fail"){
-            this.setState({ expanded: true })
-          }
-      }
     }
 
     handleExpandChange = (expanded) => {
@@ -82,7 +75,7 @@ class CreatePortal extends Component {
     }
 
     handleSelect = (e, index, value) => {
-      this.setState({value:value, category:value})
+        this.setState({ category: value })
     }
 
     handleChange = (e) => {
@@ -92,12 +85,12 @@ class CreatePortal extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault()
-      if(this.props.location.pathname === '/addPortal'){
-        postPortals(this.state)
-        this.setState({ fanClubName: '', fanClubLocation: '', category: '', logo: '', description: '' })
-      }else{
-        updatePortal(localStorage.getItem('portalId'), this.state)
-      }
+        if (this.props.location.pathname === '/addPortal') {
+            postPortals(this.state)
+            this.setState({ fanClubName: '', fanClubLocation: '', category: '', logo: '', description: '' })
+        } else {
+            updatePortal(localStorage.getItem('portalId'), this.state)
+        }
     }
 
     render() {
@@ -129,13 +122,15 @@ class CreatePortal extends Component {
                         /><br />
                         <SelectField
                             onChange={this.handleSelect}
-                            value={this.state.value}
+                            value={this.state.category}
                             floatingLabelText="Select a Category"
                             name="category"
                             fullWidth={true}
-                          >
-                            {items}
-                          </SelectField>
+                        >
+                            {this.props.portalCategories.map((category) => (
+                                <MenuItem key={category.id} value={category.id} primaryText={category.category} />
+                            ))}
+                        </SelectField>
                         <br />
                         <TextField
                             hintText="Web address"
@@ -167,13 +162,13 @@ class CreatePortal extends Component {
     }
 }
 function mapStateToProps(appState) {
-    const { errorMessage, portalId, portalInfo, updateStatus } = appState.app
+    const { errorMessage, portalId, portalInfo, updateStatus, portalCategories } = appState.app
     return {
         errorMessage,
-        // portalInfo:Object.assign({},portalInfo)
         portalId,
         portalInfo,
-        updateStatus
+        updateStatus,
+        portalCategories
     }
 }
 export default connect(mapStateToProps)(Authorize(CreatePortal))

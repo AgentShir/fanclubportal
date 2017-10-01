@@ -7,13 +7,14 @@ import * as reduce from '../actions/actionValues'
 
 const initialState = {
   foo: 'bar',
-  open: false,
   errorMessage: '',
   portalId:null,
   portalInfo: {},
   portalEvents:[],
   updateStatus:'',
-  eventInfo: {}
+  eventInfo: {},
+  portalCategories:[],
+  portals:[]
 }
 
 export default function (state = initialState, action) {
@@ -21,10 +22,11 @@ export default function (state = initialState, action) {
     case reduce.MY_ACTION:
 
       return {...state, foo: action.payload}
-    case reduce.ADD_PORTAL_FAILURE:
+    case reduce.PORTAL_FAILURE:
       return {
         ...state,
-        errorMessage:action.message
+        errorMessage:action.message,
+        updateStatus:action.updateStatus
       }
     case reduce.REGISTRATION_FAILURE:
       return{
@@ -40,7 +42,8 @@ export default function (state = initialState, action) {
     case reduce.GET_PORTAL_ID:
     return{
       ...state,
-      portalId:action.portalId
+      portalId:action.portalId,
+      updateStatus:action.updateStatus
     }
     case reduce.PORTAL_INFO:
     return{
@@ -76,6 +79,16 @@ export default function (state = initialState, action) {
       removeEvent:action.removeEvent
     }
 
+    case reduce.GET_PORTAL_CATEGORIES:
+    return{
+      ...state,
+      portalCategories:action.portalCategories
+    }
+    case reduce.GET_PORTALS:
+    return{
+      ...state,
+      portals:action.portals
+    }
     default:
       return state
   }
