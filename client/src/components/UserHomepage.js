@@ -41,27 +41,30 @@ class UserHomepage extends Component {
                     ? <Card style={cardStyle} className="headerCard">
                         <CardText>
                             <span className="updateEventTitle">
-                                <h2>{this.props.portalInfo.fanClubName + " upcoming events"}</h2>
-                                <FlatButton label="Add Event" type="submit" onClick={this.addEvent} />
+                                <Link to={`/portal/${this.props.portalInfo.id}`} className="link">
+                                <h2>{this.props.portalInfo.fanClubName}</h2> 
+                               </Link>
+                            <FlatButton label="Add Event" type="submit" onClick={this.addEvent} />
                             </span>
-                            <List>
-                                {this.props.portalEvents.map((event) => (
-                                    <div key={event.id} >
-                                        <Link to={`/updateEvent/${event.id}`} className="link">
-                                            <ListItem key={event.id}
-                                                primaryText={event.description}
-                                                secondaryText={event.date + " at " + event.time}
-                                            />
-                                        </Link>
-                                        <Divider />
-                                    </div>
-                                ))}
-                            </List>
+                        <h3>Upcoming Events</h3>
+                        <List>
+                            {this.props.portalEvents.map((event) => (
+                                <div key={event.id} >
+                                    <Link to={`/updateEvent/${event.id}`} className="link">
+                                        <ListItem key={event.id}
+                                            primaryText={event.description}
+                                            secondaryText={event.date + " at " + event.time}
+                                        />
+                                    </Link>
+                                    <Divider />
+                                </div>
+                            ))}
+                        </List>
                         </CardText>
                     </Card>
                     :   <Card style={cardHeaderStyle} className="headerCard">
-                            <CircularProgress size={80} thickness={5} />
-                        </Card>
+                    <CircularProgress size={80} thickness={5} />
+                </Card>
                 }
             </div>
         )

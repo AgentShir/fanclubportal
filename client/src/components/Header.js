@@ -91,6 +91,7 @@ class Header extends Component {
               <Link to="/contact" style={{ textDecoration: "none" }}>
                 <MenuItem onClick={this.handleToggle}>Contact</MenuItem>
               </Link>
+              <Divider />
               <MenuItem onClick={this.logout}>Logout</MenuItem>
             </div>}
         </Drawer>
