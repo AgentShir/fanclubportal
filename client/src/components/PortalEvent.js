@@ -40,15 +40,25 @@ class PortalEvent extends Component {
     }
 
     componentWillReceiveProps(props) {
-        if (this.props.location.pathname.indexOf('/addEvent') !== -1) {
+
+        if (props.location.pathname.indexOf('/addEvent') !== -1) {
             if (props.updateStatus === 'fail') {
                 this.setState({ expanded: true })
             } else if (props.updateStatus === 'success') {
                 this.setState({ expanded: false })
                 this.props.history.push('/home')
+            }else{
+                this.setState({
+                    description: '',
+                    location: '',
+                    theme: '',
+                    date: null,
+                    time: null,
+                    expanded: false
+                })
             }
         }
-        else {
+        else if(props.location.pathname.indexOf('/updateEvent') !== -1) {
             this.setState({
                 description: props.eventInfo.description,
                 location: props.eventInfo.location,
@@ -162,7 +172,8 @@ class PortalEvent extends Component {
                         /><br />
                     </CardText>
                     <CardActions style={buttonStyle}>
-                        <FlatButton label="Delete" type="submit" onClick={this.removeEvent} />
+                    {this.props.location.pathname.indexOf('/updateEvent') !== -1 &&
+                        <FlatButton label="Delete" type="submit" onClick={this.removeEvent} />}
                         <FlatButton label="Submit" type="submit" />
                     </CardActions>
                 </form>

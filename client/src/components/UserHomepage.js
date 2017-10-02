@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Authorize } from '../lib/auth'
 import { getPortalInfo } from '../actions/app'
-import UserEvents from './UserEvents'
+import EventList from './EventList'
 import { Card, CardText, CardHeader } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import { Tabs, Tab } from 'material-ui/Tabs';
@@ -27,9 +27,6 @@ const inkBarStyle = {
 const tab = {
     color: 'black'
 }
-// function handleActive(tab) {
-//     alert(`A tab with this route property ${tab.props['data-route']} was activated.`);
-// }
 
 class UserHomepage extends Component {
     componentWillMount() {
@@ -78,7 +75,7 @@ class UserHomepage extends Component {
                             <Card >
                                 <CardText>
                                     <FlatButton label="Add Event" type="submit" onClick={this.addEvent} />
-                                    <UserEvents events={this.props.portalEvents} />
+                                    <EventList events={this.props.portalEvents} />
                                 </CardText>
                             </Card>
                         </Tab>}
