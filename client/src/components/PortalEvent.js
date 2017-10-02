@@ -42,7 +42,6 @@ class PortalEvent extends Component {
     componentWillReceiveProps(props) {
 
         if (props.location.pathname.indexOf('/addEvent') !== -1) {
-            console.log('add event',props)
             if (props.updateStatus === 'fail') {
                 this.setState({ expanded: true })
             } else if (props.updateStatus === 'success') {
