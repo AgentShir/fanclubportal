@@ -9,19 +9,16 @@ const cardStyle = {
 class AboutUs extends Component {
     render(){
         return(
-          <div className="wrapper">
+          <div className="container">
             <Card style={cardStyle}>
               <CardHeader>
                 <CardTitle title="About Us" />
                     <CardText>
-                      <p>Fan Portals was born out of a sports fan's desperation.</p>
-                      <p>The sports fan needed to know what the chant was while she was in the middle of a supporters section at a soccer match.</p>
-                      <p>The sports fan needed to know where to find a bar to watch the match at in Hawaii.</p>
-                      <p>The sports fan needed to know where she could find the other Packers fans.</p>
-                      <p>The sports fan needed to know if there would be a tailgate and a march to the match.</p>
-                      <p>Fan Portals is a way for the fans to find other fans and build their fandom together!</p>
+                      <p>Fan Portals was born out of Shireen's desparate search for other US Soccer fans.</p>
+                      <p>She was visiting Los Angeles for a wedding, but didn't know where the local fans met up.</p>
+                      <p>Fan Portals started out as a way to connect sports fans, but evolved to be a portal for ALL fans.</p>
                     </CardText>
-                    <CardTitle title="Meet the Team">
+                    <CardTitle title="Meet the Team" />
                       <CardText>
                         <p>About Diana</p>
                           <ul>
@@ -39,7 +36,11 @@ class AboutUs extends Component {
                             <li>Fan of: Doctor Who, Harry Potter, Ryan Gosling, bullet journaling, La La Land, and FOOD.</li>
                           </ul>
                       </CardText>
-                    </CardTitle>
+                    <CardTitle title="Acknowledgements" />
+                      <CardText>
+                        <p><a href="http://sweeney.vegas/" rel="noopener noreferrer" target="_blank">Sweeney.Vegas</a></p>
+                        <p><a href="http://jacobson.vegas/" rel="noopener noreferrer" target="_blank">Jacobson.Vegas</a></p>
+                      </CardText>
                 </CardHeader>
             </Card>
           </div>
