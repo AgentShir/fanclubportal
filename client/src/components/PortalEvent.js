@@ -45,7 +45,7 @@ class PortalEvent extends Component {
                 this.setState({ expanded: true })
             } else if (props.updateStatus === 'success') {
                 this.setState({ expanded: false })
-                this.props.history.push('/')
+                this.props.history.push('/home')
             }
         }
         else {
@@ -58,7 +58,7 @@ class PortalEvent extends Component {
             })
 
             if (props.updateStatus === 'success') {
-                this.props.history.push('/')
+                this.props.history.push('/home')
                 updateComplete()
             } else if (props.updateStatus === 'fail') {
                 this.setState({ expanded: true })
