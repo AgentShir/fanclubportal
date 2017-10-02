@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import placeholder from '../images/square_logo.png'
 import { getPortalCategories } from '../actions/app'
 import { Card, CardTitle, CardMedia } from 'material-ui/Card'
 
@@ -20,7 +21,7 @@ class Home extends Component {
                 <CardMedia>
                   {category.logoName !== null
                   ? <img src={require('../images/categories/' + category.logoName)} alt="category" />
-                  : <img src="http://via.placeholder.com/300x300" alt="category"/>}
+                  : <img src={placeholder} alt="category"/>}
                 </CardMedia>
                 <CardTitle title={category.category} />
                 </Link>

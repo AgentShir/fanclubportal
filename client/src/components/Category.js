@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import placeholder from '../images/square_logo.png'
 import { getPortalsByCategory } from '../actions/app'
 import { Card, CardTitle, CardMedia } from 'material-ui/Card'
 import CircularProgress from 'material-ui/CircularProgress'
@@ -34,7 +35,7 @@ class Category extends Component {
                                     >
                                     {portal.logo
                                     ? <img src={portal.logo} alt="logo" />
-                                    :  <img src="http://via.placeholder.com/300x250" alt="logo"/>}
+                                    :  <img src={placeholder} alt="logo"/>}
                                     </CardMedia>
                                 </Link>
                             </Card>

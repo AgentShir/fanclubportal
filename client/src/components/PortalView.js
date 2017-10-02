@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getPortalInfo } from '../actions/app'
+import placeholder from '../images/square_logo.png'
 import { Card, CardText, CardHeader, CardMedia } from 'material-ui/Card'
 import CircularProgress from 'material-ui/CircularProgress'
 
@@ -43,7 +44,10 @@ class PortalView extends Component {
                             <div className='leftSide'>
                                 <Card className="leftCard card">
                                     <CardMedia>
-                                        <img src={this.props.portalInfo.logo} alt="Logo" />
+                                        {this.props.portalInfo.logo
+                                        ?<img src={this.props.portalInfo.logo} alt="Logo" />
+                                        :<img src={placeholder} alt="logo"/>
+                                        }
                                     </CardMedia>
                                     <CardHeader className="leftCardHeader"
                                         title={this.props.portalInfo.fanClubLocation}
@@ -92,11 +96,6 @@ class PortalView extends Component {
 
 function mapStateToProps(appState) {
     const { portalInfo, portalEvents } = appState.app
-    //If there's no fan portal logo use place holder
-    if (portalInfo.logo === '') {
-        portalInfo.logo = "http://via.placeholder.com/400x800"
-    }
-
     return {
         portalInfo,
         portalEvents
