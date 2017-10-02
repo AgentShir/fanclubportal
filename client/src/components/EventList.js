@@ -3,7 +3,7 @@ import { Authorize } from '../lib/auth'
 import { Link } from 'react-router-dom'
 import { Card, CardText } from 'material-ui/Card'
 
-class UserEvents extends Component {
+class EventList extends Component {
     render() {
         return (
             <div>
@@ -25,4 +25,4 @@ class UserEvents extends Component {
         )
     }
 }
-export default Authorize(UserEvents)
+export default Authorize(EventList)
