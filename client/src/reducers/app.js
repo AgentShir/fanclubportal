@@ -14,7 +14,9 @@ const initialState = {
   updateStatus:'',
   eventInfo: {},
   portalCategories:[],
-  portals:[]
+  portals:[],
+  userPortalInfo:{},
+  userPortalEvens:[]
 }
 
 export default function (state = initialState, action) {
@@ -88,6 +90,12 @@ export default function (state = initialState, action) {
     return{
       ...state,
       portals:action.portals
+    }
+    case reduce.USER_PORTAL_INFO:
+    return{
+      ...state,
+      userPortalInfo:action.portalInfo,
+      userPortalEvents:action.portalEvents
     }
     default:
       return state

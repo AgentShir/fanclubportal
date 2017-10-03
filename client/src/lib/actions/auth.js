@@ -56,6 +56,7 @@ export function logoutUser() {
     localStorage.removeItem('token')
     localStorage.removeItem('username')
     localStorage.removeItem('userId')
+    localStorage.removeItem('portalId')
     dispatch(receiveLogout())
   }
 }

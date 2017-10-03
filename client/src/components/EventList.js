@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom'
 import { Card, CardText } from 'material-ui/Card'
 
 class EventList extends Component {
+    static defaultProps = {
+        events:[]
+    }
     render() {
         return (
             <div>

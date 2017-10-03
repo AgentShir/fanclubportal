@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Authorize } from '../lib/auth'
-import { getPortalInfo } from '../actions/app'
+import { getUserPortalInfo } from '../actions/app'
 import EventList from './EventList'
 import { Card, CardText, CardHeader } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
@@ -31,7 +31,9 @@ const tab = {
 class UserHomepage extends Component {
     componentWillMount() {
         let portalId = localStorage.getItem('portalId')
-        getPortalInfo(portalId)
+        if (portalId !== 'null') {
+            getUserPortalInfo(portalId)
+        }
     }
     addEvent = (e) => {
         this.props.history.push(`/${localStorage.portalId}/addEvent`)
@@ -70,12 +72,12 @@ class UserHomepage extends Component {
                             </CardText>
                         </Card>
                     </Tab>
-                    {this.props.portalInfo !== undefined &&
-                        <Tab label={this.props.portalInfo.fanClubName + " Upcoming Events"} buttonStyle={tab}>
+                    {localStorage.getItem('portalId') !== 'null'  &&
+                        <Tab label={this.props.userPortalInfo.fanClubName + " Upcoming Events"} buttonStyle={tab}>
                             <Card >
                                 <CardText>
                                     <FlatButton label="Add Event" type="submit" onClick={this.addEvent} />
-                                    <EventList events={this.props.portalEvents} />
+                                    <EventList events={this.props.userPortalEvents} />
                                 </CardText>
                             </Card>
                         </Tab>}
@@ -91,12 +93,12 @@ class UserHomepage extends Component {
     }
 }
 
-const stateToProps = function (appState) {
-    const { portalInfo, portalEvents } = appState.app
+const mapStateToProps = function (appState) {
+    const { userPortalInfo, userPortalEvents } = appState.app
     return {
-        portalInfo,
-        portalEvents
+        userPortalInfo,
+        userPortalEvents
     }
 }
 
-export default connect(stateToProps)(Authorize(UserHomepage))
+export default connect(mapStateToProps)(Authorize(UserHomepage))

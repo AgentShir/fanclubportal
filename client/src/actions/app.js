@@ -172,7 +172,19 @@ export function getPortalInfo(portalId){
     console.log('Error ', err)
   })
 }
-
+export function getUserPortalInfo(portalId){
+  axios.get('/api/portal/'+portalId)
+  .then(function(resp){
+    store.dispatch({
+      type:action.USER_PORTAL_INFO,
+      portalInfo: resp.data.portalInfo,
+      portalEvents: resp.data.events
+    })
+  })
+  .catch(function(err){
+    console.log('Error ', err)
+  })
+}
 export function updatePortal(portalId, portalInfo){
   let lastUpdate = Date.now()
   let momentDate = moment(lastUpdate).format('YYYY-MM-DD')
@@ -216,7 +228,7 @@ export function getPortalCategories(){
     })
   })
   .catch(function(err){
-    console.log('action err ', err)
+    console.log('err ', err)
   })
 }
 
