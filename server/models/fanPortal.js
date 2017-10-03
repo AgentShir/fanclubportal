@@ -47,7 +47,9 @@ function getPortalInfo(portalId, done) {
     } else if (!error) {
       info.portalInfo = results[0]
       //Attach all active events to portal Info
-      const sql = `SELECT *, DATE_FORMAT(date, "%M %d %Y") as date, DATE_FORMAT(time,  '%h:%i %p') as time FROM events WHERE portalId = ? and active = 1 ORDER BY date, time`
+      const sql = `SELECT *, DATE_FORMAT(e.date, "%M %d %Y") as date, DATE_FORMAT(e.time,  '%h:%i %p') as time FROM events e
+       WHERE portalId = ? and active = 1 and date >= now()
+       ORDER BY e.date, e.time`
       conn.query(sql, [portalId], function (error, results, fields) {
         if (error) {
           let response = {
