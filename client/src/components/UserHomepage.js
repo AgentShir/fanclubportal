@@ -40,7 +40,7 @@ class UserHomepage extends Component {
         this.props.history.push(`/updatePortal/${localStorage.portalId}`)
     }
     addPortal = (e) => {
-        this.props.history.push(`/${localStorage.portalId}/addEvent`)
+        this.props.history.push(`/addPortal`)
     }
     render() {
         return (
@@ -64,14 +64,14 @@ class UserHomepage extends Component {
                                     </div>
                                     : <div>
                                         <h3> Update your Portal</h3>
-                                        <FlatButton label="Update Portal" type="submit" onClick={this.editPortal} />
+                                        <FlatButton label="Update Portal" type="submit" onClick={this.updatePortal} />
                                     </div>
                                 }
                             </CardText>
                         </Card>
                     </Tab>
-                    {this.props.portalInfo.fanClubName !== undefined &&
-                        <Tab label={this.props.portalInfo.fanClubName + "Upcoming Events"} buttonStyle={tab}>
+                    {this.props.portalInfo !== undefined &&
+                        <Tab label={this.props.portalInfo.fanClubName + " Upcoming Events"} buttonStyle={tab}>
                             <Card >
                                 <CardText>
                                     <FlatButton label="Add Event" type="submit" onClick={this.addEvent} />
