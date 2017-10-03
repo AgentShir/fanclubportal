@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getPortalInfo } from '../actions/app'
-import { Card, CardText, CardHeader, CardMedia } from 'material-ui/Card'
+import { Card, CardText, CardHeader, CardMedia, CardActions} from 'material-ui/Card'
+import FlatButton from 'material-ui/FlatButton'
 import CircularProgress from 'material-ui/CircularProgress'
 
 const cardStyle = {
     maxWidth: '1000px',
     margin: '10px auto',
     textAlign:'center'
-
+}
+const buttonStyle = {
+    textAlign: 'center'
 }
 const cardHeaderStyle = {
     textAlign: 'center'
@@ -28,6 +31,11 @@ class PortalView extends Component {
           getPortalInfo(portalId)
         }
     }
+    handleSubmit = (e) => {
+        e.preventDefault()
+
+        }
+
     render() {
         return (
             <div className="portalContainer">
@@ -45,6 +53,9 @@ class PortalView extends Component {
                                     <CardMedia>
                                         <img src={this.props.portalInfo.logo} alt="Logo" />
                                     </CardMedia>
+                                    <CardActions style={buttonStyle}>
+                                        <FlatButton label="Follow Me" type="Submit" />
+                                    </CardActions>
                                     <CardHeader className="leftCardHeader"
                                         title={this.props.portalInfo.fanClubLocation}
                                         subtitle={<p>Founded:   {this.props.portalInfo.createDate}
