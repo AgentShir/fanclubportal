@@ -92,7 +92,10 @@ class CreatePortal extends Component {
             updatePortal(localStorage.getItem('portalId'), this.state)
         }
     }
-
+    cancel = (e) => {
+        e.preventDefault()
+        this.props.history.push('/home')
+    }
     render() {
         return (
             <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
@@ -154,6 +157,7 @@ class CreatePortal extends Component {
 
                     </CardText>
                     <CardActions style={buttonStyle}>
+                        <FlatButton label="Cancel" type="submit" onClick={this.cancel} />
                         <FlatButton label="Submit" type="Submit" />
                     </CardActions>
                 </form>
