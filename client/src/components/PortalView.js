@@ -23,6 +23,18 @@ class PortalView extends Component {
         let portalId = this.props.match.params.portalId
         getPortalInfo(portalId)
     }
+
+    componentWillUnmount() {
+      this.setState = {
+          fanClubName: '',
+          fanClubLocation: '',
+          category: null,
+          MenuItem: '',
+          logo: '',
+          description: ''
+      }
+    }
+
     componentWillReceiveProps(props){
         let portalId =Number(props.match.params.portalId)
         if(portalId !== props.portalInfo.id){
