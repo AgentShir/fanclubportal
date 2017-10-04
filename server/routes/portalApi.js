@@ -46,6 +46,16 @@ router.get("/categories/:categoryId", function(req,res,next){
   })
 
 })
+router.get("/search/:searchTerm", function(req,res,next){
+  const searchTerm = req.params.searchTerm
+  fanPortal.searchPortals(searchTerm, function(success, response){
+    if (!success) {
+      res.status(404).json(response)
+    } else {
+      res.json(response)
+    }
+  })
+})
 router.get("/:portalId", function (req, res, next) {
   const portalId = req.params.portalId
   fanPortal.getPortalInfo(portalId, function (success, response) {

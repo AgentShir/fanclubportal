@@ -16,7 +16,9 @@ const initialState = {
   portalCategories:[],
   portals:[],
   userPortalInfo:{},
-  userPortalEvens:[]
+  userPortalEvens:[],
+  searchResults:[],
+  searchMessage:''
 }
 
 export default function (state = initialState, action) {
@@ -96,6 +98,13 @@ export default function (state = initialState, action) {
       ...state,
       userPortalInfo:action.portalInfo,
       userPortalEvents:action.portalEvents
+    }
+    case reduce.SEARCH_RESULTS:
+    return{
+      ...state,
+      searchResults:action.searchResults,
+      updateStatus:action.status,
+      searchMessage:action.message
     }
     default:
       return state
