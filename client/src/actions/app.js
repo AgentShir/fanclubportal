@@ -244,3 +244,22 @@ export function getPortalsByCategory(categoryId){
     console.log(' error ', err)
   })
 }
+
+export function searchPortals(searchTerm){
+  axios.get('/api/portal/search/' + searchTerm)
+  .then(function(resp){
+    store.dispatch({
+      type:action.SEARCH_RESULTS,
+      status:resp.data.status,
+      message:resp.data.message,
+      searchResults: resp.data.searchResults
+    })
+  })
+  .catch(function(err){
+    store.dispatch({
+      type:action.SEARCH_RESULTS,
+      status:err.resp.data.status,
+      message:err.resp.data.message
+    })
+  })
+}

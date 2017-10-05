@@ -18,9 +18,6 @@ const headerStyle = {
   // backgroundColor:'#4DB6AC'
   backgroundColor: '#24292E'
 }
-// const menuStyle={
-//   fill:'black'
-// }
 class Header extends Component {
   constructor(props) {
     super(props)

@@ -103,28 +103,52 @@ function getPortalCategories(done) {
   })
 }
 
-function getPortalsByCategory(categoryId,done){
+function getPortalsByCategory(categoryId, done) {
   const sql = `SELECT p.id, p.fanClubName, p.logo, c.category FROM portals p 
   JOIN categories c on p.categoryId = c.id
   WHERE p.categoryId = ? and p.active = 1`
 
-  conn.query(sql,[categoryId], function(error, results, fields){
-    if(error){
-        let response = {
-          status: "fail",
-          message: "Unable to retrieve portals."
+  conn.query(sql, [categoryId], function (error, results, fields) {
+    if (error) {
+      let response = {
+        status: "fail",
+        message: "Unable to retrieve portals."
       }
-      done(false,response)
-    }else if(!error){
+      done(false, response)
+    } else if (!error) {
       let response = results
       done(true, response)
     }
   })
 }
+function searchPortals(searchTerm, done) {
+  const sql = `SELECT   id, fanClubName, logo FROM portals
+  WHERE (fanClubName RLIKE ? OR fanClubLocation RLIKE ? OR description RLIKE ?)
+  AND active = 1`
+
+  conn.query(sql, [searchTerm, searchTerm, searchTerm], function (error, results, fields) {
+    if (error) {
+      let response = {
+        status: "fail",
+        message: "Error retrieving search results."
+      }
+      done(false, response)
+    } else if (!error) {
+      let response = {
+        status: "success",
+        message: results.length + " results for " + searchTerm,
+        searchResults: results
+      }
+      done(true, response)
+    }
+  })
+}
+
 module.exports = {
   addFanPortal,
   getPortalInfo,
   updatePortal,
   getPortalCategories,
-  getPortalsByCategory
+  getPortalsByCategory,
+  searchPortals
 }
