@@ -8,7 +8,8 @@ import CircularProgress from 'material-ui/CircularProgress'
 const cardStyle = {
     maxWidth: '1000px',
     margin: '10px auto',
-    textAlign: 'center'
+    textAlign: 'center',
+    backgroundColor: '#196E8F'
 
 }
 const cardHeaderStyle = {

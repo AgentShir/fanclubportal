@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
 import {Card, CardHeader, CardTitle, CardText} from 'material-ui/Card';
+import logo from '../images/aboutus.png';
+import team from '../images/team.png';
 
 const cardStyle = {
     maxWidth: '1000px',
     margin: '50px auto',
+    backgroundColor: '#A2F8FF'
 }
 
 class AboutUs extends Component {
     render(){
         return(
-          <div className="container">
+          <div className="portalContainer">
             <Card style={cardStyle}>
               <CardHeader>
-                <CardTitle title="About Us" />
+                <img src={logo} alt="About Us" className="aboutUs" />
                     <CardText>
                       <p>Fan Portals was born out of Shireen's desparate search for other US Soccer fans.</p>
                       <p>She was visiting Los Angeles for a wedding, but didn't know where the local fans met up.</p>
                       <p>Fan Portals started out as a way to connect sports fans, but evolved to be a portal for ALL fans.</p>
                     </CardText>
-                    <CardTitle title="Meet the Team" />
+                    <img src={team} alt="Meet the Team" className="team" />
                       <CardText>
                         <p>About Diana</p>
                           <ul>

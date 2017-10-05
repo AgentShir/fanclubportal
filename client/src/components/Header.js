@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logoutUser } from '../lib/auth'
-import logo from '../images/logo_white.png'
+import logo from '../images/logo_white_small.png'
 import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
@@ -16,8 +16,17 @@ const headerStyle = {
   cursor: 'pointer',
   boxShadow: 'none',
   // backgroundColor:'#4DB6AC'
-  backgroundColor: '#24292E'
+  backgroundColor: '#183F45'
 }
+
+const menuItemStyle = {
+  backgroundColor: '#ABABB4'
+}
+
+const navBarMenu = {
+  backgroundColor: '#55A386'
+}
+
 class Header extends Component {
   constructor(props) {
     super(props)
@@ -36,7 +45,7 @@ class Header extends Component {
     return (
       <div>
         <AppBar
-          title={<img src={logo} alt='Fan Portals' className='appLogo' />}
+          title={<img src={logo} alt='Fan Portals' />}
           style={headerStyle}
           showMenuIconButton={false}
           onTitleTouchTap={(e) => { this.props.history.push('/') }}
@@ -44,9 +53,9 @@ class Header extends Component {
           iconElementRight={<IconButton><MenuIcon /></IconButton>}
         />
         <Drawer open={this.state.open} openSecondary={true}>
-          <MenuItem onClick={this.handleToggle}>{<CloseIcon />}</MenuItem>
+          <MenuItem style={menuItemStyle} onClick={this.handleToggle}>{<CloseIcon />}</MenuItem>
           {!this.props.isAuthenticated ?
-            <div>
+            <div style={navBarMenu}>
               <Link to="/login" style={{ textDecoration: "none" }}>
                 <MenuItem onClick={this.handleToggle}>Login</MenuItem>
               </Link>
