@@ -3,7 +3,7 @@
  */
 #root{
   background-color: #FAFAFA;
-  height: 100vh;
+  max-height: 100vmax;
 }
 .appLogo{
   width: 150px;
