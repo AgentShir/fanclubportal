@@ -45,23 +45,32 @@ function getPortalInfo(portalId, done) {
       }
       done(false, response)
     } else if (!error) {
-      info.portalInfo = results[0]
-      //Attach all active events to portal Info
-      const sql = `SELECT *, DATE_FORMAT(e.date, "%M %d %Y") as date, DATE_FORMAT(e.time,  '%h:%i %p') as time FROM events e
+      if (results.length > 0) {
+        info.portalInfo = results[0]
+        //Attach all active events to portal Info
+        const sql = `SELECT *, DATE_FORMAT(e.date, "%M %d %Y") as date, DATE_FORMAT(e.time,  '%h:%i %p') as time FROM events e
        WHERE portalId = ? and active = 1 and date >= CURDATE()
        ORDER BY e.date, e.time`
-      conn.query(sql, [portalId], function (error, results, fields) {
-        if (error) {
-          let response = {
-            status: "fail",
-            message: "Unable to retrieve fan portal events."
+        conn.query(sql, [portalId], function (error, results, fields) {
+          if (error) {
+            let response = {
+              status: "fail",
+              message: "Unable to retrieve fan portal events."
+            }
+            done(false, response)
+          } else if (!error) {
+            info.events = results
+            info.status = 'success'
+            done(true, info)
           }
-          done(false, response)
-        } else if (!error) {
-          info.events = results
-          done(true, info)
+        })
+      }else{
+        let response = {
+          status: "fail",
+          message: "No portal found."
         }
-      })
+        done(false,response)
+      }
     }
   })
 }

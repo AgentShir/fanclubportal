@@ -60,7 +60,7 @@ router.get("/:portalId", function (req, res, next) {
   const portalId = req.params.portalId
   fanPortal.getPortalInfo(portalId, function (success, response) {
     if (!success) {
-      res.status(401).json(response)
+      res.status(404).json(response)
     } else {
       res.json(response)
     }

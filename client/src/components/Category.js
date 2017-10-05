@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import placeholder from '../images/square_logo.png'
-import { getPortalsByCategory } from '../actions/app'
+import { getPortalsByCategory, resetCategory } from '../actions/app'
 import { Card, CardTitle, CardMedia } from 'material-ui/Card'
 import CircularProgress from 'material-ui/CircularProgress'
 
@@ -18,7 +18,9 @@ class Category extends Component {
         let categoryId = this.props.match.params.categoryId
         getPortalsByCategory(categoryId)
     }
-
+    componentWillUnmount(){
+        resetCategory()
+    }
     render() {
         return (
             <div className="portalContainer">
@@ -28,11 +30,11 @@ class Category extends Component {
                         {this.props.portals.map((portal) => (
                             <Card key={portal.id} className="categoryCard">
                                 <Link key={portal.id} to={`/portal/${portal.id}`} className="link">
-                                    <CardMedia
-                                        overlay={<CardTitle title={portal.fanClubName} style={{ background: 'transparent' }} />}
-                                        overlayContainerStyle={{ background: 'transparent' }}
-                                        overlayContentStyle={{ background: 'transparent' }}
-                                    >
+                                <CardMedia
+                                overlay={<CardTitle title={portal.fanClubName} style={{ background: 'transparent' }} />}
+                                overlayContainerStyle={{ background: 'transparent' }}
+                                overlayContentStyle={{ background: 'transparent' }}
+                            >
                                     {portal.logo
                                     ? <img src={portal.logo} alt="logo" />
                                     :  <img src={placeholder} alt="logo"/>}

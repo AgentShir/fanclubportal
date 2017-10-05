@@ -165,11 +165,16 @@ export function getPortalInfo(portalId){
     store.dispatch({
       type:action.PORTAL_INFO,
       portalInfo: resp.data.portalInfo,
-      portalEvents: resp.data.events
+      portalEvents: resp.data.events,
+      updateStatus:resp.data.status
     })
   })
   .catch(function(err){
-    console.log('Error ', err)
+    store.dispatch({
+      type:action.PORTAL_FAILURE,
+      updateStatus: err.response.data.status,
+      message: err.response.data.message
+    })
   })
 }
 export function getUserPortalInfo(portalId){
@@ -261,5 +266,42 @@ export function searchPortals(searchTerm){
       status:err.resp.data.status,
       message:err.resp.data.message
     })
+  })
+}
+/*--------------------------RESET ACTIONS------------------------------- */
+
+export function resetHome(){
+  store.dispatch({
+    type:action.RESET_HOME
+  })
+}
+export function resetPortalView(){
+  store.dispatch({
+    type:action.RESET_PORTALVIEW
+  })
+}
+export function resetCategory(){
+  store.dispatch({
+    type:action.RESET_CATEGORY
+  })
+}
+export function resetUserHomepage(){
+  store.dispatch({
+    type:action.RESET_USERHOMEPAGE
+  })
+}
+export function resetRegister(){
+  store.dispatch({
+    type:action.RESET_REGISTER
+  })
+}
+export function resetPortalForm(){
+  store.dispatch({
+    type:action.RESET_PORTAL_FORM
+  })
+}
+export function resetEventForm(){
+  store.dispatch({
+    type:action.RESET_EVENT_FORM
   })
 }
