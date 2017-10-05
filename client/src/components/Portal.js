@@ -1,19 +1,24 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Authorize } from '../lib/auth'
-import { postPortals, getPortalCategories } from '../actions/app'
+import { postPortals, getPortalCategories, resetPortalForm } from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText, CardTitle } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import { getPortalInfo, updatePortal, updateComplete } from '../actions/app'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
-
+import CircularProgress from 'material-ui/CircularProgress'
 
 const cardStyle = {
     maxWidth: '1000px',
     margin: '50px auto',
 }
+const progressCard ={
+    maxWidth: '1000px',
+    margin: '50px auto',
+    textAlign:'center'
+  }
 const buttonStyle = {
     textAlign: 'right'
 }
@@ -30,7 +35,8 @@ class CreatePortal extends Component {
             category: null,
             MenuItem: '',
             logo: '',
-            description: ''
+            description: '',
+            showProgress: false
         }
     }
 
@@ -43,10 +49,14 @@ class CreatePortal extends Component {
             getPortalCategories()
         }
     }
+    componentWillUnmount() {
+        this.setState({})
+        resetPortalForm()
+    }
     componentWillReceiveProps(props) {
         if (this.props.location.pathname === '/addPortal') {
             if (props.updateStatus === 'fail') {
-                this.setState({ expanded: true })
+                this.setState({ expanded: true, showProgress:false })
             } else if (props.updateStatus === 'success') {
                 this.setState({ expanded: false })
                 this.props.history.push('/portal/' + props.portalId)
@@ -65,7 +75,7 @@ class CreatePortal extends Component {
                 this.props.history.push('/portal/' + localStorage.getItem('portalId'))
                 updateComplete()
             } else if (props.updateStatus === "fail") {
-                this.setState({ expanded: true })
+                this.setState({ expanded: true, showProgress:false })
             }
         }
     }
@@ -85,6 +95,7 @@ class CreatePortal extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault()
+        this.setState({ showProgress: true })
         if (this.props.location.pathname === '/addPortal') {
             postPortals(this.state)
             this.setState({ fanClubName: '', fanClubLocation: '', category: '', logo: '', description: '' })
@@ -103,64 +114,69 @@ class CreatePortal extends Component {
                 <CardText expandable={true} color={'red'} style={errorMessageStyle}>
                     {this.props.errorMessage}
                 </CardText>
-                <form onSubmit={this.handleSubmit}>
-                    <CardText>
-                        <TextField
-                            hintText="Name"
-                            floatingLabelText="Name Your Fan Club"
-                            name="fanClubName"
-                            autoComplete="off"
-                            fullWidth={true} required={true}
-                            onChange={this.handleChange}
-                            value={this.state.fanClubName}
-                        /><br />
-                        <TextField
-                            hintText="Location"
-                            floatingLabelText="Tell us your Location"
-                            name="fanClubLocation"
-                            autoComplete="off"
-                            fullWidth={true} required={true}
-                            onChange={this.handleChange}
-                            value={this.state.fanClubLocation}
-                        /><br />
-                        <SelectField
-                            onChange={this.handleSelect}
-                            value={this.state.category}
-                            floatingLabelText="Select a Category"
-                            name="category"
-                            fullWidth={true}
-                        >
-                            {this.props.portalCategories.map((category) => (
-                                <MenuItem key={category.id} value={category.id} primaryText={category.category} />
-                            ))}
-                        </SelectField>
-                        <br />
-                        <TextField
-                            hintText="Web address"
-                            floatingLabelText="Enter a web address to display a photo"
-                            name="logo"
-                            autoComplete="off"
-                            fullWidth={true} required={false}
-                            onChange={this.handleChange}
-                            type='URL'
-                            value={this.state.logo}
-                        /><br />
-                        <TextField
-                            hintText="Description"
-                            floatingLabelText="Tell us about your portal"
-                            name="description"
-                            autoComplete="off"
-                            fullWidth={true} required={false}
-                            onChange={this.handleChange}
-                            value={this.state.description}
-                        /><br />
+                {this.state.showProgress === false
+                    ? <form onSubmit={this.handleSubmit}>
+                        <CardText>
+                            <TextField
+                                hintText="Name"
+                                floatingLabelText="Name Your Fan Club"
+                                name="fanClubName"
+                                autoComplete="off"
+                                fullWidth={true} required={true}
+                                onChange={this.handleChange}
+                                value={this.state.fanClubName}
+                            /><br />
+                            <TextField
+                                hintText="Location"
+                                floatingLabelText="Tell us your Location"
+                                name="fanClubLocation"
+                                autoComplete="off"
+                                fullWidth={true} required={true}
+                                onChange={this.handleChange}
+                                value={this.state.fanClubLocation}
+                            /><br />
+                            <SelectField
+                                onChange={this.handleSelect}
+                                value={this.state.category}
+                                floatingLabelText="Select a Category"
+                                name="category"
+                                fullWidth={true}
+                            >
+                                {this.props.portalCategories.map((category) => (
+                                    <MenuItem key={category.id} value={category.id} primaryText={category.category} />
+                                ))}
+                            </SelectField>
+                            <br />
+                            <TextField
+                                hintText="Web address"
+                                floatingLabelText="Enter a web address to display a photo"
+                                name="logo"
+                                autoComplete="off"
+                                fullWidth={true} required={false}
+                                onChange={this.handleChange}
+                                type='URL'
+                                value={this.state.logo}
+                            /><br />
+                            <TextField
+                                hintText="Description"
+                                floatingLabelText="Tell us about your portal"
+                                name="description"
+                                autoComplete="off"
+                                fullWidth={true} required={false}
+                                onChange={this.handleChange}
+                                value={this.state.description}
+                            /><br />
 
-                    </CardText>
-                    <CardActions style={buttonStyle}>
-                        <FlatButton label="Cancel" type="submit" onClick={this.cancel} />
-                        <FlatButton label="Submit" type="Submit" />
-                    </CardActions>
-                </form>
+                        </CardText>
+                        <CardActions style={buttonStyle}>
+                            <FlatButton label="Cancel" type="submit" onClick={this.cancel} />
+                            <FlatButton label="Submit" type="Submit" />
+                        </CardActions>
+                    </form>
+                    : <Card style={progressCard} className="headerCard">
+                        <CircularProgress size={80} thickness={5} />
+                    </Card>
+                }
             </Card>
         )
     }

@@ -1,16 +1,22 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Authorize } from '../lib/auth'
-import { postEvent, getEventInfo, updateEvent, updateComplete, removeEvent } from '../actions/app'
+import { postEvent, getEventInfo, updateEvent, updateComplete, removeEvent, resetEventForm } from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText, CardTitle } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import DatePicker from 'material-ui/DatePicker'
 import TimePicker from 'material-ui/TimePicker'
+import CircularProgress from 'material-ui/CircularProgress'
 
 const cardStyle = {
     maxWidth: '1000px',
     margin: '50px auto',
+}
+const progressCard = {
+    maxWidth: '1000px',
+    margin: '50px auto',
+    textAlign: 'center'
 }
 const buttonStyle = {
     textAlign: 'right'
@@ -28,7 +34,8 @@ class PortalEvent extends Component {
             theme: '',
             date: null,
             time: null,
-            expanded: false
+            expanded: false,
+            showProgress: false
         }
     }
 
@@ -38,27 +45,20 @@ class PortalEvent extends Component {
             getEventInfo(eventId)
         }
     }
-
+    componentWillUnmount() {
+        this.setState({})
+        resetEventForm()
+    }
     componentWillReceiveProps(props) {
-
         if (props.location.pathname.indexOf('/addEvent') !== -1) {
             if (props.updateStatus === 'fail') {
-                this.setState({ expanded: true })
+                this.setState({ expanded: true, showProgress: false })
             } else if (props.updateStatus === 'success') {
                 this.setState({ expanded: false })
                 this.props.history.push('/home')
-            }else{
-                this.setState({
-                    description: '',
-                    location: '',
-                    theme: '',
-                    date: null,
-                    time: null,
-                    expanded: false
-                })
             }
         }
-        else if(props.location.pathname.indexOf('/updateEvent') !== -1) {
+        else if (props.location.pathname.indexOf('/updateEvent') !== -1) {
             this.setState({
                 description: props.eventInfo.description,
                 location: props.eventInfo.location,
@@ -71,7 +71,7 @@ class PortalEvent extends Component {
                 this.props.history.push('/home')
                 updateComplete()
             } else if (props.updateStatus === 'fail') {
-                this.setState({ expanded: true })
+                this.setState({ expanded: true, showProgress: false })
             }
         }
     }
@@ -88,6 +88,7 @@ class PortalEvent extends Component {
     }
     addEvent = (e) => {
         e.preventDefault()
+        this.setState({ showProgress: true })
         let portalId = localStorage.getItem('portalId')
         if (this.props.location.pathname.indexOf('/addEvent') !== -1) {
             postEvent(this.state, portalId)
@@ -100,12 +101,12 @@ class PortalEvent extends Component {
     }
 
     removeEvent = (e) => {
-      e.preventDefault()
-      let eventId = this.props.match.params.eventId
-      removeEvent(eventId)
+        e.preventDefault()
+        let eventId = this.props.match.params.eventId
+        removeEvent(eventId)
 
     }
-    cancel = (e) =>{
+    cancel = (e) => {
         e.preventDefault()
         this.props.history.push('/home')
     }
@@ -119,68 +120,73 @@ class PortalEvent extends Component {
                 <CardText expandable={true} color={'red'} style={errorMessageStyle}>
                     {this.props.errorMessage}
                 </CardText>
-                <form onSubmit={this.addEvent}>
-                    <CardText>
-                        <TextField
-                            hintText="Description"
-                            floatingLabelText="Tell us about your Event"
-                            name="description"
-                            value={this.state.description}
-                            onChange={this.handleChange}
-                            fullWidth={true}
-                            required={true}
-                            autoComplete="off"
-                        /><br />
-                        <br />
-                        <TextField
-                            hintText="Location"
-                            floatingLabelText="Tell us the location"
-                            name="location"
-                            value={this.state.location}
-                            onChange={this.handleChange}
-                            fullWidth={true}
-                            required={true}
-                            autoComplete="off"
-                        /><br /><br />
-                        <TextField
-                            hintText="Theme"
-                            floatingLabelText="Theme"
-                            name="theme"
-                            value={this.state.theme}
-                            onChange={this.handleChange}
-                            fullWidth={true}
-                            autoComplete="off"
-                        /><br /><br />
-                        <DatePicker
-                            name="date"
-                            value={this.state.date}
-                            onChange={this.handleDateChange}
-                            minDate={minDate}
-                            hintText="Date"
-                            container="inline"
-                            mode="landscape"
-                            locale="en-US"
-                            fullWidth={true}
-                            required={true}
-                        /><br /><br />
-                        <TimePicker
-                            name="time"
-                            value={this.state.time}
-                            onChange={this.handleTimeChange}
-                            fullWidth={true}
-                            hintText="Time"
-                            autoOk={true}
-                            required={true}
-                            minutesStep={5}
-                        /><br />
-                    </CardText>
-                    <CardActions style={buttonStyle}>
-                    {this.props.location.pathname.indexOf('/updateEvent') !== -1 &&
-                        <FlatButton label="Delete" type="submit" onClick={this.removeEvent} />}
-                        <FlatButton label="Cancel" type="submit" onClick={this.cancel} />
-                        <FlatButton label="Submit" type="submit" />
-                    </CardActions>
-                </form>
+                {this.state.showProgress === false
+                    ? <form onSubmit={this.addEvent}>
+                        <CardText>
+                            <TextField
+                                hintText="Description"
+                                floatingLabelText="Tell us about your Event"
+                                name="description"
+                                value={this.state.description}
+                                onChange={this.handleChange}
+                                fullWidth={true}
+                                required={true}
+                                autoComplete="off"
+                            /><br />
+                            <br />
+                            <TextField
+                                hintText="Location"
+                                floatingLabelText="Tell us the location"
+                                name="location"
+                                value={this.state.location}
+                                onChange={this.handleChange}
+                                fullWidth={true}
+                                required={true}
+                                autoComplete="off"
+                            /><br /><br />
+                            <TextField
+                                hintText="Theme"
+                                floatingLabelText="Theme"
+                                name="theme"
+                                value={this.state.theme}
+                                onChange={this.handleChange}
+                                fullWidth={true}
+                                autoComplete="off"
+                            /><br /><br />
+                            <DatePicker
+                                name="date"
+                                value={this.state.date}
+                                onChange={this.handleDateChange}
+                                minDate={minDate}
+                                hintText="Date"
+                                container="inline"
+                                mode="landscape"
+                                locale="en-US"
+                                fullWidth={true}
+                                required={true}
+                            /><br /><br />
+                            <TimePicker
+                                name="time"
+                                value={this.state.time}
+                                onChange={this.handleTimeChange}
+                                fullWidth={true}
+                                hintText="Time"
+                                autoOk={true}
+                                required={true}
+                                minutesStep={5}
+                            /><br />
+                        </CardText>
+                        <CardActions style={buttonStyle}>
+                            {this.props.location.pathname.indexOf('/updateEvent') !== -1 &&
+                                <FlatButton label="Delete" type="submit" onClick={this.removeEvent} />}
+                            <FlatButton label="Cancel" type="submit" onClick={this.cancel} />
+                            <FlatButton label="Submit" type="submit" />
+                        </CardActions>
+                    </form>
+                    : <Card style={progressCard} className="headerCard">
+                        <CircularProgress size={80} thickness={5} />
+                    </Card>
+                }
             </Card>
         )
     }
@@ -194,7 +200,7 @@ function mapStateToProps(appState) {
     if (eventInfo.time !== undefined) {
         var newTime
         if (typeof eventInfo.time === 'object') {
-          newTime = eventInfo.time
+            newTime = eventInfo.time
         } else {
             newTime = new Date()
             var tempTime = eventInfo.time

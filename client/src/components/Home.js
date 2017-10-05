@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import placeholder from '../images/square_logo.png'
 import SearchResults from './SearchResults'
-import { getPortalCategories, searchPortals } from '../actions/app'
+import { getPortalCategories, searchPortals, resetHome } from '../actions/app'
 import { Card, CardTitle, CardMedia, CardText } from 'material-ui/Card'
 import SearchBar from 'material-ui-search-bar'
 
@@ -25,6 +25,10 @@ class Home extends Component {
 
   componentWillMount() {
     getPortalCategories()
+  }
+  componentWillUnmount(){
+    this.setState({})
+    resetHome()
   }
   handleSearch = (e) => {
     this.setState({ search: e })

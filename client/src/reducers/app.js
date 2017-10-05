@@ -53,7 +53,8 @@ export default function (state = initialState, action) {
     return{
       ...state,
       portalInfo:action.portalInfo,
-      portalEvents:action.portalEvents
+      portalEvents:action.portalEvents,
+      updateStatus:action.updateStatus
     }
     case reduce.UPDATE_PORTAL:
     return{
@@ -105,6 +106,54 @@ export default function (state = initialState, action) {
       searchResults:action.searchResults,
       updateStatus:action.status,
       searchMessage:action.message
+    }
+
+    case reduce.RESET_PORTALVIEW:
+    return{
+      ...state,
+      portalInfo:{},
+      portalEvents:[],
+      updateStatus:'',
+      errorMessage:''
+    }
+    case reduce.RESET_HOME:
+    return{
+      ...state,
+      searchResults:[],
+      searchMessage:'',
+      updateStatus:''
+    }
+    case reduce.RESET_CATEGORY:
+    return{
+      ...state,
+      portals:[]
+    }
+    case reduce.RESET_USERHOMEPAGE:
+    return{
+      ...state,
+      userPortalInfo:{},
+      userPortalEvents:[]
+    }
+    case reduce.RESET_REGISTER:
+    return{
+      ...state,
+      errorMessage:''
+    }
+    case reduce.RESET_PORTAL_FORM:
+    return{
+      ...state,
+      errorMessage:'',
+      portalId:null,
+      portalInfo:{},
+      updateStatus:'',
+      portalCategories:[]
+    }
+    case reduce.RESET_EVENT_FORM:
+    return{
+      ...state,
+      errorMessage:'',
+      eventInfo:{},
+      updateStatus:''
     }
     default:
       return state

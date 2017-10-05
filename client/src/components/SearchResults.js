@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import placeholder from '../images/square_logo.png'
 import { Card, CardTitle, CardMedia } from 'material-ui/Card'
 
 class SearchResults extends Component {
     static defaultProps = {
-        portals:[]
+        portals: []
     }
     render() {
         return (
