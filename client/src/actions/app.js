@@ -166,13 +166,13 @@ export function getPortalInfo(portalId){
       type:action.PORTAL_INFO,
       portalInfo: resp.data.portalInfo,
       portalEvents: resp.data.events,
-      updateStatus:resp.data.status
+      gotInfo:resp.data.status
     })
   })
   .catch(function(err){
     store.dispatch({
       type:action.PORTAL_FAILURE,
-      updateStatus: err.response.data.status,
+      gotInfo: err.response.data.status,
       message: err.response.data.message
     })
   })
