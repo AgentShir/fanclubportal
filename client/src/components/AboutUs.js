@@ -9,7 +9,7 @@ const cardStyle = {
 class AboutUs extends Component {
     render(){
         return(
-          <div className="container">
+          <div className="portalContainer">
             <Card style={cardStyle}>
               <CardHeader>
                 <CardTitle title="About Us" />

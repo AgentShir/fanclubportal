@@ -18,7 +18,8 @@ const initialState = {
   userPortalInfo:{},
   userPortalEvens:[],
   searchResults:[],
-  searchMessage:''
+  searchMessage:'',
+  gotInfo:''
 }
 
 export default function (state = initialState, action) {
@@ -54,7 +55,7 @@ export default function (state = initialState, action) {
       ...state,
       portalInfo:action.portalInfo,
       portalEvents:action.portalEvents,
-      updateStatus:action.updateStatus
+      gotInfo:action.gotInfo
     }
     case reduce.UPDATE_PORTAL:
     return{
@@ -114,7 +115,8 @@ export default function (state = initialState, action) {
       portalInfo:{},
       portalEvents:[],
       updateStatus:'',
-      errorMessage:''
+      errorMessage:'',
+      gotInfo:''
     }
     case reduce.RESET_HOME:
     return{
@@ -146,7 +148,8 @@ export default function (state = initialState, action) {
       portalId:null,
       portalInfo:{},
       updateStatus:'',
-      portalCategories:[]
+      portalCategories:[],
+      gotInfo:''
     }
     case reduce.RESET_EVENT_FORM:
     return{

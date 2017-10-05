@@ -40,7 +40,7 @@ class PortalView extends Component {
             this.setState({})
             getPortalInfo(portalId)
         }
-        if (props.updateStatus === 'fail') {
+        if (props.gotInfo === 'fail') {
             this.setState({ expanded: true })
         }
     }
@@ -50,9 +50,9 @@ class PortalView extends Component {
     render() {
         return (
             <div className="portalContainer">
-                {this.props.updateStatus !== ''
+                {this.props.gotInfo !== ''
                     ? <div>
-                        {this.props.updateStatus === 'fail'
+                        {this.props.gotInfo === 'fail'
                             ? <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
                                 <CardText expandable={true} color={'red'} style={errorMessageStyle}>
                                     {this.props.errorMessage}
@@ -121,11 +121,11 @@ class PortalView extends Component {
 }
 
 function mapStateToProps(appState) {
-    const { portalInfo, portalEvents, updateStatus, errorMessage } = appState.app
+    const { portalInfo, portalEvents, gotInfo, errorMessage } = appState.app
     return {
         portalInfo,
         portalEvents,
-        updateStatus,
+        gotInfo,
         errorMessage
     }
 }
