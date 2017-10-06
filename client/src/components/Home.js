@@ -6,6 +6,7 @@ import SearchResults from './SearchResults'
 import { getPortalCategories, searchPortals, resetHome } from '../actions/app'
 import { Card, CardTitle, CardMedia, CardText } from 'material-ui/Card'
 import SearchBar from 'material-ui-search-bar'
+import explore from '../images/explore.png'
 
 const searchStyle = {
   margin: '50px auto',
@@ -55,7 +56,7 @@ class Home extends Component {
             {this.props.errorMessage}
           </CardText>
           }
-        <h1>Explore</h1>
+        <img src={explore} alt='Explore' className="explore"/>
         <div className="cards" >
           {this.props.portalCategories.map((category) => (
             <Card key={category.id} className="categoryCard">

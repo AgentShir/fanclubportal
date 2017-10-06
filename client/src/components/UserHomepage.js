@@ -11,16 +11,18 @@ import CircularProgress from 'material-ui/CircularProgress'
 const cardStyle = {
     maxWidth: '1000px',
     margin: '10px auto',
-    textAlign:'center'
+    textAlign:'center',
+    backgroundColor: '#E8D5D8'
 }
 const cardHeaderStyle = {
-    textAlign: 'center'
+    textAlign: 'center',
+    backgroundColor: '#196E8F'
 }
 const titleStyle = {
     fontSize: '50px'
 }
 const tabStyle = {
-    backgroundColor: 'inherit'
+    backgroundColor: '#E78A78'
 }
 const inkBarStyle = {
     backgroundColor: 'black'

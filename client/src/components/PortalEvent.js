@@ -11,7 +11,7 @@ import CircularProgress from 'material-ui/CircularProgress'
 
 const cardStyle = {
     maxWidth: '1000px',
-    margin: '50px auto',
+    margin: '50px auto'
 }
 const progressCard = {
     maxWidth: '1000px',

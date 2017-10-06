@@ -2,7 +2,7 @@
   Custom styles here
  */
 #root{
-  background-color: #F6E9C9;
+  background-color: #ABABB4;
   min-height:100%;
 }
 html, body {
@@ -12,8 +12,9 @@ html, body {
 }
 
 .appLogo{
-  width: 150px;
-  margin-top: 10px;
+  width: 15%;
+  height: 95%;
+  padding-top: 2px;
 }
 .cards {
   display:flex;
@@ -80,14 +81,27 @@ h1{
 
 /*----- Other Graphics ----*/
 .aboutUs{
-  width: 500px;
+  width: 60%;
 }
 
 .team{
-  width: 500px;
-  height: 170px;
+  width: 60%;
+  height: 40%;
 }
 
+.thanks{
+  width: 60%;
+}
+
+.explore{
+  width: 30%;
+  height: 30%;
+}
+
+.contactUs{
+  width: 50%;
+  height: 20%;
+}
 /*-------------------*/
 .tabs div:nth-child(2){
   width: 0px !important;

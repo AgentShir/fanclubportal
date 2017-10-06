@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { logoutUser } from '../lib/auth'
-import logo from '../images/logo_white_small.png'
+import logo from '../images/logo_white.png'
 import AppBar from 'material-ui/AppBar'
 import Drawer from 'material-ui/Drawer'
 import MenuItem from 'material-ui/MenuItem'
@@ -45,7 +45,7 @@ class Header extends Component {
     return (
       <div>
         <AppBar
-          title={<img src={logo} alt='Fan Portals' />}
+          title={<img src={logo} alt='Fan Portals' className="appLogo"/>}
           style={headerStyle}
           showMenuIconButton={false}
           onTitleTouchTap={(e) => { this.props.history.push('/') }}

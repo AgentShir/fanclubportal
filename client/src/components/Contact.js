@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import {Card, CardHeader, CardTitle, CardText} from 'material-ui/Card';
+import {Card, CardHeader, CardTitle, CardText, CardMedia} from 'material-ui/Card';
+import contact from '../images/contact.png'
 
 const cardStyle = {
     maxWidth: '1000px',
     margin: '50px auto',
+    backgroundColor: '#E8D5D8'
 }
 
 const cardText = {
@@ -19,7 +21,9 @@ class Contact extends Component {
         return(
           <Card style={cardStyle}>
             <CardHeader>
-              <CardTitle title="Contact" />
+              <CardMedia>
+                <img src={contact} alt='Contact Us' className="contactUs" />
+              </CardMedia>
                 <CardTitle subtitle="Use the icons to contact us!" />
                 <CardText style={cardText}>
                   <a href="mailto:fanclubportals@gmail.com?Subject=Greetings" rel="noopener noreferrer" target="_blank"><i className="fa fa-envelope fa-4x" style={i}/></a>
