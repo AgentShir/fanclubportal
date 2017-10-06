@@ -11,10 +11,10 @@ const cardStyle = {
   margin: '50px auto',
   backgroundColor: '#196E8F'
 }
-const progressCard ={
+const progressCard = {
   maxWidth: '1000px',
   margin: '50px auto',
-  textAlign:'center'
+  textAlign: 'center'
 }
 const buttonStyle = {
   textAlign: 'right'
@@ -37,11 +37,12 @@ class Login extends Component {
     this.setState({})
   }
   componentWillReceiveProps(props) {
-    if (!props.isAuthenticated) {
-      this.setState({ expanded: true, showProgress:false})
+    if (props.errorMessage.length > 0) {
+      this.setState({ expanded: true, showProgress: false })
     } else {
-      this.setState({ expanded: false })
-      this.props.history.push('/home')
+      setTimeout(() => {
+        props.history.push('/home')
+      }, 2000)
     }
   }
   handleSubmit = (e) => {

@@ -64,7 +64,7 @@ class UserHomepage extends Component {
                         </Card>
                         <Tabs
                             tabItemContainerStyle={tabStyle}
-                            inkBarStyle={inkBarStyle}>
+                            inkBarStyle={inkBarStyle} >
                             <Tab label="home" buttonStyle={tab}>
                                 <Card>
                                     <CardText>
