@@ -31,9 +31,7 @@ import 'font-awesome/css/font-awesome.min.css'
 
 // custom styles
 import '../styles/App.css'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 class App extends Component {
   render() {
