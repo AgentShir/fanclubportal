@@ -30,14 +30,17 @@ function addFanPortal(fanPortalInfo, done) {
   })
 }
 
-function getPortalInfo(portalId, done) {
-  const sql = `SELECT id, categoryId, fanClubName, fanClubLocation, logo, description, DATE_FORMAT(createDate, "%M %d %Y") as createDate, DATE_FORMAT(lastUpdate, "%M %d %Y") as lastUpdate FROM portals WHERE id = ? and active = 1`
+function getPortalInfo(portalId,userId, done) {
+  const sql = `SELECT p.id, p.categoryId, p.fanClubName, p.fanClubLocation, p.logo, p.description, DATE_FORMAT(p.createDate, "%M %d %Y") as createDate, DATE_FORMAT(p.lastUpdate, "%M %d %Y") as lastUpdate, af.alreadyFollow
+ FROM portals p 
+ LEFT OUTER JOIN (SELECT userId, portalId, 1 as alreadyFollow from follow where userId = ? and follow = 1) af on af.portalId = p.id
+ WHERE p.id = ? and p.active = 1`
 
   let info = {
     portalInfo: {},
     events: []
   }
-  conn.query(sql, [portalId], function (error, results, fields) {
+  conn.query(sql, [userId,portalId], function (error, results, fields) {
     if (error) {
       let response = {
         status: "fail",
@@ -152,12 +155,54 @@ function searchPortals(searchTerm, done) {
     }
   })
 }
+function followPortal(portalId, userId, done) {
+ const sql = `INSERT INTO follow (portalId, userId, follow)
+    VALUES(?,?,?)
+    On duplicate key update follow = 1`
 
+ conn.query(sql, [portalId, userId, 1], function (error, results, fields) {
+    if (error) {
+      let response = {
+        status: "fail",
+        message: "This portal can not be followed."
+      }
+      done(false, response)
+    } else if (!error) {
+      let response = {
+        status: "success",
+        message: "The fan portal has been followed"
+      }
+      done(true, response)
+    }
+  })
+}
+
+function unFollowPortal(portalId, userId, done) {
+ const sql = `UPDATE follow SET follow = 0 WHERE userId = ? AND portalId = ?`
+
+ conn.query(sql, [userId, portalId], function (error, results, fields) {
+    if (error) {
+      let response = {
+        status: "fail",
+        message: "This portal can not be unfollowed."
+      }
+      done(false, response)
+    } else if (!error) {
+      let response = {
+        status: "success",
+        message: "The fan portal has been unfollowed"
+      }
+      done(true, response)
+    }
+  })
+}
 module.exports = {
   addFanPortal,
   getPortalInfo,
   updatePortal,
   getPortalCategories,
   getPortalsByCategory,
-  searchPortals
+  searchPortals,
+  followPortal,
+  unFollowPortal
 }

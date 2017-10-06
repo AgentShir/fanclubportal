@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getPortalInfo, resetPortalView } from '../actions/app'
+import { getPortalInfo, resetPortalView, followPortal, unFollowPortal } from '../actions/app'
 import placeholder from '../images/square_logo.png'
-import { Card, CardText, CardHeader, CardMedia } from 'material-ui/Card'
+import { Card, CardText, CardHeader, CardMedia, CardActions } from 'material-ui/Card'
 import CircularProgress from 'material-ui/CircularProgress'
+import FlatButton from 'material-ui/FlatButton'
 
 const cardStyle = {
     maxWidth: '1000px',
@@ -20,13 +21,18 @@ const titleStyle = {
 const errorMessageStyle = {
     fontSize: '20px'
 }
+const buttonStyle = {
+    textAlign: 'center'
+}
 class PortalView extends Component {
     state = {
-        expanded: false
+        expanded: false,
+        following:false
     }
     componentWillMount() {
         let portalId = this.props.match.params.portalId
-        getPortalInfo(portalId)
+        let userId = localStorage.getItem('userId')
+        getPortalInfo(portalId, userId)
     }
 
     componentWillUnmount() {
@@ -38,14 +44,41 @@ class PortalView extends Component {
         let portalId = Number(props.match.params.portalId)
         if (portalId !== props.portalInfo.id) {
             this.setState({})
-            getPortalInfo(portalId)
+            let userId = localStorage.getItem('userId')
+            getPortalInfo(portalId, userId)
         }
         if (props.gotInfo === 'fail') {
             this.setState({ expanded: true })
+        }else if(props.gotInfo === 'success'){
+            if(props.portalInfo.alreadyFollow !== null){
+                this.setState({following:props.portalInfo.alreadyFollow})
+            }
+        }
+        if(props.followStatus === 'success'){
+            this.setState({following:true})
+        }
+        if(props.unFollowStatus === 'success'){
+            this.setState({following:false})
         }
     }
     handleExpandChange = (expanded) => {
         this.setState({ expanded: expanded });
+    }
+    followPortal = (e) => {
+        e.preventDefault()
+        if(!this.props.isAuthenticated){
+            this.props.history.push('/login')
+        }else{
+            let portalId = this.props.match.params.portalId
+            let userId = localStorage.getItem('userId')
+            followPortal(portalId,userId)
+        }
+    }
+    unFollowPortal = (e) => {
+        e.preventDefault()
+        let portalId = this.props.match.params.portalId
+        let userId = localStorage.getItem('userId')
+        unFollowPortal(portalId,userId)
     }
     render() {
         return (
@@ -73,6 +106,14 @@ class PortalView extends Component {
                                                     : <img src={placeholder} alt="logo" />
                                                 }
                                             </CardMedia>
+                                            {this.state.following === false
+                                                ? <CardActions style={buttonStyle}>
+                                                    <FlatButton label="Follow" type="submit" onClick={this.followPortal} />
+                                                </CardActions>
+                                                : <CardActions style={buttonStyle}>
+                                                    <FlatButton label="Un-Follow" type="submit" onClick={this.unFollowPortal} />
+                                                </CardActions>
+                                            }
                                             <CardHeader className="leftCardHeader"
                                                 title={this.props.portalInfo.fanClubLocation}
                                                 subtitle={<p>Founded:   {this.props.portalInfo.createDate}
@@ -121,12 +162,18 @@ class PortalView extends Component {
 }
 
 function mapStateToProps(appState) {
-    const { portalInfo, portalEvents, gotInfo, errorMessage } = appState.app
+    const { portalInfo, portalEvents, gotInfo, errorMessage, followStatus, followMessage, unFollowStatus, unFollowMessage } = appState.app
+    const { isAuthenticated} = appState.auth
     return {
         portalInfo,
         portalEvents,
         gotInfo,
-        errorMessage
+        errorMessage,
+        isAuthenticated,
+        followStatus,
+        followMessage,
+        unFollowStatus,
+        unFollowMessage
     }
 }
 

@@ -32,8 +32,9 @@ const tab = {
 class UserHomepage extends Component {
     componentWillMount() {
         let portalId = localStorage.getItem('portalId')
+        let userId = localStorage.getItem('userId')
         if (portalId !== 'null') {
-            getUserPortalInfo(portalId)
+            getUserPortalInfo(portalId,userId)
         }
     }
     componentWillUnmount() {
