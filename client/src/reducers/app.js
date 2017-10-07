@@ -23,7 +23,8 @@ const initialState = {
   followStatus:'',
   followMessage:'',
   unFollowStatus:'',
-  unFollowMessage:''
+  unFollowMessage:'',
+  followingPortals:[]
 }
 
 export default function (state = initialState, action) {
@@ -128,6 +129,11 @@ export default function (state = initialState, action) {
       followStatus:'',
       followMessage:''
     }
+    case reduce.GET_FOLLOWING_PORTALS:
+    return{
+      ...state,
+      followingPortals:action.followingPortals
+    }
     case reduce.RESET_PORTALVIEW:
     return{
       ...state,
@@ -157,7 +163,8 @@ export default function (state = initialState, action) {
     return{
       ...state,
       userPortalInfo:{},
-      userPortalEvents:[]
+      userPortalEvents:[],
+      followingPortals:[]
     }
     case reduce.RESET_REGISTER:
     return{

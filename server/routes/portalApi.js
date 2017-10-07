@@ -56,7 +56,17 @@ router.get("/search/:searchTerm", function(req,res,next){
     }
   })
 })
-router.get("/:portalId/:userId", function (req, res, next) {
+router.get("/followingPortals/:userId", function(req, res,next){
+  const userId =  req.params.userId
+  fanPortal.getFollowingPortals(userId, function(success, response){
+    if (!success) {
+      res.status(404).json(response)
+    } else {
+      res.json(response)
+    }
+  })
+})
+router.get("/:portalId/user/:userId", function (req, res, next) {
   const portalId = req.params.portalId
   const userId = req.params.userId
   fanPortal.getPortalInfo(portalId, userId, function (success, response) {
