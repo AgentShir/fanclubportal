@@ -8,10 +8,12 @@ import FlatButton from 'material-ui/FlatButton'
 import DatePicker from 'material-ui/DatePicker'
 import TimePicker from 'material-ui/TimePicker'
 import CircularProgress from 'material-ui/CircularProgress'
+import event from '../images/event.png'
 
 const cardStyle = {
     maxWidth: '1000px',
-    margin: '50px auto'
+    margin: '50px auto',
+    backgroundColor: '#CECED8'
 }
 const progressCard = {
     maxWidth: '1000px',
@@ -116,7 +118,7 @@ class PortalEvent extends Component {
     render() {
         return (
             <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
-                <CardTitle title="Event" />
+                <img src={event} alt='Create Event' className="event" />
                 <CardText expandable={true} color={'red'} style={errorMessageStyle}>
                     {this.props.errorMessage}
                 </CardText>

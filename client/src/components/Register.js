@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { postRegister, resetRegister } from '../actions/app'
 import TextField from 'material-ui/TextField'
-import { Card, CardActions, CardText, CardTitle } from 'material-ui/Card'
+import { Card, CardActions, CardText, CardTitle, CardMedia } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import CircularProgress from 'material-ui/CircularProgress'
+import register from '../images/register.png'
 
 const cardStyle = {
     maxWidth: '1000px',
     margin: '50px auto',
-    backgroundColor: '#E78A78'
+    backgroundColor: '#61A5BF'
 }
 const progressCard = {
     maxWidth: '1000px',
@@ -53,7 +54,7 @@ class Register extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.dispatch(postRegister(this.state))
-        this.setState({ fname: '', lname: '', username: '', email: '', password: '', showProgress: true }) 
+        this.setState({ fname: '', lname: '', username: '', email: '', password: '', showProgress: true })
     }
     handleExpandChange = (expanded) => {
         this.setState({ expanded: expanded });
@@ -62,7 +63,7 @@ class Register extends Component {
         return (
             <div className="portalContainer">
                 <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
-                    <CardTitle title="Register" />
+                        <img src={register} alt='Register!' className="register" />
                     <CardText expandable={true} color={'red'} style={errorMessageStyle}>
                         {this.props.regErrorMessage}
                     </CardText>

@@ -8,10 +8,13 @@ import FlatButton from 'material-ui/FlatButton'
 import { getPortalInfo, updatePortal, updateComplete } from '../actions/app'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
+import fanPortal from '../images/fan_portal.png'
+
 
 const cardStyle = {
     maxWidth: '1000px',
     margin: '50px auto',
+    backgroundColor: '#E8D5D8'
 }
 const buttonStyle = {
     textAlign: 'right'
@@ -37,7 +40,7 @@ class CreatePortal extends Component {
             category: '',
             MenuItem: '',
             logo: '',
-            description: '' 
+            description: ''
         }
     }
 
@@ -115,7 +118,7 @@ class CreatePortal extends Component {
     render() {
         return (
             <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
-                <CardTitle title="Fan Portal" />
+                <img src={fanPortal} alt='Fan Portal' className="fanPortal" />
                 <CardText expandable={true} color={'red'} style={errorMessageStyle}>
                     {this.props.errorMessage}
                 </CardText>

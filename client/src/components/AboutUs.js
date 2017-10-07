@@ -10,6 +10,12 @@ const cardStyle = {
     backgroundColor: '#E8D5D8'
 }
 
+const cardText = {
+  maxWidth: '100%',
+  overflow: 'hidden',
+  wordWrap: 'break-word'
+}
+
 class AboutUs extends Component {
     render(){
         return(
@@ -19,13 +25,11 @@ class AboutUs extends Component {
                 <CardMedia>
                   <img src={logo} alt="About Us"/>
                 </CardMedia>
-                    <CardText>
-                      <p>Fan Portals was born out of Shireen's desparate search for other US Soccer fans.</p>
-                      <p>She was visiting Los Angeles for a wedding, but didn't know where the local fans met up.</p>
-                      <p>Fan Portals started out as a way to connect sports fans, but evolved to be a portal for ALL fans.</p>
+                    <CardText style={cardText}>
+                      Fan Portals was born out of Shireen's desparate search for other US Soccer fans.  She was visiting Los Angeles for a wedding, but didn't know where the local fans met up.  Fan Portals started out as a way to connect sports fans, but evolved to be a portal for ALL fans.
                     </CardText>
                       <CardMedia>
-                        <img src={team} alt="Meet the Team" />
+                        <img src={team} alt="Meet the Team" style={{height: '30%', width: '20%'}}/>
                       </CardMedia>
                       <CardText>
                         <p>About Diana</p>

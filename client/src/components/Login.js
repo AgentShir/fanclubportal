@@ -5,11 +5,12 @@ import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText, CardTitle } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import CircularProgress from 'material-ui/CircularProgress'
+import login from '../images/login.png'
 
 const cardStyle = {
   maxWidth: '1000px',
   margin: '50px auto',
-  backgroundColor: '#196E8F'
+  backgroundColor: '#EFA798'
 }
 const progressCard = {
   maxWidth: '1000px',
@@ -63,7 +64,7 @@ class Login extends Component {
   render() {
     return (
       <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
-        <CardTitle title="Login" />
+        <img src={login} alt='Login' className="login"/>
         <CardText expandable={true} color={'red'} style={errorMessageStyle}>
           {this.props.errorMessage}
         </CardText>
