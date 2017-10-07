@@ -159,8 +159,8 @@ export function postPortals(fanPortal) {
         })
       })
 }
-export function getPortalInfo(portalId){
-  axios.get('/api/portal/'+portalId)
+export function getPortalInfo(portalId,userId){
+  axios.get('/api/portal/'+portalId +'/user/' + userId)
   .then(function(resp){
     store.dispatch({
       type:action.PORTAL_INFO,
@@ -177,8 +177,8 @@ export function getPortalInfo(portalId){
     })
   })
 }
-export function getUserPortalInfo(portalId){
-  axios.get('/api/portal/'+portalId)
+export function getUserPortalInfo(portalId,userId){
+  axios.get('/api/portal/'+portalId + '/user/' + userId )
   .then(function(resp){
     store.dispatch({
       type:action.USER_PORTAL_INFO,
@@ -266,6 +266,59 @@ export function searchPortals(searchTerm){
       status:err.resp.data.status,
       message:err.resp.data.message
     })
+  })
+}
+export function followPortal(portalId, userId) {
+  axios.post('/api/portal/follow/', {
+    portalId: portalId,
+    userId: userId,
+  })
+    .then(function (resp) {
+      store.dispatch({
+        type: action.FOLLOW_PORTAL,
+        followStatus: resp.data.status,
+        followMessage: resp.data.message
+      })
+    })
+    .catch(function (err) {
+      store.dispatch({
+        type: action.FOLLOW_PORTAL,
+        followStatus: err.response.data.status,
+        followMessage:err.response.data.message
+      })
+    })
+}
+export function unFollowPortal(portalId, userId){
+  axios.put('/api/portal/unfollow', {
+    portalId:portalId,
+    userId:userId
+  })
+  .then(function (resp) {
+    store.dispatch({
+      type: action.UNFOLLOW_PORTAL,
+      unFollowStatus: resp.data.status,
+      unFollowMessage: resp.data.message
+    })
+  })
+  .catch(function (err) {
+    store.dispatch({
+      type: action.UNFOLLOW_PORTAL,
+      unFollowStatus: err.response.data.status,
+      unFollowMessage:err.response.data.message
+    })
+  })
+}
+
+export function getFollowingPortals(userId){
+  axios.get('/api/portal/followingPortals/' + userId)
+  .then(function(resp){
+    store.dispatch({
+      type:action.GET_FOLLOWING_PORTALS,
+      followingPortals:resp.data.followingPortals
+    })
+  })
+  .catch(function(err){
+    console.log('err', err)
   })
 }
 /*--------------------------RESET ACTIONS------------------------------- */

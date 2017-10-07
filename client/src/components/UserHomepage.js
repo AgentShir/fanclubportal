@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Authorize } from '../lib/auth'
-import { getUserPortalInfo, resetUserHomepage } from '../actions/app'
+import { getUserPortalInfo, resetUserHomepage, getFollowingPortals } from '../actions/app'
 import EventList from './EventList'
+import FollowingPortalList from './FollowingPortalList'
 import { Card, CardText, CardHeader } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import { Tabs, Tab } from 'material-ui/Tabs';
@@ -34,8 +35,10 @@ const tab = {
 class UserHomepage extends Component {
     componentWillMount() {
         let portalId = localStorage.getItem('portalId')
+        let userId = localStorage.getItem('userId')
         if (portalId !== 'null') {
-            getUserPortalInfo(portalId)
+            getUserPortalInfo(portalId,userId)
+            getFollowingPortals(userId)
         }
     }
     componentWillUnmount() {
@@ -93,6 +96,7 @@ class UserHomepage extends Component {
                             <Tab label="Portals I'm following" buttonStyle={tab}>
                                 <Card>
                                     <CardText>
+                                        <FollowingPortalList portals={this.props.followingPortals} />
                                     </CardText>
                                 </Card>
                             </Tab>
@@ -108,10 +112,11 @@ class UserHomepage extends Component {
 }
 
 const mapStateToProps = function (appState) {
-    const { userPortalInfo, userPortalEvents } = appState.app
+    const { userPortalInfo, userPortalEvents, followingPortals } = appState.app
     return {
         userPortalInfo,
-        userPortalEvents
+        userPortalEvents,
+        followingPortals
     }
 }
 

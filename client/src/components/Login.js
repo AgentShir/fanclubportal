@@ -42,7 +42,7 @@ class Login extends Component {
       this.setState({ expanded: true, showProgress: false })
     } else {
       setTimeout(() => {
-        props.history.push('/home')
+       props.history.push('/home')
       }, 2000)
     }
   }

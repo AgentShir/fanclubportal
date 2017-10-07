@@ -45,9 +45,9 @@ class CreatePortal extends Component {
     }
 
     componentWillMount() {
-        console.log('will mount')
         if (localStorage.getItem('portalId') !== 'null') {
-            getPortalInfo(localStorage.getItem('portalId'))
+            let userId = localStorage.getItem('userId')
+            getPortalInfo(localStorage.getItem('portalId'),userId)
             getPortalCategories()
 
         } else {
@@ -60,7 +60,6 @@ class CreatePortal extends Component {
     }
     componentWillReceiveProps(props) {
         if (this.props.location.pathname === '/addPortal') {
-            console.log(' add portal')
             if (props.updateStatus === 'fail') {
                 this.setState({ expanded: true, showProgress: false })
             } else if (props.updateStatus === 'success') {
@@ -69,7 +68,6 @@ class CreatePortal extends Component {
             }
             //if editing portal
         } else {
-            console.log('else')
             this.setState({
                 fanClubName: props.fanClubName,
                 fanClubLocation: props.fanClubLocation,
@@ -191,7 +189,6 @@ class CreatePortal extends Component {
 }
 function mapStateToProps(appState) {
     const { errorMessage, portalId, portalInfo, updateStatus, portalCategories, gotInfo } = appState.app
-    console.log('state to props', updateStatus)
     return {
         errorMessage,
         portalId,

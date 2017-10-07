@@ -19,7 +19,12 @@ const initialState = {
   userPortalEvens:[],
   searchResults:[],
   searchMessage:'',
-  gotInfo:''
+  gotInfo:'',
+  followStatus:'',
+  followMessage:'',
+  unFollowStatus:'',
+  unFollowMessage:'',
+  followingPortals:[]
 }
 
 export default function (state = initialState, action) {
@@ -108,7 +113,27 @@ export default function (state = initialState, action) {
       updateStatus:action.status,
       searchMessage:action.message
     }
-
+    case reduce.FOLLOW_PORTAL:
+    return{
+      ...state,
+      followStatus:action.followStatus,
+      followMessage:action.followMessage,
+      unFollowMessage:'',
+      unFollowStatus:''
+    }
+    case reduce.UNFOLLOW_PORTAL:
+    return{
+      ...state,
+      unFollowStatus:action.unFollowStatus,
+      unFollowMessage:action.unFollowMessage,
+      followStatus:'',
+      followMessage:''
+    }
+    case reduce.GET_FOLLOWING_PORTALS:
+    return{
+      ...state,
+      followingPortals:action.followingPortals
+    }
     case reduce.RESET_PORTALVIEW:
     return{
       ...state,
@@ -116,7 +141,11 @@ export default function (state = initialState, action) {
       portalEvents:[],
       updateStatus:'',
       errorMessage:'',
-      gotInfo:''
+      gotInfo:'',
+      followStatus:'',
+      followMessage:'',
+      unFollowStatus:'',
+      unFollowMessage:''
     }
     case reduce.RESET_HOME:
     return{
@@ -134,7 +163,8 @@ export default function (state = initialState, action) {
     return{
       ...state,
       userPortalInfo:{},
-      userPortalEvents:[]
+      userPortalEvents:[],
+      followingPortals:[]
     }
     case reduce.RESET_REGISTER:
     return{

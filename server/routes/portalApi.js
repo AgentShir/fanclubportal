@@ -56,9 +56,9 @@ router.get("/search/:searchTerm", function(req,res,next){
     }
   })
 })
-router.get("/:portalId", function (req, res, next) {
-  const portalId = req.params.portalId
-  fanPortal.getPortalInfo(portalId, function (success, response) {
+router.get("/followingPortals/:userId", function(req, res,next){
+  const userId =  req.params.userId
+  fanPortal.getFollowingPortals(userId, function(success, response){
     if (!success) {
       res.status(404).json(response)
     } else {
@@ -66,7 +66,28 @@ router.get("/:portalId", function (req, res, next) {
     }
   })
 })
-
+router.get("/:portalId/user/:userId", function (req, res, next) {
+  const portalId = req.params.portalId
+  const userId = req.params.userId
+  fanPortal.getPortalInfo(portalId, userId, function (success, response) {
+    if (!success) {
+      res.status(404).json(response)
+    } else {
+      res.json(response)
+    }
+  })
+})
+router.put("/unfollow", function(req,res,next){
+  const portalId = req.body.portalId
+  const userId = req.body.userId
+  fanPortal.unFollowPortal(portalId, userId, function (success, response) {
+    if (!success) {
+      res.status(401).json(response)
+    } else {
+      res.json(response)
+    }
+  })
+})
 router.put("/:portalId", function (req, res, next) {
   const portalId = req.params.portalId
   fanPortal.updatePortal(portalId, req.body, function (success, response) {
@@ -77,5 +98,18 @@ router.put("/:portalId", function (req, res, next) {
     }
   })
 })
+router.post("/follow", function (req, res, next) {
+  const portalId = req.body.portalId
+  const userId = req.body.userId
+
+  fanPortal.followPortal(portalId, userId, function (success, response) {
+    if (!success) {
+      res.status(401).json(response)
+    } else {
+      res.json(response)
+    }
+  })
+})
+
 
 module.exports = router;
