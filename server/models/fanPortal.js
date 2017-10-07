@@ -196,6 +196,28 @@ function unFollowPortal(portalId, userId, done) {
     }
   })
 }
+function getFollowingPortals(userId, done){
+  const sql = `SELECT f.*, p.fanClubName, p.fanClubLocation, p.logo
+  FROM follow f
+  JOIN  portals p on f.portalId = p.id
+  WHERE f.userId =? and f.follow =1
+  ORDER BY p.fanClubName`
+  conn.query(sql,[userId], function(error, results, fields){
+    if(error){
+      let response ={
+        status:'fail',
+        message:"Unable to retrieve following portals."
+      }
+      done(false,response)
+    }else if(!error){
+      let response = {
+        status: 'success',
+        followingPortals:results
+      }
+      done(true, response)
+    }
+  })
+}
 module.exports = {
   addFanPortal,
   getPortalInfo,
@@ -204,5 +226,6 @@ module.exports = {
   getPortalsByCategory,
   searchPortals,
   followPortal,
-  unFollowPortal
+  unFollowPortal,
+  getFollowingPortals
 }
