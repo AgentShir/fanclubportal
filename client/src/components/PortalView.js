@@ -16,7 +16,8 @@ const cardHeaderStyle = {
     textAlign: 'center'
 }
 const titleStyle = {
-    fontSize: '50px'
+    fontSize: '50px',
+    whiteSpace: 'normal'
 }
 const errorMessageStyle = {
     fontSize: '20px'

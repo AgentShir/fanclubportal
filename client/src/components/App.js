@@ -21,7 +21,7 @@ import Contact from './Contact'
 import Portal from './Portal'
 import PortalEvent from './PortalEvent'
 import PortalView from './PortalView'
-import UserHomepage from './UserHomepage'
+import Dashboard from './Dashboard'
 import Category from './Category'
 
 
@@ -51,7 +51,7 @@ class App extends Component {
                 <Route path='/updateEvent/:eventId' component={PortalEvent} />
                 <Route path='/portal/:portalId' component={PortalView} />
                 <Route path='/updatePortal/:portalId' component={Portal} />
-                <Route path='/home' component={UserHomepage} />
+                <Route path='/dashboard/:tabId' component={Dashboard} />
                 <Route path='/category/:categoryId' component={Category} />
               </Switch>
             </Layout>

@@ -15,8 +15,8 @@ import Divider from 'material-ui/Divider'
 const headerStyle = {
   cursor: 'pointer',
   boxShadow: 'none',
-  // backgroundColor:'#4DB6AC'
-  backgroundColor: '#24292E'
+  // backgroundColor: '#24292E'
+  backgroundColor:'#31708E'
 }
 class Header extends Component {
   constructor(props) {
@@ -45,6 +45,9 @@ class Header extends Component {
         />
         <Drawer open={this.state.open} openSecondary={true}>
           <MenuItem onClick={this.handleToggle}>{<CloseIcon />}</MenuItem>
+          <Link to="/" style={{ textDecoration: "none" }}>
+            <MenuItem onClick={this.handleToggle}>Home</MenuItem>
+          </Link>
           {!this.props.isAuthenticated ?
             <div>
               <Link to="/login" style={{ textDecoration: "none" }}>
@@ -60,8 +63,8 @@ class Header extends Component {
                 <MenuItem onClick={this.handleToggle}>Contact</MenuItem>
               </Link></div>
             : <div>
-              <Link to="/home" style={{ textDecoration: "none" }}>
-                <MenuItem onClick={this.handleToggle}>Home</MenuItem>
+              <Link to="/dashboard/0" style={{ textDecoration: "none" }}>
+                <MenuItem onClick={this.handleToggle}>Dashboard</MenuItem>
               </Link>
               {localStorage.getItem('portalId') === 'null' ?
                 <div>
@@ -71,13 +74,13 @@ class Header extends Component {
                 </div>
                 : <div>
                   <Link to={`/portal/${localStorage.portalId}`} style={{ textDecoration: "none" }}>
-                    <MenuItem onClick={this.handleToggle}>View Portal</MenuItem>
+                    <MenuItem onClick={this.handleToggle}>View Your Portal</MenuItem>
                   </Link>
                   <Link to={`/updatePortal/${localStorage.portalId}`} style={{ textDecoration: "none" }}>
-                    <MenuItem onClick={this.handleToggle}>Edit Portal</MenuItem>
+                    <MenuItem onClick={this.handleToggle}>Edit Your Portal</MenuItem>
                   </Link>
                   <Link to={`/${localStorage.portalId}/addEvent`} style={{ textDecoration: "none" }}>
-                    <MenuItem onClick={this.handleToggle}>Add Event</MenuItem>
+                    <MenuItem onClick={this.handleToggle}>Add Portal Event</MenuItem>
                   </Link>
                   <Divider />
                 </div>

@@ -12,8 +12,8 @@ const cardStyle = {
 }
 const progressCard = {
     maxWidth: '1000px',
-    margin: '50px auto',
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingBottom: '50px'
 }
 const buttonStyle = {
     textAlign: 'right'
@@ -32,12 +32,12 @@ class Register extends Component {
         showProgress: false
     }
     componentWillReceiveProps(props) {
-        if (props.regErrorMessage.length > 0 ) {
+        if (props.regErrorMessage.length > 0) {
             this.setState({ expanded: true, showProgress: false })
         } else {
-            setTimeout(()=>{
-                props.history.push('/home')
-            },2000)
+            setTimeout(() => {
+                props.history.push('/dashboard/0')
+            }, 2000)
         }
     }
     componentWillUnmount() {
@@ -52,11 +52,15 @@ class Register extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         this.props.dispatch(postRegister(this.state))
-        this.setState({ fname: '', lname: '', username: '', email: '', password: '', showProgress: true }) 
+        this.setState({ fname: '', lname: '', username: '', email: '', password: '', showProgress: true })
     }
     handleExpandChange = (expanded) => {
         this.setState({ expanded: expanded });
     };
+    cancel = (e) => {
+        e.preventDefault()
+        this.props.history.push('/')
+      }
     render() {
         return (
             <div className="portalContainer">
@@ -66,9 +70,9 @@ class Register extends Component {
                         {this.props.regErrorMessage}
                     </CardText>
                     {this.state.showProgress === true
-                        ? <Card style={progressCard} className="headerCard">
+                        ? <div style={progressCard}>
                             <CircularProgress size={80} thickness={5} />
-                        </Card>
+                        </div>
                         : <form onSubmit={this.handleSubmit}>
                             <CardText>
                                 <TextField
@@ -107,6 +111,7 @@ class Register extends Component {
                                 /><br />
                             </CardText>
                             <CardActions style={buttonStyle}>
+                                <FlatButton label="Cancel" type="button" onClick={this.cancel} />
                                 <FlatButton label="Submit" type="submit" />
                             </CardActions>
                         </form>
