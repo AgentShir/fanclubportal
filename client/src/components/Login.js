@@ -12,8 +12,8 @@ const cardStyle = {
 }
 const progressCard = {
   maxWidth: '1000px',
-  margin: '50px auto',
-  textAlign: 'center'
+  textAlign: 'center',
+  paddingBottom: '50px'
 }
 const buttonStyle = {
   textAlign: 'right'
@@ -40,7 +40,7 @@ class Login extends Component {
       this.setState({ expanded: true, showProgress: false })
     } else {
       setTimeout(() => {
-       props.history.push('/home')
+        props.history.push('/dashboard/0')
       }, 2000)
     }
   }
@@ -58,7 +58,10 @@ class Login extends Component {
   handleExpandChange = (expanded) => {
     this.setState({ expanded: expanded });
   };
-
+  cancel = (e) => {
+    e.preventDefault()
+    this.props.history.push('/')
+  }
   render() {
     return (
       <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
@@ -93,12 +96,13 @@ class Login extends Component {
               /><br /><br />
             </CardText>
             <CardActions style={buttonStyle}>
+              <FlatButton label="Cancel" type="button" onClick={this.cancel} />
               <FlatButton label="Submit" type="submit" />
             </CardActions>
           </form>
-          : <Card style={progressCard} className="headerCard">
+          : <div style={progressCard}>
             <CircularProgress size={80} thickness={5} />
-          </Card>
+          </div>
         }
       </Card>
     )

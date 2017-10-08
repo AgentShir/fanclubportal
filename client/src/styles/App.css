@@ -2,7 +2,8 @@
   Custom styles here
  */
 #root{
-  background-color: #FAFAFA;
+  /* background-color: #FAFAFA; */
+  background-color:#F7F9FB;
   min-height:100%;
 }
 html, body {
