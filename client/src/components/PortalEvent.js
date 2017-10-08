@@ -17,8 +17,8 @@ const cardStyle = {
 }
 const progressCard = {
     maxWidth: '1000px',
-    margin: '50px auto',
-    textAlign: 'center'
+    textAlign: 'center',
+    paddingBottom: '50px'
 }
 const buttonStyle = {
     textAlign: 'right'
@@ -57,7 +57,7 @@ class PortalEvent extends Component {
                 this.setState({ expanded: true, showProgress: false })
             } else if (props.updateStatus === 'success') {
                 this.setState({ expanded: false })
-                this.props.history.push('/home')
+                this.props.history.push('/dashboard/1')
             }
         }
         else if (props.location.pathname.indexOf('/updateEvent') !== -1) {
@@ -70,7 +70,7 @@ class PortalEvent extends Component {
             })
 
             if (props.updateStatus === 'success') {
-                this.props.history.push('/home')
+               this.props.history.push('/dashboard/1')
                 updateComplete()
             } else if (props.updateStatus === 'fail') {
                 this.setState({ expanded: true, showProgress: false })
@@ -90,7 +90,7 @@ class PortalEvent extends Component {
     }
     addEvent = (e) => {
         e.preventDefault()
-        this.setState({ showProgress: true })
+        // this.setState({ showProgress: true })
         let portalId = localStorage.getItem('portalId')
         if (this.props.location.pathname.indexOf('/addEvent') !== -1) {
             postEvent(this.state, portalId)
@@ -105,12 +105,13 @@ class PortalEvent extends Component {
     removeEvent = (e) => {
         e.preventDefault()
         let eventId = this.props.match.params.eventId
+        // this.setState({showProgress:true})
         removeEvent(eventId)
 
     }
     cancel = (e) => {
         e.preventDefault()
-        this.props.history.push('/home')
+        this.props.history.push('/dashboard/1')
     }
     handleExpandChange = (expanded) => {
         this.setState({ expanded: expanded });
@@ -180,14 +181,14 @@ class PortalEvent extends Component {
                         </CardText>
                         <CardActions style={buttonStyle}>
                             {this.props.location.pathname.indexOf('/updateEvent') !== -1 &&
-                                <FlatButton label="Delete" type="submit" onClick={this.removeEvent} />}
-                            <FlatButton label="Cancel" type="submit" onClick={this.cancel} />
+                            <FlatButton label="Delete" type="button" onClick={this.removeEvent} />}
+                            <FlatButton label="Cancel" type="button" onClick={this.cancel} />
                             <FlatButton label="Submit" type="submit" />
                         </CardActions>
                     </form>
-                    : <Card style={progressCard} className="headerCard">
+                    : <div style={progressCard}>
                         <CircularProgress size={80} thickness={5} />
-                    </Card>
+                    </div>
                 }
             </Card>
         )

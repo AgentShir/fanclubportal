@@ -18,30 +18,32 @@ class Category extends Component {
         let categoryId = this.props.match.params.categoryId
         getPortalsByCategory(categoryId)
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
         resetCategory()
     }
     render() {
         return (
             <div className="portalContainer">
-                <h1>{this.props.categoryName}</h1>
-                {this.props.portals
-                    ? <div className="cards" >
-                        {this.props.portals.map((portal) => (
-                            <Card key={portal.id} className="categoryCard">
-                                <Link key={portal.id} to={`/portal/${portal.id}`} className="link">
-                                <CardMedia
-                                overlay={<CardTitle title={portal.fanClubName} style={{ background: 'transparent' }} />}
-                                overlayContainerStyle={{ background: 'transparent' }}
-                                overlayContentStyle={{ background: 'transparent' }}
-                            >
-                                    {portal.logo
-                                    ? <img src={portal.logo} alt="logo" />
-                                    :  <img src={placeholder} alt="logo"/>}
-                                    </CardMedia>
-                                </Link>
-                            </Card>
-                        ))}
+                {this.props.categoryName !== undefined
+                    ? <div>
+                        <h1>{this.props.categoryName}</h1>
+                        <div className="cards" >
+                            {this.props.portals.map((portal) => (
+                                <Card key={portal.id} className="categoryCard">
+                                    <Link key={portal.id} to={`/portal/${portal.id}`} className="link">
+                                        <CardMedia
+                                            overlay={<CardTitle title={portal.fanClubName} style={{ background: 'transparent' }} />}
+                                            overlayContainerStyle={{ background: 'transparent' }}
+                                            overlayContentStyle={{ background: 'transparent' }}
+                                        >
+                                            {portal.logo
+                                                ? <img src={portal.logo} alt="logo" />
+                                                : <img src={placeholder} alt="logo" />}
+                                        </CardMedia>
+                                    </Link>
+                                </Card>
+                            ))}
+                        </div>
                     </div>
                     : <Card style={cardStyle} className="headerCard">
                         <CircularProgress size={80} thickness={5} />
@@ -54,7 +56,7 @@ class Category extends Component {
 
 const stateToProps = function (appState) {
     const { portals } = appState.app
-    var categoryName = 'Category'
+    var categoryName
     if (portals[0] !== undefined) {
         categoryName = portals[0].category
     }

@@ -338,9 +338,9 @@ export function resetCategory(){
     type:action.RESET_CATEGORY
   })
 }
-export function resetUserHomepage(){
+export function resetDashboard(){
   store.dispatch({
-    type:action.RESET_USERHOMEPAGE
+    type:action.RESET_DASHBOARD
   })
 }
 export function resetRegister(){

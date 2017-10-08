@@ -159,7 +159,7 @@ export default function (state = initialState, action) {
       ...state,
       portals:[]
     }
-    case reduce.RESET_USERHOMEPAGE:
+    case reduce.RESET_DASHBOARD:
     return{
       ...state,
       userPortalInfo:{},

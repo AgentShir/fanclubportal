@@ -2,7 +2,8 @@
   Custom styles here
  */
 #root{
-  background-color: #ABABB4;
+  /* background-color: #FAFAFA; */
+  background-color:#F7F9FB;
   min-height:100%;
 }
 html, body {
@@ -166,5 +167,3 @@ h1{
      text-align: center;
    }
  }
-
- /*---------Color Scheme Play----------*/
