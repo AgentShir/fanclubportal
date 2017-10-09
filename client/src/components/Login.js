@@ -10,7 +10,7 @@ import login from '../images/login.png'
 const cardStyle = {
   maxWidth: '1000px',
   margin: '50px auto',
-  backgroundColor: '#EFA798'
+  backgroundColor: '#FFFFFF'
 }
 const progressCard = {
   maxWidth: '1000px',

@@ -15,7 +15,7 @@ import fanPortal from '../images/fan_portal.png'
 const cardStyle = {
     maxWidth: '1000px',
     margin: '50px auto',
-    backgroundColor: '#E8D5D8'
+    backgroundColor: '#FFFFFF'
 }
 const buttonStyle = {
     textAlign: 'right'
@@ -130,7 +130,7 @@ class CreatePortal extends Component {
             <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
               <div className="imageAlign">
                 <img src={fanPortal} alt='Fan Portal' className="fanPortal" />
-              </div>  
+              </div>
                   <CardText expandable={true} color={'red'} style={errorMessageStyle}>
                       {this.props.errorMessage}
                   </CardText>

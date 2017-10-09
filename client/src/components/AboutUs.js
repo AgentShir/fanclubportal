@@ -7,7 +7,7 @@ import thanks from '../images/acknowledge.png';
 const cardStyle = {
     maxWidth: '90%',
     margin: '50px auto',
-    backgroundColor: '#A6C3CE'
+    backgroundColor: '#FFFFFF'
 }
 
 class AboutUs extends Component {

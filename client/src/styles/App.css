@@ -26,6 +26,7 @@ html, body {
    max-width: 1000px;
     margin: 10px auto 0;
     height: 100%;
+    /*background-color: #FFFFFF;*/
  }
  .rightSideCards{
    width: 70%;
@@ -128,7 +129,7 @@ h1{
 
 .fanPortal{
   padding-top: 4px;
-  width: 30%;
+  width: 25%;
   height: 10%;
 }
 
@@ -161,7 +162,8 @@ h1{
   height: 100%;
   padding: 4px;
   word-wrap: break-word;
-  overflow: hidden
+  overflow: hidden;
+  white-space: normal;
 }
 
 /*-------------------*/
