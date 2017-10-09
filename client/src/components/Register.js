@@ -10,7 +10,7 @@ import register from '../images/register.png'
 const cardStyle = {
     maxWidth: '1000px',
     margin: '50px auto',
-    backgroundColor: '#61A5BF'
+    backgroundColor: '#FFFFFF'
 }
 const progressCard = {
     maxWidth: '1000px',

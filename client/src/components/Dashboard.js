@@ -16,7 +16,7 @@ const cardStyle = {
     maxWidth: '1000px',
     margin: '10px auto',
     textAlign: 'center',
-    backgroundColor:'#E78A78'
+    backgroundColor:'#FFFFFF'
 }
 const tabCard ={
     backgroundColor:'#CECED8'

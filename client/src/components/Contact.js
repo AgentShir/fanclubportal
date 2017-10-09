@@ -5,7 +5,7 @@ import contact from '../images/contact.png'
 const cardStyle = {
     maxWidth: '1000px',
     margin: '50px auto',
-    backgroundColor: '#E8D5D8'
+    backgroundColor: '#FFFFFF'
 }
 
 const cardText = {

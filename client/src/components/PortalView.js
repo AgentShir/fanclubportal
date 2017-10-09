@@ -12,7 +12,7 @@ const cardStyle = {
     maxWidth: '1000px',
     margin: '10px auto',
     textAlign: 'center',
-    backgroundColor: '#E8D5D8'
+    backgroundColor: '#FFFFFF'
 
 }
 const cardHeaderStyle = {

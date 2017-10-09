@@ -13,7 +13,7 @@ import event from '../images/event.png'
 const cardStyle = {
     maxWidth: '1000px',
     margin: '50px auto',
-    backgroundColor: '#CECED8'
+    backgroundColor: '#FFFFFF'
 }
 const progressCard = {
     maxWidth: '1000px',
@@ -121,7 +121,7 @@ class PortalEvent extends Component {
             <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
               <div className="imageAlign">
                 <img src={event} alt='Create Event' className="event" />
-              </div>  
+              </div>
                 <CardText expandable={true} color={'red'} style={errorMessageStyle}>
                     {this.props.errorMessage}
                 </CardText>
