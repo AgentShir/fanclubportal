@@ -29,7 +29,7 @@ class Contact extends Component {
                 </div>
               <div className="imageAlign">
                 <CardText style={cardText}>
-                  <a href="mailto:fanclubportals@gmail.com?Subject=Greetings" rel="noopener noreferrer" target="_blank"><i className="fa fa-envelope fa-4x" style={i}/></a>
+                  <a href="mailto:fanclubportals@gmail.com?subject=Greetings" rel="noopener noreferrer" ><i className="fa fa-envelope fa-4x" style={i}/></a>
                   <a href="https://www.facebook.com/fanportals/" rel="noopener noreferrer" target="_blank"><i className="fa fa-facebook-square fa-4x" style={i} aria-label="Fan Club Portals on Facebook"></i></a>
                   <a href="http://starwarsrebels.wikia.com/wiki/Star_Wars_Rebels_Wiki" rel="noopener noreferrer" target="_blank"><i className="fa fa-rebel fa-4x" style={i} aria-label="Star Wars Rebels Wiki"></i></a>
                   <a href="https://github.com/AgentShir/fanclubportals" rel="noopener noreferrer" target="_blank"><i className="fa fa-github fa-4x"  style={i} aria-label="View our repository on GitHub"></i></a>
