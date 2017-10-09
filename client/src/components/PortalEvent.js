@@ -4,7 +4,7 @@ import { Authorize } from '../lib/auth'
 import { postEvent, getEventInfo, updateEvent, updateComplete, removeEvent, resetEventForm } from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText } from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import DatePicker from 'material-ui/DatePicker'
 import TimePicker from 'material-ui/TimePicker'
 import CircularProgress from 'material-ui/CircularProgress'
@@ -183,9 +183,9 @@ class PortalEvent extends Component {
                         </CardText>
                         <CardActions style={buttonStyle}>
                             {this.props.location.pathname.indexOf('/updateEvent') !== -1 &&
-                            <FlatButton label="Delete" type="button" onClick={this.removeEvent} />}
-                            <FlatButton label="Cancel" type="button" onClick={this.cancel} />
-                            <FlatButton label="Submit" type="submit" />
+                            <RaisedButton labelColor='#cd0000'label="Delete" type="button" onClick={this.removeEvent} />}
+                            <RaisedButton label="Cancel" type="button" onClick={this.cancel} />
+                            <RaisedButton backgroundColor='#31708E' labelColor='#F7F9FB' label="Submit" type="submit" />
                         </CardActions>
                     </form>
                     : <div style={progressCard}>

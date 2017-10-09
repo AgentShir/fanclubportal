@@ -67,11 +67,13 @@ h1{
 .categoryCard{
   max-width: 30%;
   margin: 10px;
+  overflow: hidden;
+  background-size: cover;
 }
 .categoryCard img{
-  max-width: 300px !important;
+  /* max-width: 300px !important; */
   max-height: 250px !important;
-  width: 300px !important;
+  /* width: 300px !important; */
   height:250px !important;
 }
 .categoryCard:hover, .categoryCard:focus, .categoryCard:active

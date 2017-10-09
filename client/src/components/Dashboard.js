@@ -6,7 +6,6 @@ import EventList from './EventList'
 import FollowingPortalList from './FollowingPortalList'
 import UpcomingEvents from './UpcomingEvents'
 import { Card, CardText, CardHeader } from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
 import { Tabs, Tab } from 'material-ui/Tabs';
 import CircularProgress from 'material-ui/CircularProgress'
 import CreateIcon from 'material-ui/svg-icons/content/create'
@@ -168,7 +167,7 @@ class Dashboard extends Component {
                                 <Tab label={this.props.userPortalInfo.fanClubName + " Upcoming Events"} buttonStyle={tab}>
                                     <Card style={tabCard}>
                                         <CardText>
-                                            <FlatButton label="Add Event" type="submit" onClick={this.addEvent} hoverColor='#31708E' />
+                                            <RaisedButton label="Add Event" type="submit" onClick={this.addEvent} />
                                             <EventList events={this.props.userPortalEvents} />
                                         </CardText>
                                     </Card>

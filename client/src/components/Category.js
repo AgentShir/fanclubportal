@@ -33,8 +33,6 @@ class Category extends Component {
                                     <Link key={portal.id} to={`/portal/${portal.id}`} className="link">
                                         <CardMedia
                                             overlay={<CardTitle title={portal.fanClubName} style={{ background: 'transparent' }} />}
-                                            overlayContainerStyle={{ background: 'transparent' }}
-                                            overlayContentStyle={{ background: 'transparent' }}
                                         >
                                             {portal.logo
                                                 ? <img src={portal.logo} alt="logo" />

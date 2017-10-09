@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { postRegister, resetRegister } from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText } from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import CircularProgress from 'material-ui/CircularProgress'
 import register from '../images/register.png'
 
@@ -115,8 +115,8 @@ class Register extends Component {
                                 /><br />
                             </CardText>
                             <CardActions style={buttonStyle}>
-                                <FlatButton label="Cancel" type="button" onClick={this.cancel} />
-                                <FlatButton label="Submit" type="submit" />
+                                <RaisedButton label="Cancel" type="button" onClick={this.cancel} />
+                                <RaisedButton backgroundColor='#31708E' labelColor='#F7F9FB'label="Submit" type="submit" />
                             </CardActions>
                         </form>
                     }

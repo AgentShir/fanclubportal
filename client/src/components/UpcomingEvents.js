@@ -59,7 +59,6 @@ class UpcomingEvents extends Component {
         const actions = [
             <FlatButton
                 label="Cancel"
-                primary={true}
                 onClick={this.handleClose}
             />,
             <FlatButton
@@ -71,7 +70,6 @@ class UpcomingEvents extends Component {
         const actions2 = [
             <FlatButton
                 label="Cancel"
-                primary={true}
                 onClick={this.handleClose}
             />,
             <FlatButton

@@ -4,7 +4,7 @@ import { getPortalInfo, resetPortalView, followPortal, unFollowPortal } from '..
 import placeholder from '../images/square_logo.png'
 import { Card, CardText, CardHeader, CardMedia, CardActions } from 'material-ui/Card'
 import CircularProgress from 'material-ui/CircularProgress'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import upcoming from '../images/upcoming_events.png'
 import description from '../images/description.png'
 
@@ -112,10 +112,10 @@ class PortalView extends Component {
                                             </CardMedia>
                                             {this.state.following === false
                                                 ? <CardActions style={buttonStyle}>
-                                                    <FlatButton label="Follow" type="submit" onClick={this.followPortal} />
+                                                    <RaisedButton label="Follow" type="submit" onClick={this.followPortal} />
                                                 </CardActions>
                                                 : <CardActions style={buttonStyle}>
-                                                    <FlatButton label="Un-Follow" type="submit" onClick={this.unFollowPortal} />
+                                                    <RaisedButton label="Un-Follow" type="submit" onClick={this.unFollowPortal} />
                                                 </CardActions>
                                             }
                                             <CardHeader className="leftCardHeader"

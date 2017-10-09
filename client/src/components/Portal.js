@@ -4,7 +4,7 @@ import { Authorize } from '../lib/auth'
 import { postPortals, getPortalCategories, resetPortalForm } from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText } from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import { getPortalInfo, updatePortal, updateComplete } from '../actions/app'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
@@ -193,8 +193,8 @@ class CreatePortal extends Component {
 
                         </CardText>
                         <CardActions style={buttonStyle}>
-                            <FlatButton label="Cancel" type="button" onClick={this.cancel} />
-                            <FlatButton label="Submit" type="Submit" />
+                            <RaisedButton label="Cancel" type="button" onClick={this.cancel} />
+                            <RaisedButton backgroundColor='#31708E' labelColor='#F7F9FB' label="Submit" type="Submit" />
                         </CardActions>
                     </form>
                     : <div style={progressCard}>
