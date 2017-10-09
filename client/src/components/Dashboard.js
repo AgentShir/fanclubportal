@@ -17,22 +17,23 @@ const cardStyle = {
     maxWidth: '1000px',
     margin: '10px auto',
     textAlign: 'center',
-    backgroundColor: 'F7F9FB'
+    backgroundColor:'#E78A78'
 }
-const tabCard = {
-    backgroundColor: 'F7F9FB'
+const tabCard ={
+    backgroundColor:'#CECED8'
 }
 const cardHeaderStyle = {
-    textAlign: 'center'
+    textAlign: 'center',
+    backgroundColor: '#196E8F',
 }
 const titleStyle = {
     whiteSpace: 'normal',
     fontSize: '50px',
-    color: '#31708E'
+    color:'#000000'
 }
 const tabStyle = {
     whiteSpace: 'normal',
-    backgroundColor: 'inherit'
+    backgroundColor: '#EEEEF1'
 }
 const inkBarStyle = {
     backgroundColor: 'black'

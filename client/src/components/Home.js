@@ -6,6 +6,8 @@ import SearchResults from './SearchResults'
 import { getPortalCategories, searchPortals, resetHome } from '../actions/app'
 import { Card, CardTitle, CardMedia, CardText } from 'material-ui/Card'
 import SearchBar from 'material-ui-search-bar'
+import explore from '../images/explore.png'
+import colorLogo from '../images/logo_color_main.png'
 
 const searchStyle = {
   margin: '50px auto',
@@ -40,6 +42,9 @@ class Home extends Component {
   render() {
     return (
       <div className="portalContainer">
+        <div className="imageAlign">
+           <img src={colorLogo} alt="Large Colorful Logo" className="colorLogo" />
+        </div>
         <SearchBar
           value={this.state.search}
           onChange={(e) => this.handleSearch(e)}
@@ -55,21 +60,23 @@ class Home extends Component {
             {this.props.errorMessage}
           </CardText>
           }
-        <h1>Explore</h1>
-        <div className="cards" >
-          {this.props.portalCategories.map((category) => (
-            <Card key={category.id} className="categoryCard">
-              <Link key={category.id} to={`/category/${category.id}`} className="link">
-                <CardMedia>
-                  {category.logoName !== null
-                    ? <img src={require('../images/categories/' + category.logoName)} alt="category" />
-                    : <img src={placeholder} alt="category" />}
-                </CardMedia>
-                <CardTitle title={category.category} />
-              </Link>
-            </Card>
-          ))}
-        </div>
+          <div className="imageAlign">
+            <img src={explore} alt='Explore' className="explore"/>
+          </div>
+            <div className="cards" >
+              {this.props.portalCategories.map((category) => (
+                <Card key={category.id} className="categoryCard">
+                  <Link key={category.id} to={`/category/${category.id}`} className="link">
+                    <CardMedia>
+                      {category.logoName !== null
+                        ? <img src={require('../images/categories/' + category.logoName)} alt="category" />
+                        : <img src={placeholder} alt="category" />}
+                    </CardMedia>
+                    <CardTitle title={category.category} />
+                  </Link>
+                </Card>
+              ))}
+            </div>
       </div>
     )
   }
