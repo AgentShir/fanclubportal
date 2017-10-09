@@ -1,22 +1,26 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Authorize } from '../lib/auth'
-import { getUserPortalInfo, resetDashboard, getFollowingPortals } from '../actions/app'
+import { getUserPortalInfo, resetDashboard, getFollowingPortals, getMonthEvents } from '../actions/app'
 import EventList from './EventList'
 import FollowingPortalList from './FollowingPortalList'
+import UpcomingEvents from './UpcomingEvents'
 import { Card, CardText, CardHeader } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import { Tabs, Tab } from 'material-ui/Tabs';
 import CircularProgress from 'material-ui/CircularProgress'
+import CreateIcon from 'material-ui/svg-icons/content/create'
+import RaisedButton from 'material-ui/RaisedButton'
+import ExploreIcon from 'material-ui/svg-icons/action/explore'
 
 const cardStyle = {
     maxWidth: '1000px',
     margin: '10px auto',
     textAlign: 'center',
-    backgroundColor:'F7F9FB'
+    backgroundColor: 'F7F9FB'
 }
-const tabCard ={
-    backgroundColor:'F7F9FB'
+const tabCard = {
+    backgroundColor: 'F7F9FB'
 }
 const cardHeaderStyle = {
     textAlign: 'center'
@@ -24,7 +28,7 @@ const cardHeaderStyle = {
 const titleStyle = {
     whiteSpace: 'normal',
     fontSize: '50px',
-    color:'#31708E'
+    color: '#31708E'
 }
 const tabStyle = {
     whiteSpace: 'normal',
@@ -37,6 +41,21 @@ const tab = {
     color: 'black'
 }
 
+const styles = {
+    button: {
+        margin: 12,
+    },
+    exampleImageInput: {
+        cursor: 'pointer',
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        width: '100%',
+        opacity: 0,
+    },
+};
 class Dashboard extends Component {
     constructor(props) {
         super(props)
@@ -52,13 +71,22 @@ class Dashboard extends Component {
         if (portalId !== 'null') {
             getUserPortalInfo(portalId, userId)
             getFollowingPortals(userId)
+            getMonthEvents(userId)
+        } else {
+            this.setState({ showProgress: false })
         }
     }
     componentWillReceiveProps(props) {
-        if (localStorage.getItem('portalId') !== null && props.userPortalInfo.fanClubName === undefined) {
+        if (localStorage.getItem('portalId') !== 'null' && props.userPortalInfo.fanClubName === undefined) {
             this.setState({ showProgress: true })
         } else {
             this.setState({ showProgress: false })
+        }
+
+        if(props.eventRsvpStatus === 'success'){
+            let userId = localStorage.getItem('userId')
+            getMonthEvents(userId)
+            this.setState({ showProgress: true, tabIndex:2 })
         }
     }
     componentWillUnmount() {
@@ -66,15 +94,21 @@ class Dashboard extends Component {
         resetDashboard()
     }
     addEvent = (e) => {
+        e.preventDefault()
         this.props.history.push(`/${localStorage.portalId}/addEvent`)
     }
     updatePortal = (e) => {
+        e.preventDefault()
         this.props.history.push(`/updatePortal/${localStorage.portalId}`)
     }
     addPortal = (e) => {
+        e.preventDefault()
         this.props.history.push(`/addPortal`)
     }
-
+    explore = (e) => {
+        e.preventDefault()
+        this.props.history.push('/')
+    }
     render() {
         return (
             <div className="portalContainer">
@@ -94,15 +128,38 @@ class Dashboard extends Component {
                                 <Card style={tabCard}>
                                     <CardText>
                                         {localStorage.getItem('portalId') === 'null'
-                                            ? <div>
-                                                <h3>You can create your own fan portal. </h3>
-                                                <FlatButton label="Create Portal" type="submit" onClick={this.addPortal} hoverColor='#31708E'/>
+                                            ? <div style={{display:'inline-block'}}>
+                                                {/* <h3>You can create your own fan portal. </h3> */}
+                                                <RaisedButton
+                                                    label="Create Portal"
+                                                    style={styles.button}
+                                                    type="submit"
+                                                    onClick={this.addPortal}
+                                                    icon={<CreateIcon />}
+                                                />
                                             </div>
-                                            : <div>
-                                                <h3> Update your Portal</h3>
-                                                <FlatButton label="Update Portal" type="submit" onClick={this.updatePortal} hoverColor='#31708E' />
+                                            : <div style={{display:'inline-block'}}>
+                                                {/* <h3> Update your Portal</h3> */}
+                                                <RaisedButton
+                                                    label="Update Portal"
+                                                    style={styles.button}
+                                                    type="submit"
+                                                    onClick={this.updatePortal}
+                                                    icon={<CreateIcon />}
+                                                />
                                             </div>
                                         }
+                                        <RaisedButton
+                                            label="Explore"
+                                            style={styles.button}
+                                            type="submit"
+                                            onClick={this.explore}
+                                            icon={<ExploreIcon />}
+                                        />
+                                        {this.props.followingPortals.length > 0 &&
+                                        <div><h3>Portals I'm following</h3>
+                                        <FollowingPortalList portals={this.props.followingPortals} />
+                                        </div>}
                                     </CardText>
                                 </Card>
                             </Tab>
@@ -115,13 +172,14 @@ class Dashboard extends Component {
                                         </CardText>
                                     </Card>
                                 </Tab>}
-                            <Tab label="Portals I'm following" buttonStyle={tab}>
+                            {this.props.followingPortals.length > 0 &&
+                            <Tab label="Happening This Month" buttonStyle={tab}>
                                 <Card style={tabCard}>
                                     <CardText>
-                                        <FollowingPortalList portals={this.props.followingPortals} />
+                                        <UpcomingEvents events={this.props.monthEvents} />
                                     </CardText>
                                 </Card>
-                            </Tab>
+                            </Tab>}
                         </Tabs>
                     </div>
                     : <Card style={cardStyle} className="headerCard">
@@ -134,11 +192,13 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = function (appState) {
-    const { userPortalInfo, userPortalEvents, followingPortals } = appState.app
+    const { userPortalInfo, userPortalEvents, followingPortals, monthEvents, eventRsvpStatus } = appState.app
     return {
         userPortalInfo,
         userPortalEvents,
-        followingPortals
+        followingPortals,
+        monthEvents,
+        eventRsvpStatus
     }
 }
 
