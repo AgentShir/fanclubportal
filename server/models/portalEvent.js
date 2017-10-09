@@ -79,15 +79,15 @@ function removeEvent(eventId, done) {
   })
 }
 function getMonthEvents(userId, done) {
-  const sql = `SELECT f.id AS followId, f.portalId AS portalId, p.fanClubName, p.logo, e.id AS eventId, e.description, e.location, e.theme, DATE_FORMAT(e.date, '%M %d %Y') AS date, DATE_FORMAT(e.time, '%h:%i %p') AS time, r.going
- FROM follow f
-         JOIN portals p ON f.portalId = p.id
-         JOIN events e ON e.portalId = f.portalId
-         LEFT JOIN rsvp r ON r.eventId = e.id
- WHERE
-     f.userId = ? AND f.follow = 1 AND e.active = 1 AND MONTH(e.date) = MONTH(NOW()) AND YEAR(e.date) = YEAR(NOW()) AND e.date >= CURDATE()
- ORDER BY - e.date DESC , - e.time DESC`
 
+  const sql = ` select f.id AS followId, f.portalId AS portalId, p.fanClubName, p.logo, e.id AS eventId, e.description, e.location, e.theme, DATE_FORMAT(e.date, '%M %d %Y') AS date, DATE_FORMAT(e.time, '%h:%i %p') AS time, r.going
+from follow f
+ join portals p on p.id = f.portalId
+join events e on e.portalId = p.id
+left join rsvp r on r.followId = f.id and  r.eventId = e.id
+ where f.follow = 1 and f.userId= 231
+ AND e.active = 1 AND MONTH(e.date) = MONTH(NOW()) AND YEAR(e.date) = YEAR(NOW()) AND e.date >= CURDATE()
+ ORDER BY - e.date DESC , - e.time DESC`
   conn.query(sql, [userId], function (error, results, fields) {
     if (error) {
       let response = {
@@ -105,11 +105,11 @@ function getMonthEvents(userId, done) {
   })
 }
 function goingToEvent(eventId, followId, done) {
-  const sql = `INSERT INTO rsvp (eventId, followId)
-  VALUES(?,?)
+  const sql = `INSERT INTO rsvp (eventId, followId,going)
+  VALUES(?,?,?)
   On duplicate key update going = 1`
 
-  conn.query(sql, [eventId, followId], function (error, results, fields) {
+  conn.query(sql, [eventId, followId, 1], function (error, results, fields) {
     if (error) {
       let response = {
         status: "fail",
@@ -127,23 +127,22 @@ function goingToEvent(eventId, followId, done) {
 }
 function notGoingToEvent(eventId, followId, done) {
   const sql = `UPDATE rsvp SET going = 0 WHERE eventId = ? AND followId = ?`
- 
   conn.query(sql, [eventId, followId], function (error, results, fields) {
-     if (error) {
-       let response = {
-         status: "fail",
-         message: "Unable to change rsvp status."
-       }
-       done(false, response)
-     } else if (!error) {
-       let response = {
-         status: "success",
-         message: "rsvp status changed to not going."
-       }
-       done(true, response)
-     }
-   })
- }
+    if (error) {
+      let response = {
+        status: "fail",
+        message: "Unable to change rsvp status."
+      }
+      done(false, response)
+    } else if (!error) {
+      let response = {
+        status: "success",
+        message: "rsvp status changed to not going."
+      }
+      done(true, response)
+    }
+  })
+}
 module.exports = {
   addEvent,
   getEventInfo,
