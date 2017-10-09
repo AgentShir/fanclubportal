@@ -21,10 +21,8 @@ class AboutUs extends Component {
                 </div>
                     <div className="textWrap">
                       <div className="textInner">
-                        <p>Fan Portals was born out of Shireen's desperate search for other US Soccer fans.</p>
-                        <p>She was visiting Los Angeles for a wedding, but didn't know where the local fans met up to watch</p>
-                        <p>the match. Fan Portals started out as a way to connect sports fans, but evolved to be a portal</p>
-                        <p>for ALL kinds of fans.</p>
+                        <p>The concept for Fan Portals was born of Shireen's desperate need to watch soccer with other like-minded fans.  She was in LA for a wedding and wanted to know where the local chapter of the American Outlaws would be meeting to watch the the US vs. Portugal match in the 2014 World Cup.</p>
+                        <p>Fan Portals eventually evolved from being sports-centric concept to being a portal for ALL fans.</p>
                       </div>
                     </div>
                       <div className="imageAlign">
