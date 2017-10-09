@@ -15,16 +15,11 @@ import Divider from 'material-ui/Divider'
 const headerStyle = {
   cursor: 'pointer',
   boxShadow: 'none',
-  // backgroundColor: '#24292E'
-  backgroundColor:'#31708E'
-}
-
-const menuItemStyle = {
-  backgroundColor: '#ABABB4'
+  backgroundColor: '#31708E'
 }
 
 const navBarMenu = {
-  backgroundColor: '#55A386'
+  backgroundColor: '#CECED8',
 }
 
 class Header extends Component {
@@ -55,7 +50,7 @@ class Header extends Component {
         <Drawer open={this.state.open} openSecondary={true}>
           <MenuItem onClick={this.handleToggle}>{<CloseIcon />}</MenuItem>
           <Link to="/" style={{ textDecoration: "none" }}>
-            <MenuItem onClick={this.handleToggle}>Home</MenuItem>
+            <MenuItem style={navBarMenu} onClick={this.handleToggle}>Home</MenuItem>
           </Link>
           {!this.props.isAuthenticated ?
             <div style={navBarMenu}>
@@ -71,7 +66,7 @@ class Header extends Component {
               <Link to="/contact" style={{ textDecoration: "none" }}>
                 <MenuItem onClick={this.handleToggle}>Contact</MenuItem>
               </Link></div>
-            : <div>
+            : <div style={navBarMenu}>
               <Link to="/dashboard/0" style={{ textDecoration: "none" }}>
                 <MenuItem onClick={this.handleToggle}>Dashboard</MenuItem>
               </Link>
@@ -81,7 +76,7 @@ class Header extends Component {
                     <MenuItem onClick={this.handleToggle}>Add Portal</MenuItem>
                   </Link>
                 </div>
-                : <div>
+                : <div style={navBarMenu}>
                   <Link to={`/portal/${localStorage.portalId}`} style={{ textDecoration: "none" }}>
                     <MenuItem onClick={this.handleToggle}>View Your Portal</MenuItem>
                   </Link>

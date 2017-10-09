@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { loginUser, logoutUser } from '../lib/auth'
 import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField'
-import { Card, CardActions, CardText, CardTitle } from 'material-ui/Card'
+import { Card, CardActions, CardText  } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import CircularProgress from 'material-ui/CircularProgress'
 import login from '../images/login.png'
@@ -67,7 +67,9 @@ class Login extends Component {
   render() {
     return (
       <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
-        <img src={login} alt='Login' className="login"/>
+        <div className="imageAlign">
+          <img src={login} alt='Login' className="login"/>
+        </div>
         <CardText expandable={true} color={'red'} style={errorMessageStyle}>
           {this.props.errorMessage}
         </CardText>

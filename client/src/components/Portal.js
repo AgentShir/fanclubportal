@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Authorize } from '../lib/auth'
 import { postPortals, getPortalCategories, resetPortalForm } from '../actions/app'
 import TextField from 'material-ui/TextField'
-import { Card, CardActions, CardText, CardTitle } from 'material-ui/Card'
+import { Card, CardActions, CardText } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import { getPortalInfo, updatePortal, updateComplete } from '../actions/app'
 import MenuItem from 'material-ui/MenuItem'
@@ -128,10 +128,12 @@ class CreatePortal extends Component {
     render() {
         return (
             <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+              <div className="imageAlign">
                 <img src={fanPortal} alt='Fan Portal' className="fanPortal" />
-                <CardText expandable={true} color={'red'} style={errorMessageStyle}>
-                    {this.props.errorMessage}
-                </CardText>
+              </div>  
+                  <CardText expandable={true} color={'red'} style={errorMessageStyle}>
+                      {this.props.errorMessage}
+                  </CardText>
                 {this.state.showProgress === false
                     ? <form onSubmit={this.handleSubmit}>
                         <CardText>

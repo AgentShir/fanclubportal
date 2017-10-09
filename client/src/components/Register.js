@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { postRegister, resetRegister } from '../actions/app'
 import TextField from 'material-ui/TextField'
-import { Card, CardActions, CardText, CardTitle, CardMedia } from 'material-ui/Card'
+import { Card, CardActions, CardText } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import CircularProgress from 'material-ui/CircularProgress'
 import register from '../images/register.png'
@@ -67,7 +67,9 @@ class Register extends Component {
         return (
             <div className="portalContainer">
                 <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+                    <div className="imageAlign">
                         <img src={register} alt='Register!' className="register" />
+                      </div>
                     <CardText expandable={true} color={'red'} style={errorMessageStyle}>
                         {this.props.regErrorMessage}
                     </CardText>

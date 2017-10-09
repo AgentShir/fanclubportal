@@ -5,6 +5,8 @@ import placeholder from '../images/square_logo.png'
 import { Card, CardText, CardHeader, CardMedia, CardActions } from 'material-ui/Card'
 import CircularProgress from 'material-ui/CircularProgress'
 import FlatButton from 'material-ui/FlatButton'
+import upcoming from '../images/upcoming_events.png'
+import description from '../images/description.png'
 
 const cardStyle = {
     maxWidth: '1000px',
@@ -126,13 +128,13 @@ class PortalView extends Component {
                                     <div className="rightSideCards">
                                         <Card className="rightCard card">
                                             <CardText>
-                                                <h2> Description </h2>
+                                                <img src={description} alt="Description" className="description" />
                                                 <p>{this.props.portalInfo.description}</p>
                                             </CardText>
                                         </Card>
                                         <Card className="bottomRightCard card">
                                             <CardText>
-                                                <h2> Upcoming Events</h2>
+                                                <img src={upcoming} alt="Upcoming Events" className="upcoming" />
 
                                                 {this.props.portalEvents.map((event) => (
                                                     <Card key={event.id}>
