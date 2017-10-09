@@ -130,8 +130,52 @@ export function removeEvent(eventId) {
       })
     })
 }
-
-
+export function getMonthEvents(userId){
+  axios.get('/api/event/getMonthEvents/' + userId)
+  .then(function(resp){
+    store.dispatch({
+      type:action.GET_MONTH_EVENTS,
+      monthEvents:resp.data.monthEvents
+    })
+  })
+  .catch(function(err){
+    console.log('err', err)
+  })
+}
+export function goingToEvent(eventId, followId){
+  axios.post('/api/event/goingToEvent/' + eventId,{
+    followId:followId
+  })
+  .then(function(resp){
+    store.dispatch({
+      type:action.EVENT_RSVP_STATUS,
+      status:resp.data.status
+    })
+  })
+  .catch(function(err){
+    store.dispatch({
+      type:action.EVENT_RSVP_STATUS,
+      status:err.response.data.status
+    })
+  })
+}
+export function notGoingToEvent(eventId, followId){
+  axios.put('/api/event/notGoingToEvent/' + eventId,{
+    followId:followId
+  })
+  .then(function(resp){
+    store.dispatch({
+      type:action.EVENT_RSVP_STATUS,
+      status:resp.data.status
+    })
+  })
+  .catch(function(err){
+    store.dispatch({
+      type:action.EVENT_RSVP_STATUS,
+      status:err.response.data.status
+    })
+  })
+}
 /*--------------PORTAL ACTIONS-------------------------------------------------*/
 
 export function postPortals(fanPortal) {

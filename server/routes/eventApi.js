@@ -18,8 +18,17 @@ router.post("/:portalId", function(req, res,next){
         }
       })
     }
-  })
-
+  }) 
+router.get("/getMonthEvents/:userId", function(req, res,next){
+    const userId =  req.params.userId
+    portalEvent.getMonthEvents(userId, function(success, response){
+      if (!success) {
+        res.status(404).json(response)
+      } else {
+        res.json(response)
+      }
+    })
+})
 router.get("/:eventId/:portalId", function(req, res, next) {
   const eventId = req.params.eventId
   const portalId = req.params.portalId
@@ -55,4 +64,26 @@ router.delete("/:eventId", function(req, res, next) {
   })
 })
 
+router.post('/goingToEvent/:eventId',function(req,res,next){
+  const eventId  = req.params.eventId
+  const followId = req.body.followId
+  portalEvent.goingToEvent(eventId,followId, function(success, response){
+    if(!success){
+      res.status(401).json(response)
+    }else{
+      res.json(response)
+    }
+  })
+})
+router.put('/notGoingToEvent/:eventId', function(req,res,next){
+  const eventId  = req.params.eventId
+  const followId = req.body.followId
+  portalEvent.notGoingToEvent(eventId,followId, function(success, response){
+    if(!success){
+      res.status(401).json(response)
+    }else{
+      res.json(response)
+    }
+  })
+})
   module.exports = router;

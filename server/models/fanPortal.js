@@ -202,6 +202,7 @@ function getFollowingPortals(userId, done){
   JOIN  portals p on f.portalId = p.id
   WHERE f.userId =? and f.follow =1
   ORDER BY p.fanClubName`
+
   conn.query(sql,[userId], function(error, results, fields){
     if(error){
       let response ={

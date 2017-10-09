@@ -24,7 +24,9 @@ const initialState = {
   followMessage:'',
   unFollowStatus:'',
   unFollowMessage:'',
-  followingPortals:[]
+  followingPortals:[],
+  monthEvents:[],
+  eventRsvpStatus:''
 }
 
 export default function (state = initialState, action) {
@@ -164,7 +166,9 @@ export default function (state = initialState, action) {
       ...state,
       userPortalInfo:{},
       userPortalEvents:[],
-      followingPortals:[]
+      followingPortals:[],
+      monthEvents:[],
+      eventRsvpStatus:''
     }
     case reduce.RESET_REGISTER:
     return{
@@ -187,6 +191,17 @@ export default function (state = initialState, action) {
       errorMessage:'',
       eventInfo:{},
       updateStatus:''
+    }
+    case reduce.GET_MONTH_EVENTS:
+    return{
+      ...state,
+      monthEvents:action.monthEvents,
+      eventRsvpStatus:''
+    }
+    case reduce.EVENT_RSVP_STATUS:
+    return{
+      ...state,
+      eventRsvpStatus:action.status
     }
     default:
       return state
