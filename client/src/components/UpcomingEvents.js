@@ -96,12 +96,12 @@ class UpcomingEvents extends Component {
                 {this.props.events
                     ? <List>
                         {this.props.events.map((event) => (
-                            {
-                                ...event.logo
+                            <div key={event.eventId}>
+                            {event.logo
                                     ? <ListItem key={event.eventId}
                                         leftAvatar={<Avatar src={event.logo} />}
                                         primaryText={event.description}
-                                        secondaryText={<p>{event.date} @ {event.time}</p>}
+                                        secondaryText={<p>{event.date} @ {event.time} {event.eventId}</p>}
                                         secondaryTextLines={2}
                                         onClick={this.handleOpen(event)}
                                         rightIcon = {event.going === 1 ? <GoingIcon style={iconStyle}/> : <BusyIcon /> }
@@ -109,12 +109,13 @@ class UpcomingEvents extends Component {
                                     : <ListItem key={event.eventId}
                                         leftAvatar={<Avatar src={placeholder} />}
                                         primaryText={event.description}
-                                        secondaryText={<p>{event.date} @ {event.time}</p>}
+                                        secondaryText={<p>{event.date} @ {event.time}{event.eventId}</p>}
                                         secondaryTextLines={2}
                                         onClick={this.handleOpen(event)}
                                         rightIcon = {event.going === 1 ? <GoingIcon style={iconStyle}/> : <BusyIcon /> }
                                     />
-                            }
+                             }
+                             </div>
                         ))}
                     </List>
                     : <Card style={cardStyle} className="headerCard">

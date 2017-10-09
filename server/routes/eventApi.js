@@ -65,6 +65,7 @@ router.delete("/:eventId", function(req, res, next) {
 })
 
 router.post('/goingToEvent/:eventId',function(req,res,next){
+  console.log(' going ')
   const eventId  = req.params.eventId
   const followId = req.body.followId
   portalEvent.goingToEvent(eventId,followId, function(success, response){
@@ -76,6 +77,7 @@ router.post('/goingToEvent/:eventId',function(req,res,next){
   })
 })
 router.put('/notGoingToEvent/:eventId', function(req,res,next){
+  console.log('not going')
   const eventId  = req.params.eventId
   const followId = req.body.followId
   portalEvent.notGoingToEvent(eventId,followId, function(success, response){
