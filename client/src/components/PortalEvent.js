@@ -3,15 +3,17 @@ import { connect } from 'react-redux'
 import { Authorize } from '../lib/auth'
 import { postEvent, getEventInfo, updateEvent, updateComplete, removeEvent, resetEventForm } from '../actions/app'
 import TextField from 'material-ui/TextField'
-import { Card, CardActions, CardText, CardTitle } from 'material-ui/Card'
+import { Card, CardActions, CardText } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import DatePicker from 'material-ui/DatePicker'
 import TimePicker from 'material-ui/TimePicker'
 import CircularProgress from 'material-ui/CircularProgress'
+import event from '../images/event.png'
 
 const cardStyle = {
     maxWidth: '1000px',
     margin: '50px auto',
+    backgroundColor: '#CECED8'
 }
 const progressCard = {
     maxWidth: '1000px',
@@ -117,7 +119,9 @@ class PortalEvent extends Component {
     render() {
         return (
             <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
-                <CardTitle title="Event" />
+              <div className="imageAlign">
+                <img src={event} alt='Create Event' className="event" />
+              </div>  
                 <CardText expandable={true} color={'red'} style={errorMessageStyle}>
                     {this.props.errorMessage}
                 </CardText>

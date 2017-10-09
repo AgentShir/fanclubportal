@@ -3,16 +3,19 @@ import { connect } from 'react-redux'
 import { Authorize } from '../lib/auth'
 import { postPortals, getPortalCategories, resetPortalForm } from '../actions/app'
 import TextField from 'material-ui/TextField'
-import { Card, CardActions, CardText, CardTitle } from 'material-ui/Card'
+import { Card, CardActions, CardText } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import { getPortalInfo, updatePortal, updateComplete } from '../actions/app'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
 import CircularProgress from 'material-ui/CircularProgress'
+import fanPortal from '../images/fan_portal.png'
+
 
 const cardStyle = {
     maxWidth: '1000px',
     margin: '50px auto',
+    backgroundColor: '#E8D5D8'
 }
 const buttonStyle = {
     textAlign: 'right'
@@ -70,7 +73,7 @@ class CreatePortal extends Component {
                 this.setState({ expanded: false, showProgress: false })
                 setTimeout(() => {
                     this.props.history.push('/portal/' + props.portalId)
-                }, 2000)                
+                }, 2000)
             }
             //if editing portal
         } else {
@@ -85,7 +88,7 @@ class CreatePortal extends Component {
                 this.setState({ expanded: false })
                 setTimeout(() => {
                     this.props.history.push('/portal/' + localStorage.getItem('portalId'))
-                }, 2000) 
+                }, 2000)
                 updateComplete()
             } else if (props.updateStatus === "fail") {
                 this.setState({ expanded: true, showProgress:false})
@@ -125,10 +128,12 @@ class CreatePortal extends Component {
     render() {
         return (
             <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
-                <CardTitle title="Fan Portal" />
-                <CardText expandable={true} color={'red'} style={errorMessageStyle}>
-                    {this.props.errorMessage}
-                </CardText>
+              <div className="imageAlign">
+                <img src={fanPortal} alt='Fan Portal' className="fanPortal" />
+              </div>  
+                  <CardText expandable={true} color={'red'} style={errorMessageStyle}>
+                      {this.props.errorMessage}
+                  </CardText>
                 {this.state.showProgress === false
                     ? <form onSubmit={this.handleSubmit}>
                         <CardText>
