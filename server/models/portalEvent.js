@@ -85,7 +85,7 @@ from follow f
  join portals p on p.id = f.portalId
 join events e on e.portalId = p.id
 left join rsvp r on r.followId = f.id and  r.eventId = e.id
- where f.follow = 1 and f.userId= 231
+ where f.follow = 1 and f.userId= ?
  AND e.active = 1 AND MONTH(e.date) = MONTH(NOW()) AND YEAR(e.date) = YEAR(NOW()) AND e.date >= CURDATE()
  ORDER BY - e.date DESC , - e.time DESC`
   conn.query(sql, [userId], function (error, results, fields) {
