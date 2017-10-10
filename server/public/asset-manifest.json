@@ -1,11 +1,23 @@
 {
-  "main.css": "static/css/main.46a8b8a2.css",
-  "main.css.map": "static/css/main.46a8b8a2.css.map",
-  "main.js": "static/js/main.92605bea.js",
-  "main.js.map": "static/js/main.92605bea.js.map",
+  "main.css": "static/css/main.2aab5ad9.css",
+  "main.css.map": "static/css/main.2aab5ad9.css.map",
+  "main.js": "static/js/main.4f31c220.js",
+  "main.js.map": "static/js/main.4f31c220.js.map",
+  "static/media/aboutus.png": "static/media/aboutus.cc2dbba2.png",
+  "static/media/acknowledge.png": "static/media/acknowledge.3aafd5ad.png",
+  "static/media/fan_logo.png": "static/media/fan_logo.b98f32f9.png",
   "static/media/fontawesome-webfont.eot": "static/media/fontawesome-webfont.674f50d2.eot",
   "static/media/fontawesome-webfont.svg?v=4.7.0": "static/media/fontawesome-webfont.912ec66d.svg",
   "static/media/fontawesome-webfont.ttf?v=4.7.0": "static/media/fontawesome-webfont.b06871f2.ttf",
   "static/media/fontawesome-webfont.woff2?v=4.7.0": "static/media/fontawesome-webfont.af7ae505.woff2",
-  "static/media/fontawesome-webfont.woff?v=4.7.0": "static/media/fontawesome-webfont.fee66e71.woff"
+  "static/media/fontawesome-webfont.woff?v=4.7.0": "static/media/fontawesome-webfont.fee66e71.woff",
+  "static/media/foodDrink.jpg": "static/media/foodDrink.476da5c3.jpg",
+  "static/media/logo_dk_blue.png": "static/media/logo_dk_blue.8ab83fdb.png",
+  "static/media/logo_white.png": "static/media/logo_white.4aefcc28.png",
+  "static/media/movies.jpg": "static/media/movies.1dae54e0.jpg",
+  "static/media/outdoors.jpg": "static/media/outdoors.42cef0d6.jpg",
+  "static/media/sports.jpg": "static/media/sports.be6ea1c4.jpg",
+  "static/media/team.png": "static/media/team.b84e1bef.png",
+  "static/media/technology.jpeg": "static/media/technology.204450ab.jpeg",
+  "static/media/television.jpg": "static/media/television.20af573a.jpg"
 }
