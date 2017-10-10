@@ -15,7 +15,8 @@ import Divider from 'material-ui/Divider'
 const headerStyle = {
   cursor: 'pointer',
   boxShadow: 'none',
-  backgroundColor: '#31708E'
+  // backgroundColor: '#31708E'
+  backgroundColor:'#002642'
 }
 
 class Header extends Component {

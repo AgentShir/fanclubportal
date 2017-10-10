@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Authorize } from '../lib/auth'
 import { Link } from 'react-router-dom'
-import placeholder from '../images/square_logo.png'
+import placeholder from '../images/logo_dk_blue.png'
 import { Card, CardTitle, CardMedia } from 'material-ui/Card'
 import CircularProgress from 'material-ui/CircularProgress'
 
@@ -11,7 +11,13 @@ const cardStyle = {
     textAlign: 'center'
 
 }
-
+const overlayContainer = {
+    background: 'transparent !important',
+    textShadow: '2px 2px gray'
+}
+const overlayContent = {
+    background: 'transparent !important'
+}
 class FollowingPortalList extends Component {
     static defaultProps = {
         portals: []
@@ -25,9 +31,9 @@ class FollowingPortalList extends Component {
                             <Card key={portal.portalId} className="categoryCard">
                                 <Link key={portal.portalId} to={`/portal/${portal.portalId}`} className="link">
                                     <CardMedia
-                                        overlay={<CardTitle title={portal.fanClubName} style={{ background: 'transparent' }} />}
-                                        overlayContainerStyle={{ background: 'transparent' }}
-                                        overlayContentStyle={{ background: 'transparent' }}
+                                        overlay={<CardTitle title={portal.fanClubName} />}
+                                        overlayContainerStyle={overlayContainer}
+                                        overlayContentStyle={overlayContent}
                                     >
                                         {portal.logo
                                             ? <img src={portal.logo} alt="logo" />

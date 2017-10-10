@@ -18,24 +18,21 @@ const cardStyle = {
     textAlign: 'center',
     backgroundColor:'#FFFFFF'
 }
-const tabCard ={
-    backgroundColor:'#CECED8'
-}
 const cardHeaderStyle = {
     textAlign: 'center',
-    backgroundColor: '#196E8F',
+    fontFamily: 'Libre Franklin, sans-serif',
+    color:'#85C0EA'
 }
 const titleStyle = {
     whiteSpace: 'normal',
-    fontSize: '50px',
-    color:'#000000'
+    fontSize: '50px'
 }
 const tabStyle = {
     whiteSpace: 'normal',
     backgroundColor: '#EEEEF1'
 }
 const inkBarStyle = {
-    backgroundColor: 'black'
+    backgroundColor: '#85C0EA'
 }
 const tab = {
     color: 'black'
@@ -125,7 +122,7 @@ class Dashboard extends Component {
                             inkBarStyle={inkBarStyle}
                             initialSelectedIndex={Number(this.state.tabIndex)} >
                             <Tab label="home" buttonStyle={tab}>
-                                <Card style={tabCard}>
+                                <Card>
                                     <CardText>
                                         {localStorage.getItem('portalId') === 'null'
                                             ? <div style={{display:'inline-block'}}>
@@ -157,15 +154,15 @@ class Dashboard extends Component {
                                             icon={<ExploreIcon />}
                                         />
                                         {this.props.followingPortals.length > 0 &&
-                                        <div><h3>Portals I'm following</h3>
+                                        <div className='portalContainer'><h3>Portals I'm following</h3>
                                         <FollowingPortalList portals={this.props.followingPortals} />
-                                        </div>}
+                                       </div>}
                                     </CardText>
                                 </Card>
                             </Tab>
                             {localStorage.getItem('portalId') !== 'null' &&
                                 <Tab label={this.props.userPortalInfo.fanClubName + " Upcoming Events"} buttonStyle={tab}>
-                                    <Card style={tabCard}>
+                                    <Card>
                                         <CardText>
                                             <RaisedButton label="Add Event" type="submit" onClick={this.addEvent} />
                                             <EventList events={this.props.userPortalEvents} />
@@ -174,7 +171,7 @@ class Dashboard extends Component {
                                 </Tab>}
                             {this.props.followingPortals.length > 0 &&
                             <Tab label="Happening This Month" buttonStyle={tab}>
-                                <Card style={tabCard}>
+                                <Card>
                                     <CardText>
                                         <UpcomingEvents events={this.props.monthEvents} />
                                     </CardText>

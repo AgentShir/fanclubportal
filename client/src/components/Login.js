@@ -5,7 +5,6 @@ import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText  } from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import CircularProgress from 'material-ui/CircularProgress'
-import login from '../images/login.png'
 
 const cardStyle = {
   maxWidth: '1000px',
@@ -23,7 +22,6 @@ const buttonStyle = {
 const errorMessageStyle = {
   fontSize: '20px'
 }
-
 class Login extends Component {
   state = {
     username: '',
@@ -68,7 +66,7 @@ class Login extends Component {
     return (
       <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
         <div className="imageAlign">
-          <img src={login} alt='Login' className="login"/>
+          <h1>Login</h1>
         </div>
         <CardText expandable={true} color={'red'} style={errorMessageStyle}>
           {this.props.errorMessage}
@@ -101,7 +99,7 @@ class Login extends Component {
             </CardText>
             <CardActions style={buttonStyle}>
               <RaisedButton label="Cancel" type="button" onClick={this.cancel} />
-              <RaisedButton backgroundColor='#31708E' labelColor='#F7F9FB' label="Submit" type="submit" />
+              <RaisedButton backgroundColor='#002642' labelColor='#F7F9FB' label="Submit" type="submit" />
             </CardActions>
           </form>
           : <div style={progressCard}>
