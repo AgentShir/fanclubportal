@@ -1,7 +1,7 @@
 {
     "secret":"{_Jp9!p:-;5gM4j:",
     "sessionLengthInSeconds": 300000000,
-      "db":{
+       "db":{
           "host":"us-cdbr-iron-east-05.cleardb.net",
           "user":"b3fde08fa56fdd",
           "password":"fcd7d197",
