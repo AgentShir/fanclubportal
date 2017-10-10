@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Card, CardHeader, CardTitle, CardText } from 'material-ui/Card';
-import contact from '../images/contact.png'
 
 const cardStyle = {
     maxWidth: '1000px',
@@ -22,7 +21,7 @@ class Contact extends Component {
           <Card style={cardStyle}>
             <CardHeader>
               <div className="imageAlign">
-                <img src={contact} alt='Contact Us' className="contactUs"/>
+                <h1>Contact Us</h1>
               </div>
               <div className="imageAlign">
                   <CardTitle subtitle="Use the icons to contact us!" />
