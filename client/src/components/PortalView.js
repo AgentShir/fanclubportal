@@ -29,7 +29,8 @@ const errorMessageStyle = {
     fontSize: '20px'
 }
 const buttonStyle = {
-    textAlign: 'center'
+    textAlign: 'center',
+    padding:'20px'
 }
 class PortalView extends Component {
     state = {

@@ -68,7 +68,7 @@ class CreatePortal extends Component {
             if (props.updateStatus === 'fail') {
                 this.setState({ expanded: true, showProgress: false })
             } else if (props.updateStatus === 'success') {
-                this.setState({ expanded: false, showProgress: false })
+                this.setState({ expanded: false, showProgress: true })
                 setTimeout(() => {
                     this.props.history.push('/portal/' + props.portalId)
                 }, 2000)
@@ -127,7 +127,6 @@ class CreatePortal extends Component {
         return (
             <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
               <div className="imageAlign">
-                {/* <img src={fanPortal} alt='Fan Portal' className="fanPortal" /> */}
                 <h1>Portal</h1>
               </div>
                   <CardText expandable={true} color={'red'} style={errorMessageStyle}>
@@ -162,6 +161,7 @@ class CreatePortal extends Component {
                                 floatingLabelText="Select a Category"
                                 name="category"
                                 fullWidth={true}
+                                selectedMenuItemStyle={{color:'#85C0EA'}}
                             >
                                 {this.props.portalCategories.map((category) => (
                                     <MenuItem key={category.id} value={category.id} primaryText={category.category} />
