@@ -32,11 +32,27 @@ import 'font-awesome/css/font-awesome.min.css'
 // custom styles
 import '../styles/App.css'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import {fullBlack} from 'material-ui/styles/colors';
 
+const muiTheme = getMuiTheme({
+  datePicker: {
+    color: '#002642',
+    calendarTextColor: '#85C0EA',
+    selectColor:'#85C0EA',
+    calendarYearBackgroundColor: '#85C0EA',
+  },
+  palette:{
+    primary1Color:'#85C0EA',
+    primary2Color:'#85C0EA',
+    pickerHeaderColor: '#002642',
+    shadowColor: fullBlack
+  }
+});
 class App extends Component {
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={muiTheme}>
         <Provider store={store}>
           <Router>
             <Layout>

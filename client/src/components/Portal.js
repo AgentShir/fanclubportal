@@ -4,13 +4,11 @@ import { Authorize } from '../lib/auth'
 import { postPortals, getPortalCategories, resetPortalForm } from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText } from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import { getPortalInfo, updatePortal, updateComplete } from '../actions/app'
 import MenuItem from 'material-ui/MenuItem'
 import SelectField from 'material-ui/SelectField'
 import CircularProgress from 'material-ui/CircularProgress'
-import fanPortal from '../images/fan_portal.png'
-
 
 const cardStyle = {
     maxWidth: '1000px',
@@ -129,7 +127,8 @@ class CreatePortal extends Component {
         return (
             <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
               <div className="imageAlign">
-                <img src={fanPortal} alt='Fan Portal' className="fanPortal" />
+                {/* <img src={fanPortal} alt='Fan Portal' className="fanPortal" /> */}
+                <h1>Portal</h1>
               </div>
                   <CardText expandable={true} color={'red'} style={errorMessageStyle}>
                       {this.props.errorMessage}
@@ -193,8 +192,8 @@ class CreatePortal extends Component {
 
                         </CardText>
                         <CardActions style={buttonStyle}>
-                            <FlatButton label="Cancel" type="button" onClick={this.cancel} />
-                            <FlatButton label="Submit" type="Submit" />
+                            <RaisedButton label="Cancel" type="button" onClick={this.cancel} />
+                            <RaisedButton backgroundColor='#002642' labelColor='#F7F9FB' label="Submit" type="Submit" />
                         </CardActions>
                     </form>
                     : <div style={progressCard}>

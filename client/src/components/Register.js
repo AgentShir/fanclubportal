@@ -3,9 +3,8 @@ import { connect } from 'react-redux'
 import { postRegister, resetRegister } from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText } from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import CircularProgress from 'material-ui/CircularProgress'
-import register from '../images/register.png'
 
 const cardStyle = {
     maxWidth: '1000px',
@@ -68,7 +67,7 @@ class Register extends Component {
             <div className="portalContainer">
                 <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
                     <div className="imageAlign">
-                        <img src={register} alt='Register!' className="register" />
+                        <h1>Register</h1>
                       </div>
                     <CardText expandable={true} color={'red'} style={errorMessageStyle}>
                         {this.props.regErrorMessage}
@@ -115,8 +114,8 @@ class Register extends Component {
                                 /><br />
                             </CardText>
                             <CardActions style={buttonStyle}>
-                                <FlatButton label="Cancel" type="button" onClick={this.cancel} />
-                                <FlatButton label="Submit" type="submit" />
+                                <RaisedButton label="Cancel" type="button" onClick={this.cancel} />
+                                <RaisedButton backgroundColor='#002642' labelColor='#F7F9FB'label="Submit" type="submit" />
                             </CardActions>
                         </form>
                     }

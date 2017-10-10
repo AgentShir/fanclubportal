@@ -6,7 +6,6 @@ import EventList from './EventList'
 import FollowingPortalList from './FollowingPortalList'
 import UpcomingEvents from './UpcomingEvents'
 import { Card, CardText, CardHeader } from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
 import { Tabs, Tab } from 'material-ui/Tabs';
 import CircularProgress from 'material-ui/CircularProgress'
 import CreateIcon from 'material-ui/svg-icons/content/create'
@@ -19,24 +18,21 @@ const cardStyle = {
     textAlign: 'center',
     backgroundColor:'#FFFFFF'
 }
-const tabCard ={
-    backgroundColor:'#CECED8'
-}
 const cardHeaderStyle = {
     textAlign: 'center',
-    backgroundColor: '#196E8F',
+    fontFamily: 'Libre Franklin, sans-serif',
+    color:'#85C0EA'
 }
 const titleStyle = {
     whiteSpace: 'normal',
-    fontSize: '50px',
-    color:'#000000'
+    fontSize: '50px'
 }
 const tabStyle = {
     whiteSpace: 'normal',
     backgroundColor: '#EEEEF1'
 }
 const inkBarStyle = {
-    backgroundColor: 'black'
+    backgroundColor: '#85C0EA'
 }
 const tab = {
     color: 'black'
@@ -126,7 +122,7 @@ class Dashboard extends Component {
                             inkBarStyle={inkBarStyle}
                             initialSelectedIndex={Number(this.state.tabIndex)} >
                             <Tab label="home" buttonStyle={tab}>
-                                <Card style={tabCard}>
+                                <Card>
                                     <CardText>
                                         {localStorage.getItem('portalId') === 'null'
                                             ? <div style={{display:'inline-block'}}>
@@ -158,24 +154,24 @@ class Dashboard extends Component {
                                             icon={<ExploreIcon />}
                                         />
                                         {this.props.followingPortals.length > 0 &&
-                                        <div><h3>Portals I'm following</h3>
+                                        <div className='portalContainer'><h3>Portals I'm following</h3>
                                         <FollowingPortalList portals={this.props.followingPortals} />
-                                        </div>}
+                                       </div>}
                                     </CardText>
                                 </Card>
                             </Tab>
                             {localStorage.getItem('portalId') !== 'null' &&
                                 <Tab label={this.props.userPortalInfo.fanClubName + " Upcoming Events"} buttonStyle={tab}>
-                                    <Card style={tabCard}>
+                                    <Card>
                                         <CardText>
-                                            <FlatButton label="Add Event" type="submit" onClick={this.addEvent} hoverColor='#31708E' />
+                                            <RaisedButton label="Add Event" type="submit" onClick={this.addEvent} />
                                             <EventList events={this.props.userPortalEvents} />
                                         </CardText>
                                     </Card>
                                 </Tab>}
                             {this.props.followingPortals.length > 0 &&
                             <Tab label="Happening This Month" buttonStyle={tab}>
-                                <Card style={tabCard}>
+                                <Card>
                                     <CardText>
                                         <UpcomingEvents events={this.props.monthEvents} />
                                     </CardText>

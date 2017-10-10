@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Authorize } from '../lib/auth'
 import { goingToEvent, notGoingToEvent } from '../actions/app'
-import placeholder from '../images/square_logo.png'
+import placeholder from '../images/fan_logo.png'
 import { Card } from 'material-ui/Card'
 import CircularProgress from 'material-ui/CircularProgress'
 import { List, ListItem } from 'material-ui/List';
@@ -18,7 +18,7 @@ const cardStyle = {
 
 }
 const iconStyle={
-    fill:'blue'
+    fill:'#85C0EA'
 }
 class UpcomingEvents extends Component {
     static defaultProps = {
@@ -59,7 +59,6 @@ class UpcomingEvents extends Component {
         const actions = [
             <FlatButton
                 label="Cancel"
-                primary={true}
                 onClick={this.handleClose}
             />,
             <FlatButton
@@ -71,7 +70,6 @@ class UpcomingEvents extends Component {
         const actions2 = [
             <FlatButton
                 label="Cancel"
-                primary={true}
                 onClick={this.handleClose}
             />,
             <FlatButton
@@ -90,8 +88,8 @@ class UpcomingEvents extends Component {
                     open={this.state.open}
                 >
                     <h2>{this.state.description}</h2>
-                    <p>Come and Join us at <strong>{this.state.location} {this.state.date} @ {this.state.time} </strong>
-                        {this.state.theme && <span>Theme: {this.state.theme}</span>} </p>
+                    <p>Come and Join us at <strong>{this.state.location} {this.state.date} @ {this.state.time} </strong><br />
+                        {this.state.theme && <span><strong>Theme:</strong> {this.state.theme}</span>} </p>
                 </Dialog>
                 {this.props.events
                     ? <List>

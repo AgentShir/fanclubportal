@@ -3,9 +3,8 @@ import { loginUser, logoutUser } from '../lib/auth'
 import { connect } from 'react-redux'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText  } from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import CircularProgress from 'material-ui/CircularProgress'
-import login from '../images/login.png'
 
 const cardStyle = {
   maxWidth: '1000px',
@@ -23,7 +22,6 @@ const buttonStyle = {
 const errorMessageStyle = {
   fontSize: '20px'
 }
-
 class Login extends Component {
   state = {
     username: '',
@@ -68,7 +66,7 @@ class Login extends Component {
     return (
       <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
         <div className="imageAlign">
-          <img src={login} alt='Login' className="login"/>
+          <h1>Login</h1>
         </div>
         <CardText expandable={true} color={'red'} style={errorMessageStyle}>
           {this.props.errorMessage}
@@ -100,8 +98,8 @@ class Login extends Component {
               /><br /><br />
             </CardText>
             <CardActions style={buttonStyle}>
-              <FlatButton label="Cancel" type="button" onClick={this.cancel} />
-              <FlatButton label="Submit" type="submit" />
+              <RaisedButton label="Cancel" type="button" onClick={this.cancel} />
+              <RaisedButton backgroundColor='#002642' labelColor='#F7F9FB' label="Submit" type="submit" />
             </CardActions>
           </form>
           : <div style={progressCard}>

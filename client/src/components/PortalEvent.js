@@ -4,11 +4,10 @@ import { Authorize } from '../lib/auth'
 import { postEvent, getEventInfo, updateEvent, updateComplete, removeEvent, resetEventForm } from '../actions/app'
 import TextField from 'material-ui/TextField'
 import { Card, CardActions, CardText } from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 import DatePicker from 'material-ui/DatePicker'
 import TimePicker from 'material-ui/TimePicker'
 import CircularProgress from 'material-ui/CircularProgress'
-import event from '../images/event.png'
 
 const cardStyle = {
     maxWidth: '1000px',
@@ -26,6 +25,7 @@ const buttonStyle = {
 const errorMessageStyle = {
     fontSize: '20px'
 }
+
 const minDate = new Date();
 class PortalEvent extends Component {
     constructor(props) {
@@ -70,7 +70,7 @@ class PortalEvent extends Component {
             })
 
             if (props.updateStatus === 'success') {
-               this.props.history.push('/dashboard/1')
+                this.props.history.push('/dashboard/1')
                 updateComplete()
             } else if (props.updateStatus === 'fail') {
                 this.setState({ expanded: true, showProgress: false })
@@ -119,9 +119,10 @@ class PortalEvent extends Component {
     render() {
         return (
             <Card style={cardStyle} expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
-              <div className="imageAlign">
-                <img src={event} alt='Create Event' className="event" />
-              </div>
+                <div className="imageAlign">
+                    {/* <img src={event} alt='Create Event' className="event" /> */}
+                    <h1>Event</h1>
+                </div>
                 <CardText expandable={true} color={'red'} style={errorMessageStyle}>
                     {this.props.errorMessage}
                 </CardText>
@@ -183,9 +184,9 @@ class PortalEvent extends Component {
                         </CardText>
                         <CardActions style={buttonStyle}>
                             {this.props.location.pathname.indexOf('/updateEvent') !== -1 &&
-                            <FlatButton label="Delete" type="button" onClick={this.removeEvent} />}
-                            <FlatButton label="Cancel" type="button" onClick={this.cancel} />
-                            <FlatButton label="Submit" type="submit" />
+                                <RaisedButton labelColor='#cd0000' label="Delete" type="button" onClick={this.removeEvent} />}
+                            <RaisedButton label="Cancel" type="button" onClick={this.cancel} />
+                            <RaisedButton backgroundColor='#002642' labelColor='#F7F9FB' label="Submit" type="submit" />
                         </CardActions>
                     </form>
                     : <div style={progressCard}>

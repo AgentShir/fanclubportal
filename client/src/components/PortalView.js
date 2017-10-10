@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getPortalInfo, resetPortalView, followPortal, unFollowPortal } from '../actions/app'
-import placeholder from '../images/square_logo.png'
+import placeholder from '../images/logo_dk_blue.png'
 import { Card, CardText, CardHeader, CardMedia, CardActions } from 'material-ui/Card'
 import CircularProgress from 'material-ui/CircularProgress'
-import FlatButton from 'material-ui/FlatButton'
-import upcoming from '../images/upcoming_events.png'
-import description from '../images/description.png'
+import RaisedButton from 'material-ui/RaisedButton'
 
 const cardStyle = {
     maxWidth: '1000px',
@@ -15,12 +13,17 @@ const cardStyle = {
     backgroundColor: '#FFFFFF'
 
 }
+const h2Style={
+    color:'black'
+}
 const cardHeaderStyle = {
     textAlign: 'center'
 }
 const titleStyle = {
     fontSize: '50px',
-    whiteSpace: 'normal'
+    whiteSpace: 'normal',
+    fontFamily: 'Libre Franklin, sans-serif',
+    color:'#85C0EA'
 }
 const errorMessageStyle = {
     fontSize: '20px'
@@ -101,7 +104,7 @@ class PortalView extends Component {
                                     titleStyle={titleStyle}
                                 />
                             </Card>
-                                <div className="cards">
+                                <div className="portalViewCards">
                                     <div className='leftSide'>
                                         <Card className="leftCard card">
                                             <CardMedia>
@@ -112,10 +115,10 @@ class PortalView extends Component {
                                             </CardMedia>
                                             {this.state.following === false
                                                 ? <CardActions style={buttonStyle}>
-                                                    <FlatButton label="Follow" type="submit" onClick={this.followPortal} />
+                                                    <RaisedButton label="Follow" type="submit" onClick={this.followPortal} />
                                                 </CardActions>
                                                 : <CardActions style={buttonStyle}>
-                                                    <FlatButton label="Un-Follow" type="submit" onClick={this.unFollowPortal} />
+                                                    <RaisedButton label="Un-Follow" type="submit" onClick={this.unFollowPortal} />
                                                 </CardActions>
                                             }
                                             <CardHeader className="leftCardHeader"
@@ -128,14 +131,13 @@ class PortalView extends Component {
                                     <div className="rightSideCards">
                                         <Card className="rightCard card">
                                             <CardText>
-                                                <img src={description} alt="Description" className="description" />
+                                                <h2 style={h2Style}>Description</h2>
                                                 <p>{this.props.portalInfo.description}</p>
                                             </CardText>
                                         </Card>
                                         <Card className="bottomRightCard card">
                                             <CardText>
-                                                <img src={upcoming} alt="Upcoming Events" className="upcoming" />
-
+                                                <h2 style={h2Style}>Upcoming Events</h2>
                                                 {this.props.portalEvents.map((event) => (
                                                     <Card key={event.id}>
                                                         <CardHeader
