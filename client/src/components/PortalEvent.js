@@ -57,7 +57,9 @@ class PortalEvent extends Component {
                 this.setState({ expanded: true, showProgress: false })
             } else if (props.updateStatus === 'success') {
                 this.setState({ expanded: false })
-                this.props.history.push('/dashboard/1')
+                setTimeout(() => {
+                    this.props.history.push('/dashboard/1')
+                }, 2000)
             }
         }
         else if (props.location.pathname.indexOf('/updateEvent') !== -1) {
@@ -70,7 +72,9 @@ class PortalEvent extends Component {
             })
 
             if (props.updateStatus === 'success') {
-                this.props.history.push('/dashboard/1')
+                setTimeout(() => {
+                    this.props.history.push('/dashboard/1')
+                }, 2000)
                 updateComplete()
             } else if (props.updateStatus === 'fail') {
                 this.setState({ expanded: true, showProgress: false })
@@ -90,7 +94,7 @@ class PortalEvent extends Component {
     }
     addEvent = (e) => {
         e.preventDefault()
-        // this.setState({ showProgress: true })
+        this.setState({ showProgress: true })
         let portalId = localStorage.getItem('portalId')
         if (this.props.location.pathname.indexOf('/addEvent') !== -1) {
             postEvent(this.state, portalId)
@@ -105,7 +109,7 @@ class PortalEvent extends Component {
     removeEvent = (e) => {
         e.preventDefault()
         let eventId = this.props.match.params.eventId
-        // this.setState({showProgress:true})
+        this.setState({showProgress:true})
         removeEvent(eventId)
 
     }
