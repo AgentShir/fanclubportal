@@ -57,6 +57,7 @@ router.get("/search/:searchTerm", function(req,res,next){
   })
 })
 router.get("/followingPortals/:userId", function(req, res,next){
+  console.log( 'routes')
   const userId =  req.params.userId
   fanPortal.getFollowingPortals(userId, function(success, response){
     if (!success) {
