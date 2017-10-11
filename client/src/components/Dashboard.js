@@ -64,10 +64,11 @@ class Dashboard extends Component {
     componentWillMount() {
         let portalId = localStorage.getItem('portalId')
         let userId = localStorage.getItem('userId')
-        console.log(' hi')
         this.setState({ tabIndex: this.props.match.params.tabId })
         if (portalId !== 'null') {
             getUserPortalInfo(portalId, userId)
+            getFollowingPortals(userId)
+            getMonthEvents(userId)
         } else {
             getFollowingPortals(userId)
             getMonthEvents(userId)
