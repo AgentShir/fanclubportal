@@ -354,6 +354,7 @@ export function unFollowPortal(portalId, userId){
 }
 
 export function getFollowingPortals(userId){
+  console.log(userId)
   axios.get('/api/portal/followingPortals/' + userId)
   .then(function(resp){
     store.dispatch({

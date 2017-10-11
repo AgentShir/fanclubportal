@@ -64,12 +64,13 @@ class Dashboard extends Component {
     componentWillMount() {
         let portalId = localStorage.getItem('portalId')
         let userId = localStorage.getItem('userId')
+        console.log(' hi')
         this.setState({ tabIndex: this.props.match.params.tabId })
         if (portalId !== 'null') {
             getUserPortalInfo(portalId, userId)
+        } else {
             getFollowingPortals(userId)
             getMonthEvents(userId)
-        } else {
             this.setState({ showProgress: false })
         }
     }
@@ -190,6 +191,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = function (appState) {
     const { userPortalInfo, userPortalEvents, followingPortals, monthEvents, eventRsvpStatus } = appState.app
+    console.log(appState.app)
     return {
         userPortalInfo,
         userPortalEvents,

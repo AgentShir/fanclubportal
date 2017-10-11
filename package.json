@@ -8,10 +8,11 @@
     "concurrently": "^3.5.0",
     "material-ui": "^0.19.3",
     "material-ui-search-bar": "^0.4.0",
-    "moment": "^2.18.1"
+    "moment": "^2.18.1",
+    "yarn": "^1.2.0"
   },
   "scripts": {
-    "start": "concurrently \"yarn run server\" \"yarn run client\"",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
     "client": "cd client && yarn start",
     "server": "cd server && yarn start",
     "build": "cd server/public && rm -rf * && cd ../../client && yarn build",
