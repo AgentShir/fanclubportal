@@ -77,7 +77,6 @@ class PortalView extends Component {
         if(!this.props.isAuthenticated){
             this.props.history.push('/login')
         }else{
-            console.log(portalId, userId)
             let portalId = this.props.match.params.portalId
             let userId = localStorage.getItem('userId')
             followPortal(portalId,userId)

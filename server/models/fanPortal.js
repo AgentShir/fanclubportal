@@ -211,7 +211,6 @@ function getFollowingPortals(userId, done){
       }
       done(false,response)
     }else if(!error){
-      console.log(' test ', results )
       let response = {
         status: 'success',
         followingPortals:results
