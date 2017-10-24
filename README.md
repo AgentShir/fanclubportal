@@ -3,7 +3,7 @@
 ### The Iron Yard, Las Vegas: Capstone Project
 
 #### Team Members: 
-#### Diana Ibarra, Phil Schwartz, [Shireen Garcia](www.shireengarcia.com)
+#### Diana Ibarra, Phil Schwartz, [Shireen Garcia](http://www.shireengarcia.com)
 
 Demo: [Fan Portals](http://fanportals.herokuapp.com/)
 
