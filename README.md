@@ -2,7 +2,8 @@
 
 #### The Iron Yard, Las Vegas: Capstone Project
 
-###### Team Members: Diana Ibarra, Phil Schwartz, [Shireen Garcia](www.shireengarcia.com)
+#### Team Members: 
+##### Diana Ibarra, Phil Schwartz, [Shireen Garcia](www.shireengarcia.com)
 
 Fan Portals was the culmination of 12 weeks of study in the Iron Yard's Full Stack program. 
 
